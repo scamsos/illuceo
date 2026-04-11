@@ -265,7 +265,24 @@ footer{border-top:1px solid var(--border);padding:36px 32px;display:grid;grid-te
 const NORDVPN='https://go.nordvpn.net/aff_c?offer_id=15&aff_id=YOUR_AFFILIATE_ID&url_id=902';
 const CAT={'Models':'cat-models','Tools':'cat-tools','Business':'cat-business','Research':'cat-research','Policy':'cat-policy','Agents':'cat-agents'};
 
-// ... (Keep your existing T translations object here) ...
+const T={
+  en:{live:'LIVE',tagline:'The moment AI becomes clear',nord_strip:'🛡️ <strong>Stay private while reading AI news.</strong> NordVPN encrypts your connection.',nord_cta:'Get 73% OFF →',loading:'Illuminating today\'s AI landscape',ticker_label:'ILLUCEO',nav_all:'All Stories',nav_models:'Models',nav_tools:'Tools',nav_business:'Business',nav_research:'Research',nav_policy:'Policy',nav_agents:'Agents',section_top:'Top Story',section_latest:'Latest Intelligence',section_brief:'Quick Briefing',error_title:'Connection Lost',why:'WHY IT MATTERS',read_min:'min read',nord_card_badge:'SPONSORED · PARTNER',nord_card_title:'Read AI news privately — 73% OFF NordVPN',nord_card_body:'Every site you visit is tracked. NordVPN encrypts your connection and keeps your reading habits yours. Trusted by 14M+ users worldwide.',nord_card_btn:'Claim Your Discount →',nord_card_fine:'30-day money-back guarantee',footer_desc:'The sharpest AI intelligence on the planet, curated daily in your language.',footer_about_h:'About',footer_about_p:'ILLUCEO aggregates the most important AI developments every 24 hours. Updated daily via GitHub Actions.',footer_nord_p:'🔒 Every site you visit is tracked. NordVPN encrypts your connection and keeps your data private.',footer_nord_link:'Try NordVPN Risk-Free →',footer_powered:'AI-Powered Daily Intelligence',footer_affiliate:'Contains affiliate links',
+  prompt:`You are the editor of ILLUCEO at illuceo.space. Today is ${new Date().toDateString()}. Generate exactly 12 of the most important AI news stories from the last 24 hours. For each: headline, category (one of: Models, Tools, Business, Research, Policy, Agents), summary (2 sentences), why_matters (1 sentence), read_time (integer 2-5). Return ONLY valid JSON array, no markdown. Format: [{"headline":"...","category":"...","summary":"...","why_matters":"...","read_time":3}]`},
+  es:{live:'EN VIVO',tagline:'El momento en que la IA se vuelve clara',nord_strip:'🛡️ <strong>Mantén tu privacidad.</strong> NordVPN cifra tu conexión.',nord_cta:'73% DESCUENTO →',loading:'Iluminando el panorama de IA de hoy',ticker_label:'ILLUCEO',nav_all:'Todas',nav_models:'Modelos',nav_tools:'Herramientas',nav_business:'Negocios',nav_research:'Investigación',nav_policy:'Política',nav_agents:'Agentes',section_top:'Historia Principal',section_latest:'Última Inteligencia',section_brief:'Resumen Rápido',error_title:'Conexión Perdida',why:'POR QUÉ IMPORTA',read_min:'min lectura',nord_card_badge:'PATROCINADO · SOCIO',nord_card_title:'Lee noticias de IA en privado — 73% OFF NordVPN',nord_card_body:'Cada sitio que visitas te rastrea. NordVPN cifra tu conexión. Confiado por +14M usuarios.',nord_card_btn:'Obtener Descuento →',nord_card_fine:'Garantía de 30 días',footer_desc:'La inteligencia de IA más relevante, curada diariamente en tu idioma.',footer_about_h:'Acerca de',footer_about_p:'ILLUCEO agrega los desarrollos de IA más importantes cada 24 horas.',footer_nord_p:'🔒 NordVPN cifra tu conexión y protege tu privacidad.',footer_nord_link:'Prueba NordVPN →',footer_powered:'Inteligencia Diaria Impulsada por IA',footer_affiliate:'Contiene enlaces de afiliados',
+  prompt:`Eres el editor de ILLUCEO en illuceo.space. Hoy es ${new Date().toDateString()}. Genera exactamente 12 noticias de IA más importantes de las últimas 24 horas en español. Para cada una: headline (español), category (Models/Tools/Business/Research/Policy/Agents), summary (2 frases), why_matters (1 frase), read_time (2-5). Solo JSON. Formato: [{"headline":"...","category":"...","summary":"...","why_matters":"...","read_time":3}]`},
+  fr:{live:'EN DIRECT',tagline:'Le moment où l\'IA devient claire',nord_strip:'🛡️ <strong>Restez privé.</strong> NordVPN chiffre votre connexion.',nord_cta:'73% DE RÉDUCTION →',loading:'Illuminer le paysage IA d\'aujourd\'hui',ticker_label:'ILLUCEO',nav_all:'Tout',nav_models:'Modèles',nav_tools:'Outils',nav_business:'Affaires',nav_research:'Recherche',nav_policy:'Politique',nav_agents:'Agents',section_top:'À la Une',section_latest:'Dernières Nouvelles',section_brief:'Résumé Rapide',error_title:'Connexion Perdue',why:'POURQUOI C\'EST IMPORTANT',read_min:'min lecture',nord_card_badge:'SPONSORISÉ · PARTENAIRE',nord_card_title:'Lisez en privé — 73% REMISE NordVPN',nord_card_body:'Chaque site vous suit. NordVPN chiffre votre connexion. Approuvé par 14M+ utilisateurs.',nord_card_btn:'Obtenir la Réduction →',nord_card_fine:'Garantie 30 jours',footer_desc:'L\'actualité IA la plus pertinente, curatée quotidiennement dans votre langue.',footer_about_h:'À propos',footer_about_p:'ILLUCEO agrège les développements IA les plus importants toutes les 24 heures.',footer_nord_p:'🔒 NordVPN chiffre votre connexion.',footer_nord_link:'Essayer NordVPN →',footer_powered:'Intelligence Quotidienne par IA',footer_affiliate:'Contient des liens d\'affiliation',
+  prompt:`Tu es l'éditeur d'ILLUCEO sur illuceo.space. Aujourd'hui c'est ${new Date().toDateString()}. Génère 12 actualités IA importantes des 24 dernières heures en français. Pour chacune: headline, category (Models/Tools/Business/Research/Policy/Agents), summary (2 phrases), why_matters (1 phrase), read_time (2-5). JSON uniquement. Format: [{"headline":"...","category":"...","summary":"...","why_matters":"...","read_time":3}]`},
+  de:{live:'LIVE',tagline:'Der Moment, in dem KI klar wird',nord_strip:'🛡️ <strong>Privat bleiben.</strong> NordVPN verschlüsselt Ihre Verbindung.',nord_cta:'73% RABATT →',loading:'KI-Panorama von heute erhellen',ticker_label:'ILLUCEO',nav_all:'Alle',nav_models:'Modelle',nav_tools:'Tools',nav_business:'Business',nav_research:'Forschung',nav_policy:'Politik',nav_agents:'Agenten',section_top:'Top-Meldung',section_latest:'Neueste Nachrichten',section_brief:'Kurz-Briefing',error_title:'Verbindungsfehler',why:'WARUM ES WICHTIG IST',read_min:'Min Lesezeit',nord_card_badge:'GESPONSERT · PARTNER',nord_card_title:'Privat surfen — 73% RABATT NordVPN',nord_card_body:'Jede Website verfolgt Sie. NordVPN verschlüsselt Ihre Verbindung. 14M+ Nutzer vertrauen uns.',nord_card_btn:'Rabatt sichern →',nord_card_fine:'30 Tage Geld-zurück-Garantie',footer_desc:'Die schärfsten KI-Nachrichten täglich in Ihrer Sprache.',footer_about_h:'Über uns',footer_about_p:'ILLUCEO aggregiert täglich die wichtigsten KI-Entwicklungen.',footer_nord_p:'🔒 NordVPN verschlüsselt Ihre Verbindung.',footer_nord_link:'NordVPN testen →',footer_powered:'KI-gestützte Tages-Intelligenz',footer_affiliate:'Enthält Affiliate-Links',
+  prompt:`Du bist Redakteur von ILLUCEO auf illuceo.space. Heute ist ${new Date().toDateString()}. Generiere 12 wichtige KI-Nachrichten der letzten 24h auf Deutsch. headline, category (Models/Tools/Business/Research/Policy/Agents), summary (2 Sätze), why_matters (1 Satz), read_time (2-5). Nur JSON. Format: [{"headline":"...","category":"...","summary":"...","why_matters":"...","read_time":3}]`},
+  pt:{live:'AO VIVO',tagline:'O momento em que a IA se torna clara',nord_strip:'🛡️ <strong>Mantenha sua privacidade.</strong> NordVPN criptografa sua conexão.',nord_cta:'73% DE DESCONTO →',loading:'Iluminando o panorama de IA de hoje',ticker_label:'ILLUCEO',nav_all:'Todas',nav_models:'Modelos',nav_tools:'Ferramentas',nav_business:'Negócios',nav_research:'Pesquisa',nav_policy:'Política',nav_agents:'Agentes',section_top:'Destaque',section_latest:'Últimas Notícias',section_brief:'Resumo Rápido',error_title:'Conexão Perdida',why:'POR QUE IMPORTA',read_min:'min leitura',nord_card_badge:'PATROCINADO · PARCEIRO',nord_card_title:'Navegue com privacidade — 73% OFF NordVPN',nord_card_body:'Cada site te rastreia. NordVPN criptografa sua conexão. Confiado por +14M usuários.',nord_card_btn:'Obter Desconto →',nord_card_fine:'Garantia de 30 dias',footer_desc:'As notícias de IA mais relevantes, curadas diariamente no seu idioma.',footer_about_h:'Sobre',footer_about_p:'ILLUCEO agrega os desenvolvimentos de IA mais importantes a cada 24 horas.',footer_nord_p:'🔒 NordVPN criptografa sua conexão.',footer_nord_link:'Experimentar NordVPN →',footer_powered:'Inteligência Diária por IA',footer_affiliate:'Contém links de afiliados',
+  prompt:`Você é o editor do ILLUCEO em illuceo.space. Hoje é ${new Date().toDateString()}. Gere 12 notícias de IA importantes das últimas 24h em português. headline, category (Models/Tools/Business/Research/Policy/Agents), summary (2 frases), why_matters (1 frase), read_time (2-5). Apenas JSON. Formato: [{"headline":"...","category":"...","summary":"...","why_matters":"...","read_time":3}]`},
+  zh:{live:'直播',tagline:'AI变得清晰的那一刻',nord_strip:'🛡️ <strong>保护您的隐私。</strong> NordVPN 加密您的连接。',nord_cta:'享受73%折扣 →',loading:'照亮今日AI全景',ticker_label:'ILLUCEO',nav_all:'全部',nav_models:'模型',nav_tools:'工具',nav_business:'商业',nav_research:'研究',nav_policy:'政策',nav_agents:'智能体',section_top:'头条新闻',section_latest:'最新资讯',section_brief:'快速简报',error_title:'连接中断',why:'为什么重要',read_min:'分钟',nord_card_badge:'赞助·合作',nord_card_title:'私密浏览AI新闻 — NordVPN 7折',nord_card_body:'每个网站都追踪您。NordVPN加密连接。1400万+用户信赖。',nord_card_btn:'立即享受折扣 →',nord_card_fine:'30天退款保证',footer_desc:'最锋利的AI新闻，每日以您的语言精选。',footer_about_h:'关于',footer_about_p:'ILLUCEO每24小时汇总最重要的AI发展动态。',footer_nord_p:'🔒 NordVPN保持您的连接加密。',footer_nord_link:'免费试用NordVPN →',footer_powered:'AI驱动的每日资讯',footer_affiliate:'包含推广链接',
+  prompt:`你是ILLUCEO编辑，illuceo.space。今天${new Date().toDateString()}。用中文生成12条最重要AI新闻（过去24小时）。每条：headline，category（Models/Tools/Business/Research/Policy/Agents），summary（2句），why_matters（1句），read_time（2-5）。只返回JSON。格式：[{"headline":"...","category":"...","summary":"...","why_matters":"...","read_time":3}]`},
+  ar:{live:'مباشر',tagline:'اللحظة التي يصبح فيها الذكاء الاصطناعي واضحاً',nord_strip:'🛡️ <strong>حافظ على خصوصيتك.</strong> NordVPN يشفر اتصالك.',nord_cta:'خصم 73% →',loading:'إضاءة مشهد الذكاء الاصطناعي اليوم',ticker_label:'ILLUCEO',nav_all:'الكل',nav_models:'النماذج',nav_tools:'الأدوات',nav_business:'الأعمال',nav_research:'البحث',nav_policy:'السياسة',nav_agents:'الوكلاء',section_top:'القصة الرئيسية',section_latest:'آخر الأخبار',section_brief:'موجز سريع',error_title:'انقطع الاتصال',why:'لماذا هذا مهم',read_min:'دقيقة',nord_card_badge:'برعاية·شراكة',nord_card_title:'تصفح بخصوصية — خصم 73% NordVPN',nord_card_body:'كل موقع يتتبعك. NordVPN يشفر اتصالك. موثوق به من 14M+ مستخدم.',nord_card_btn:'احصل على الخصم →',nord_card_fine:'ضمان 30 يوم',footer_desc:'أحدث أخبار الذكاء الاصطناعي، مُختارة يومياً بلغتك.',footer_about_h:'عن الموقع',footer_about_p:'ILLUCEO يجمع أهم تطورات الذكاء الاصطناعي كل 24 ساعة.',footer_nord_p:'🔒 NordVPN يبقي اتصالك مشفراً.',footer_nord_link:'جرب NordVPN مجاناً →',footer_powered:'ذكاء يومي بالذكاء الاصطناعي',footer_affiliate:'يحتوي روابط تابعة',
+  prompt:`أنت محرر ILLUCEO على illuceo.space. اليوم ${new Date().toDateString()}. أنشئ 12 خبراً مهماً للذكاء الاصطناعي من الـ 24 ساعة الماضية بالعربية. لكل خبر: headline، category (Models/Tools/Business/Research/Policy/Agents)، summary (جملتان)، why_matters (جملة)، read_time (2-5). فقط JSON. الصيغة: [{"headline":"...","category":"...","summary":"...","why_matters":"...","read_time":3}]`},
+  ru:{live:'В ЭФИРЕ',tagline:'Момент, когда ИИ становится ясным',nord_strip:'🛡️ <strong>Оставайтесь конфиденциальными.</strong> NordVPN шифрует ваше соединение.',nord_cta:'СКИДКА 73% →',loading:'Освещаем сегодняшний ИИ-ландшафт',ticker_label:'ILLUCEO',nav_all:'Все',nav_models:'Модели',nav_tools:'Инструменты',nav_business:'Бизнес',nav_research:'Исследования',nav_policy:'Политика',nav_agents:'Агенты',section_top:'Главная История',section_latest:'Последние Новости',section_brief:'Краткий Обзор',error_title:'Соединение Прервано',why:'ПОЧЕМУ ЭТО ВАЖНО',read_min:'мин',nord_card_badge:'СПОНСИРОВАНО·ПАРТНЁР',nord_card_title:'Читайте приватно — СКИДКА 73% NordVPN',nord_card_body:'Каждый сайт отслеживает вас. NordVPN шифрует соединение. 14M+ пользователей доверяют.',nord_card_btn:'Получить Скидку →',nord_card_fine:'Гарантия возврата 30 дней',footer_desc:'Острейшие новости ИИ, ежедневно на вашем языке.',footer_about_h:'О нас',footer_about_p:'ILLUCEO агрегирует важнейшие разработки ИИ каждые 24 часа.',footer_nord_p:'🔒 NordVPN шифрует ваше соединение.',footer_nord_link:'Попробовать NordVPN →',footer_powered:'Ежедневная ИИ-разведка',footer_affiliate:'Содержит партнёрские ссылки',
+  prompt:`Ты редактор ILLUCEO на illuceo.space. Сегодня ${new Date().toDateString()}. Создай 12 важнейших новостей ИИ за последние 24 часа на русском. headline, category (Models/Tools/Business/Research/Policy/Agents), summary (2 предложения), why_matters (1 предложение), read_time (2-5). Только JSON. Формат: [{"headline":"...","category":"...","summary":"...","why_matters":"...","read_time":3}]`}
+};
 
 let lang='en', currentCat='all', allArticles=[];
 function t(k){return T[lang]?.[k]??T.en[k]??k;}
@@ -314,31 +331,53 @@ function render(articles){
         </div>`).join('')}
     </div>`;
 
-  // ... (Keep rest of your existing render logic for card-row, row2, and bottom-row) ...
+  document.getElementById('card-row').innerHTML=items.slice(4,7).map(a=>`
+    <div class="card">${catDot(a.category)}<div class="hl-md">${a.headline}</div>
+    <div class="deck-card">${a.summary}</div>
+    <div class="meta"><span>${a.read_time} ${t('read_min')}</span></div></div>`).join('');
+
+  document.getElementById('row2').innerHTML=items.slice(7,9).map(a=>`
+    <div class="card">${catDot(a.category)}<div class="hl-md">${a.headline}</div>
+    <div class="deck-card">${a.summary}</div>
+    <div class="why-box"><div class="why-label">${t('why')}</div><div class="why-text">${a.why_matters}</div></div>
+    <div class="meta"><span>${a.read_time} ${t('read_min')}</span></div></div>`).join('')+
+    `<div class="nord-card">
+      <div><div class="nord-card-badge">${t('nord_card_badge')}</div>
+      <div class="nord-card-title">${t('nord_card_title')}</div>
+      <div class="nord-card-body">${t('nord_card_body')}</div></div>
+      <div><a href="${NORDVPN}" target="_blank" rel="noopener sponsored" class="nord-card-btn">${t('nord_card_btn')}</a>
+      <div class="nord-card-fine">${t('nord_card_fine')}</div></div>
+    </div>`;
+
+  document.getElementById('bottom-row').innerHTML=items.slice(9,13).map(a=>`
+    <div class="card">${catDot(a.category)}<div class="hl-md">${a.headline}</div>
+    <div class="deck-card">${a.summary}</div>
+    <div class="meta"><span>${a.read_time} ${t('read_min')}</span></div></div>`).join('');
+
+  document.getElementById('loading').style.display='none';
+  document.getElementById('bento').classList.add('visible');
 }
 
-// CORRECTED FETCH FUNCTION
 async function fetchNews(){
   document.getElementById('loading').style.display='flex';
   document.getElementById('bento').classList.remove('visible');
   document.getElementById('error-box').style.display='none';
-  
-  try {
-    // Fetch the local JSON file instead of the external API
-    const res = await fetch('./news-data.json');
-    if (!res.ok) throw new Error(`Could not load news-data.json (Status ${res.status})`);
-    
-    const data = await res.json();
-    const articles = data.articles;
-    
-    if (!Array.isArray(articles) || !articles.length) throw new Error('No articles found');
-    
-    allArticles = articles; 
-    render(articles);
-  } catch (err) {
-    document.getElementById('loading').style.display = 'none';
-    document.getElementById('error-box').style.display = 'block';
-    document.getElementById('error-msg').textContent = err.message;
+  try{
+    const res=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,
+        messages:[{role:'user',content:t('prompt')}]})
+    });
+    if(!res.ok) throw new Error(`API ${res.status}`);
+    const data=await res.json();
+    let raw=data.content.map(b=>b.text||'').join('').replace(/```json|```/g,'').trim();
+    const articles=JSON.parse(raw);
+    if(!Array.isArray(articles)||!articles.length) throw new Error('Empty response');
+    allArticles=articles; render(articles);
+  }catch(err){
+    document.getElementById('loading').style.display='none';
+    document.getElementById('error-box').style.display='block';
+    document.getElementById('error-msg').textContent=`${err.message}. Add your Anthropic API key to activate ILLUCEO.`;
   }
 }
 
