@@ -4,12 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="ILLUCEO — The moment AI becomes clear. Daily AI intelligence in 8 languages.">
-<meta property="og:title" content="ILLUCEO — AI Intelligence Daily">
-<meta property="og:description" content="The moment AI becomes clear. Daily intelligence across 8 languages.">
-<meta property="og:url" content="https://illuceo.space">
-<link rel="canonical" href="https://illuceo.space">
 <title>ILLUCEO — The Moment AI Becomes Clear</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@300;400;500&family=Outfit:wght@200;300;400;500&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -23,152 +18,47 @@
   --sans:'Outfit',sans-serif;
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
-html{scroll-behavior:smooth;}
 body{background:var(--bg);color:var(--text);font-family:var(--sans);font-weight:300;min-height:100vh;overflow-x:hidden;}
-body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;}
-::-webkit-scrollbar{width:2px;}::-webkit-scrollbar-track{background:var(--bg);}::-webkit-scrollbar-thumb{background:var(--border2);}
-
-/* TOPBAR */
 .topbar{position:sticky;top:0;z-index:200;background:rgba(9,9,11,0.93);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);padding:0 32px;height:40px;display:flex;align-items:center;justify-content:space-between;}
 .topbar-left{display:flex;align-items:center;gap:20px;}
 .live-pill{display:flex;align-items:center;gap:5px;font-family:var(--mono);font-size:9px;letter-spacing:.25em;text-transform:uppercase;color:var(--teal);}
 .live-dot{width:5px;height:5px;background:var(--teal);border-radius:50%;animation:livepulse 2s ease-in-out infinite;}
-@keyframes livepulse{0%,100%{opacity:1;box-shadow:0 0 0 0 var(--teal-glow);}50%{opacity:.5;box-shadow:0 0 0 5px transparent;}}
-.topbar-date{font-family:var(--mono);font-size:9px;letter-spacing:.12em;color:var(--text3);}
+@keyframes livepulse{0%,100%{opacity:1;}50%{opacity:.5;}}
+.topbar-date{font-family:var(--mono);font-size:9px;color:var(--text3);}
 .lang-switcher{display:flex;gap:2px;}
-.lang-btn{font-family:var(--mono);font-size:8px;letter-spacing:.12em;text-transform:uppercase;padding:2px 6px;border:1px solid transparent;background:transparent;color:var(--text3);border-radius:2px;cursor:pointer;transition:all .18s;}
-.lang-btn:hover{color:var(--text2);border-color:var(--border2);}
+.lang-btn{font-family:var(--mono);font-size:8px;padding:2px 6px;border:1px solid transparent;background:transparent;color:var(--text3);cursor:pointer;}
 .lang-btn.active{color:var(--teal);border-color:var(--teal);background:var(--teal-dim);}
-
-/* NORD STRIP */
-.nord-strip{background:linear-gradient(90deg,#0d1428,#111c3a 60%,#0d1e45);border-bottom:1px solid #1a2d52;padding:7px 32px;display:flex;align-items:center;justify-content:space-between;gap:12px;}
-.nord-text{font-family:var(--mono);font-size:10px;color:#7ba8e8;letter-spacing:.04em;}
-.nord-text strong{color:#c8deff;}
-.nord-cta{flex-shrink:0;background:linear-gradient(135deg,#4687ff,#2654c8);color:#fff;font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;padding:5px 14px;border-radius:3px;text-decoration:none;border:1px solid rgba(255,255,255,.08);transition:all .2s;white-space:nowrap;}
-.nord-cta:hover{background:linear-gradient(135deg,#5a96ff,#3262d4);box-shadow:0 4px 18px rgba(70,135,255,.35);transform:translateY(-1px);}
-
-/* MASTHEAD */
-.masthead{text-align:center;padding:52px 32px 36px;border-bottom:1px solid var(--border);position:relative;overflow:hidden;}
-.masthead::before{content:'';position:absolute;top:-80px;left:50%;transform:translateX(-50%);width:700px;height:280px;background:radial-gradient(ellipse,rgba(0,229,176,.055) 0%,transparent 68%);pointer-events:none;}
-.site-name{font-family:var(--serif);font-size:clamp(68px,13vw,140px);font-weight:700;letter-spacing:.12em;line-height:.88;color:var(--text);display:inline-block;}
-.site-name .ib{color:var(--teal);position:relative;display:inline-block;}
-.site-name .ib::after{content:'';position:absolute;bottom:-8px;left:50%;transform:translateX(-50%);width:2px;height:36px;background:linear-gradient(to bottom,var(--teal),transparent);animation:beam 3s ease-in-out infinite;}
-@keyframes beam{0%,100%{opacity:.5;height:28px;}50%{opacity:1;height:40px;}}
-.site-tagline{font-family:var(--serif);font-style:italic;font-size:clamp(14px,2vw,20px);color:var(--text2);margin-top:22px;letter-spacing:.04em;}
-.latin-note{font-family:var(--mono);font-size:8px;letter-spacing:.2em;color:var(--text3);margin-top:10px;opacity:.55;}
-
-/* NAV */
-.nav{display:flex;justify-content:center;border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none;}
-.nav::-webkit-scrollbar{display:none;}
-.nav-item{font-family:var(--mono);font-size:9px;letter-spacing:.25em;text-transform:uppercase;padding:11px 18px;color:var(--text3);cursor:pointer;border-right:1px solid var(--border);white-space:nowrap;transition:all .18s;border-bottom:2px solid transparent;margin-bottom:-1px;}
-.nav-item:hover{color:var(--text2);background:rgba(255,255,255,.015);}
-.nav-item.active{color:var(--teal);border-bottom-color:var(--teal);}
-
-/* MAIN */
+.nord-strip{background:linear-gradient(90deg,#0d1428,#111c3a);border-bottom:1px solid #1a2d52;padding:7px 32px;display:flex;align-items:center;justify-content:space-between;}
+.nord-text{font-family:var(--mono);font-size:10px;color:#7ba8e8;}
+.nord-cta{background:linear-gradient(135deg,#4687ff,#2654c8);color:#fff;font-family:var(--mono);font-size:9px;padding:5px 14px;border-radius:3px;text-decoration:none;}
+.masthead{text-align:center;padding:52px 32px 36px;border-bottom:1px solid var(--border);}
+.site-name{font-family:var(--serif);font-size:clamp(68px,13vw,140px);font-weight:700;color:var(--text);}
+.site-name .ib{color:var(--teal);}
+.site-tagline{font-family:var(--serif);font-style:italic;font-size:clamp(14px,2vw,20px);color:var(--text2);margin-top:22px;}
+.nav{display:flex;justify-content:center;border-bottom:1px solid var(--border);}
+.nav-item{font-family:var(--mono);font-size:9px;letter-spacing:.25em;padding:11px 18px;color:var(--text3);cursor:pointer;transition:all .18s;}
+.nav-item.active{color:var(--teal);border-bottom:2px solid var(--teal);}
 .main{max-width:1380px;margin:0 auto;padding:28px 20px;}
-
-/* LOADING */
 .loading{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:52vh;gap:20px;}
-.loading-logo{font-family:var(--serif);font-size:36px;font-weight:600;letter-spacing:.2em;color:var(--text3);animation:fadeloop 2s ease-in-out infinite;}
-.loading-logo span{color:var(--teal);}
+.loading-logo{font-family:var(--serif);font-size:36px;color:var(--text3);animation:fadeloop 2s infinite;}
 @keyframes fadeloop{0%,100%{opacity:.35;}50%{opacity:1;}}
-.loading-bar{width:120px;height:1px;background:var(--border2);position:relative;overflow:hidden;}
-.loading-bar::after{content:'';position:absolute;left:-40%;top:0;width:40%;height:100%;background:linear-gradient(90deg,transparent,var(--teal),transparent);animation:scan 1.4s ease-in-out infinite;}
-@keyframes scan{0%{left:-40%;}100%{left:100%;}}
-.loading-msg{font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--text3);}
-
-/* ERROR */
-.error-box{display:none;max-width:480px;margin:60px auto;background:rgba(224,92,106,.05);border:1px solid rgba(224,92,106,.2);border-radius:4px;padding:28px;text-align:center;}
-.error-box h3{font-family:var(--serif);font-size:24px;color:var(--rose);margin-bottom:10px;}
-.error-box p{font-family:var(--mono);font-size:11px;color:var(--text2);line-height:1.7;}
-
-/* BENTO */
+.error-box{display:none;max-width:480px;margin:60px auto;background:rgba(224,92,106,.05);border:1px solid rgba(224,92,106,.2);padding:28px;text-align:center;}
 .bento{display:none;animation:risein .5s ease forwards;}
-.bento.visible{display:block;}
 @keyframes risein{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
-
-/* TICKER */
-.ticker-wrap{background:var(--bg3);border:1px solid var(--border);border-radius:4px;overflow:hidden;position:relative;margin-bottom:20px;display:flex;align-items:stretch;}
-.ticker-label{background:var(--teal);color:var(--bg);font-family:var(--mono);font-size:8px;letter-spacing:.3em;text-transform:uppercase;font-weight:500;padding:0 16px;display:flex;align-items:center;flex-shrink:0;z-index:2;}
-.ticker-overflow{overflow:hidden;flex:1;padding:10px 0;}
-.ticker-track{display:flex;animation:ticker 50s linear infinite;white-space:nowrap;}
-@keyframes ticker{from{transform:translateX(0);}to{transform:translateX(-50%);}}
-.ticker-item{font-family:var(--mono);font-size:10px;color:var(--text2);padding:0 28px;letter-spacing:.04em;white-space:nowrap;}
-.ticker-item::after{content:'·';margin-left:28px;color:var(--border2);}
-
-/* SECTION HD */
-.section-hd{display:flex;align-items:center;gap:14px;margin-bottom:12px;padding:0 2px;}
-.section-hd span{font-family:var(--mono);font-size:8px;letter-spacing:.35em;text-transform:uppercase;color:var(--text3);white-space:nowrap;}
-.section-hd hr{flex:1;border:none;border-top:1px solid var(--border);}
-
-/* HERO */
-.hero-row{display:grid;grid-template-columns:1fr 320px;border:1px solid var(--border);border-radius:6px;overflow:hidden;background:var(--border);gap:1px;margin-bottom:1px;}
-.hero-main{background:var(--bg2);padding:36px 40px;cursor:pointer;position:relative;transition:background .2s;overflow:hidden;}
-.hero-main::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--teal),transparent);transform:scaleX(0);transform-origin:left;transition:transform .35s;}
-.hero-main:hover{background:#101013;}
-.hero-main:hover::before{transform:scaleX(1);}
+.hero-row{display:grid;grid-template-columns:1fr 320px;border:1px solid var(--border);border-radius:6px;overflow:hidden;background:var(--border);gap:1px;}
+.hero-main{background:var(--bg2);padding:36px 40px;}
 .hero-sidebar{background:var(--bg2);display:flex;flex-direction:column;}
-.sidebar-story{padding:18px 22px;border-bottom:1px solid var(--border);cursor:pointer;flex:1;transition:background .18s;}
-.sidebar-story:last-child{border-bottom:none;}
-.sidebar-story:hover{background:rgba(255,255,255,.018);}
-
-/* CARDS */
-.card-row{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--border);border-top:none;border-radius:0 0 6px 6px;background:var(--border);gap:1px;margin-bottom:20px;}
-.row2{display:grid;grid-template-columns:1fr 1fr 260px;border:1px solid var(--border);border-radius:6px;background:var(--border);gap:1px;margin-bottom:20px;}
-.bottom-row{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--border);border-radius:6px;background:var(--border);gap:1px;margin-bottom:20px;}
-.card{background:var(--bg2);padding:22px 26px;cursor:pointer;transition:background .18s;}
-.card:hover{background:#101013;}
-
-/* NORD CARD */
-.nord-card{background:linear-gradient(145deg,#0a1530,#0d1e45);padding:26px 24px;border-left:1px solid #1a2d52;display:flex;flex-direction:column;justify-content:space-between;gap:14px;}
-.nord-card-badge{font-family:var(--mono);font-size:7px;letter-spacing:.3em;text-transform:uppercase;color:var(--nord);margin-bottom:2px;}
-.nord-card-title{font-family:var(--serif);font-size:18px;font-weight:600;color:#e8f0ff;line-height:1.3;margin-bottom:8px;}
-.nord-card-body{font-size:11px;color:#6b96d4;line-height:1.65;flex:1;}
-.nord-card-btn{display:block;text-align:center;background:linear-gradient(135deg,#4687ff,#2654c8);color:#fff;font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;padding:10px 14px;border-radius:3px;text-decoration:none;transition:all .2s;border:1px solid rgba(255,255,255,.06);}
-.nord-card-btn:hover{transform:translateY(-1px);box-shadow:0 6px 22px rgba(70,135,255,.3);}
-.nord-card-fine{font-family:var(--mono);font-size:7px;color:#2a4060;text-align:center;letter-spacing:.1em;margin-top:4px;}
-
-/* TYPOGRAPHY */
-.cat{font-family:var(--mono);font-size:8px;letter-spacing:.28em;text-transform:uppercase;margin-bottom:9px;display:inline-flex;align-items:center;gap:5px;}
-.cat::before{content:'';display:inline-block;width:3px;height:3px;border-radius:50%;background:currentColor;}
-.cat-models{color:var(--teal);}.cat-tools{color:var(--amber);}.cat-business{color:#e8c46a;}.cat-research{color:var(--blue);}.cat-policy{color:var(--violet);}.cat-agents{color:#e87a5a;}
-.hl-xl{font-family:var(--serif);font-size:clamp(26px,3.8vw,48px);font-weight:600;line-height:1.08;letter-spacing:-.01em;color:var(--text);margin-bottom:14px;transition:color .2s;}
-.hero-main:hover .hl-xl{color:var(--teal);}
-.deck{font-size:14px;line-height:1.75;color:var(--text2);margin-bottom:16px;font-weight:300;}
-.why-box{background:var(--teal-dim);border-left:2px solid var(--teal);padding:9px 13px;margin-bottom:16px;border-radius:0 3px 3px 0;}
-.why-label{font-family:var(--mono);font-size:7px;letter-spacing:.3em;text-transform:uppercase;color:var(--teal);margin-bottom:3px;}
-.why-text{font-size:12px;color:var(--text2);line-height:1.55;}
-.meta{font-family:var(--mono);font-size:9px;letter-spacing:.08em;color:var(--text3);display:flex;gap:10px;align-items:center;flex-wrap:wrap;}
-.readbadge{background:var(--teal-dim);border:1px solid rgba(0,229,176,.12);color:var(--teal);font-family:var(--mono);font-size:8px;letter-spacing:.12em;padding:2px 7px;border-radius:2px;}
-.hl-sm{font-family:var(--serif);font-size:16px;font-weight:600;line-height:1.28;color:var(--text);margin-bottom:6px;transition:color .2s;}
-.sidebar-story:hover .hl-sm{color:var(--teal);}
-.deck-sm{font-size:12px;line-height:1.6;color:var(--text3);}
-.hl-md{font-family:var(--serif);font-size:19px;font-weight:600;line-height:1.22;color:var(--text);margin-bottom:8px;transition:color .2s;}
-.card:hover .hl-md{color:var(--teal);}
-.deck-card{font-size:12px;line-height:1.65;color:var(--text3);margin-bottom:10px;}
-
-/* FOOTER */
+.sidebar-story{padding:18px 22px;border-bottom:1px solid var(--border);flex:1;}
+.cat{font-family:var(--mono);font-size:8px;text-transform:uppercase;margin-bottom:9px;display:inline-flex;align-items:center;gap:5px;}
+.cat-models{color:var(--teal);}.cat-tools{color:var(--amber);}.cat-business{color:#e8c46a;}
+.hl-xl{font-family:var(--serif);font-size:clamp(26px,3.8vw,48px);font-weight:600;line-height:1.08;margin-bottom:14px;}
+.deck{font-size:14px;line-height:1.75;color:var(--text2);margin-bottom:16px;}
+.why-box{background:var(--teal-dim);border-left:2px solid var(--teal);padding:9px 13px;margin-bottom:16px;}
+.why-label{font-family:var(--mono);font-size:7px;color:var(--teal);margin-bottom:3px;}
+.meta{font-family:var(--mono);font-size:9px;color:var(--text3);display:flex;gap:10px;}
+.card-row,.row2,.bottom-row{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--border);background:var(--border);gap:1px;margin-top:20px;}
+.card{background:var(--bg2);padding:22px 26px;}
 footer{border-top:1px solid var(--border);padding:36px 32px;display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:32px;margin-top:24px;}
-.brand-name{font-family:var(--serif);font-size:32px;font-weight:700;letter-spacing:.1em;color:var(--text);}
-.brand-name span{color:var(--teal);}
-.brand-latin{font-family:var(--mono);font-size:8px;letter-spacing:.2em;color:var(--text3);margin-top:4px;margin-bottom:10px;}
-.footer-brand p{font-size:12px;color:var(--text3);line-height:1.7;}
-.footer-col h4{font-family:var(--mono);font-size:8px;letter-spacing:.3em;text-transform:uppercase;color:var(--text3);margin-bottom:10px;}
-.footer-col p,.footer-col a{font-size:11px;color:var(--text3);line-height:1.8;text-decoration:none;display:block;}
-.footer-col a:hover{color:var(--teal);}
-.footer-nord{background:linear-gradient(145deg,rgba(13,27,62,.9),rgba(11,22,52,.9));border:1px solid #1a2d52;border-radius:4px;padding:18px;}
-.footer-nord p{font-size:11px;color:#6b96d4;margin-bottom:12px;line-height:1.6;}
-.footer-nord a{color:var(--nord);font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;}
-.footer-nord a:hover{color:#7aaaff;}
-.footer-copy{border-top:1px solid var(--border);padding:14px 32px;display:flex;justify-content:space-between;align-items:center;}
-.footer-copy p{font-family:var(--mono);font-size:8px;color:var(--text3);letter-spacing:.1em;}
-.footer-copy a{color:var(--text3);text-decoration:none;}
-.footer-copy a:hover{color:var(--teal);}
-
-/* RESPONSIVE */
-@media(max-width:1100px){.row2{grid-template-columns:1fr 1fr;}.nord-card{grid-column:span 2;flex-direction:row;align-items:center;}}
-@media(max-width:900px){.hero-row{grid-template-columns:1fr;}.hero-sidebar{flex-direction:row;flex-wrap:wrap;}.sidebar-story{min-width:200px;}.card-row{grid-template-columns:1fr 1fr;}.bottom-row{grid-template-columns:1fr 1fr;}footer{grid-template-columns:1fr 1fr;}}
-@media(max-width:640px){.topbar,.nord-strip{padding:0 16px;}.nord-strip{padding:7px 16px;}.masthead{padding:32px 16px 24px;}.main{padding:16px;}.hero-main{padding:22px 18px;}.card-row,.row2,.bottom-row{grid-template-columns:1fr;}.nord-card{grid-column:1;flex-direction:column;}footer{grid-template-columns:1fr;padding:24px 16px;}.footer-copy{flex-direction:column;gap:6px;text-align:center;padding:14px 16px;}}
 </style>
 </head>
 <body>
@@ -178,224 +68,93 @@ footer{border-top:1px solid var(--border);padding:36px 32px;display:grid;grid-te
     <div class="live-pill"><div class="live-dot"></div><span data-i18n="live">LIVE</span></div>
     <div class="topbar-date" id="topbar-date"></div>
   </div>
-  <div class="lang-switcher" id="lang-switcher">
+  <div class="lang-switcher">
     <button class="lang-btn active" data-lang="en">EN</button>
     <button class="lang-btn" data-lang="es">ES</button>
     <button class="lang-btn" data-lang="fr">FR</button>
     <button class="lang-btn" data-lang="de">DE</button>
     <button class="lang-btn" data-lang="pt">PT</button>
-    <button class="lang-btn" data-lang="zh">中文</button>
-    <button class="lang-btn" data-lang="ar">AR</button>
-    <button class="lang-btn" data-lang="ru">RU</button>
   </div>
-</div>
-
-<div class="nord-strip">
-  <div class="nord-text" data-i18n="nord_strip">🛡️ <strong>Stay private while reading AI news.</strong> NordVPN encrypts your connection — trusted by 14M+ worldwide.</div>
-  <a href="https://go.nordvpn.net/aff_c?offer_id=15&aff_id=YOUR_AFFILIATE_ID&url_id=902" target="_blank" rel="noopener sponsored" class="nord-cta" data-i18n="nord_cta">Get 73% OFF →</a>
 </div>
 
 <header class="masthead">
   <div class="site-name"><span class="ib">I</span>LLUCEO</div>
   <div class="site-tagline" data-i18n="tagline">The moment AI becomes clear</div>
-  <div class="latin-note">illuceo · latin · "to begin giving light · to dawn upon the mind"</div>
 </header>
 
 <nav class="nav">
   <div class="nav-item active" data-cat="all" data-i18n="nav_all">All Stories</div>
-  <div class="nav-item" data-cat="models" data-i18n="nav_models">Models</div>
-  <div class="nav-item" data-cat="tools" data-i18n="nav_tools">Tools</div>
-  <div class="nav-item" data-cat="business" data-i18n="nav_business">Business</div>
-  <div class="nav-item" data-cat="research" data-i18n="nav_research">Research</div>
-  <div class="nav-item" data-cat="policy" data-i18n="nav_policy">Policy</div>
-  <div class="nav-item" data-cat="agents" data-i18n="nav_agents">Agents</div>
+  <div class="nav-item" data-cat="models">Models</div>
+  <div class="nav-item" data-cat="tools">Tools</div>
+  <div class="nav-item" data-cat="business">Business</div>
 </nav>
 
 <main class="main">
   <div class="loading" id="loading">
     <div class="loading-logo"><span>I</span>LLUCEO</div>
-    <div class="loading-bar"></div>
-    <div class="loading-msg" data-i18n="loading">Illuminating today's AI landscape</div>
+    <div class="loading-msg">Illuminating today's AI landscape</div>
   </div>
   <div class="error-box" id="error-box">
-    <h3 data-i18n="error_title">Connection Lost</h3>
+    <h3>Connection Lost</h3>
     <p id="error-msg"></p>
   </div>
   <div class="bento" id="bento">
-    <div class="ticker-wrap">
-      <div class="ticker-label" data-i18n="ticker_label">ILLUCEO</div>
-      <div class="ticker-overflow">
-        <div class="ticker-track" id="ticker-track">
-          <div class="ticker-item">Illuminating today's headlines…</div>
-        </div>
-      </div>
-    </div>
-    <div class="section-hd"><span data-i18n="section_top">Top Story</span><hr></div>
     <div class="hero-row" id="hero-row"></div>
     <div class="card-row" id="card-row"></div>
-    <div class="section-hd" style="margin-top:18px"><span data-i18n="section_latest">Latest Intelligence</span><hr></div>
     <div class="row2" id="row2"></div>
-    <div class="section-hd" style="margin-top:18px"><span data-i18n="section_brief">Quick Briefing</span><hr></div>
     <div class="bottom-row" id="bottom-row"></div>
   </div>
 </main>
 
-<footer>
-  <div class="footer-brand">
-    <div class="brand-name"><span>I</span>LLUCEO</div>
-    <div class="brand-latin">illuceo · latin · "to begin giving light"</div>
-    <p data-i18n="footer_desc">The sharpest AI intelligence on the planet, curated daily and delivered in your language.</p>
-  </div>
-  <div class="footer-col">
-    <h4 data-i18n="footer_about_h">About</h4>
-    <p data-i18n="footer_about_p">ILLUCEO aggregates and summarizes the most important AI developments every 24 hours. Updated daily via GitHub Actions.</p>
-    <br><a href="https://illuceo.space">illuceo.space</a>
-  </div>
-  <div class="footer-nord">
-    <p data-i18n="footer_nord_p">🔒 Every site you visit is tracked. NordVPN encrypts your connection and keeps your reading habits private.</p>
-    <a href="https://go.nordvpn.net/aff_c?offer_id=15&aff_id=YOUR_AFFILIATE_ID&url_id=902" target="_blank" rel="noopener sponsored" data-i18n="footer_nord_link">Try NordVPN Risk-Free →</a>
-  </div>
-</footer>
-<div class="footer-copy">
-  <p>© 2026 ILLUCEO · <span data-i18n="footer_powered">AI-Powered Daily Intelligence</span> · illuceo.space</p>
-  <p><span data-i18n="footer_affiliate">Contains affiliate links</span> · <a href="https://go.nordvpn.net/aff_c?offer_id=15&aff_id=YOUR_AFFILIATE_ID&url_id=902" target="_blank" rel="noopener sponsored">NordVPN Partner</a></p>
-</div>
-
 <script>
-const NORDVPN='https://go.nordvpn.net/aff_c?offer_id=15&aff_id=YOUR_AFFILIATE_ID&url_id=902';
 const CAT={'Models':'cat-models','Tools':'cat-tools','Business':'cat-business','Research':'cat-research','Policy':'cat-policy','Agents':'cat-agents'};
-
-const T={
-  en:{live:'LIVE',tagline:'The moment AI becomes clear',nord_strip:'🛡️ <strong>Stay private while reading AI news.</strong> NordVPN encrypts your connection.',nord_cta:'Get 73% OFF →',loading:'Illuminating today\'s AI landscape',ticker_label:'ILLUCEO',nav_all:'All Stories',nav_models:'Models',nav_tools:'Tools',nav_business:'Business',nav_research:'Research',nav_policy:'Policy',nav_agents:'Agents',section_top:'Top Story',section_latest:'Latest Intelligence',section_brief:'Quick Briefing',error_title:'Connection Lost',why:'WHY IT MATTERS',read_min:'min read',nord_card_badge:'SPONSORED · PARTNER',nord_card_title:'Read AI news privately — 73% OFF NordVPN',nord_card_body:'Every site you visit is tracked. NordVPN encrypts your connection and keeps your reading habits yours. Trusted by 14M+ users worldwide.',nord_card_btn:'Claim Your Discount →',nord_card_fine:'30-day money-back guarantee',footer_desc:'The sharpest AI intelligence on the planet, curated daily in your language.',footer_about_h:'About',footer_about_p:'ILLUCEO aggregates the most important AI developments every 24 hours. Updated daily via GitHub Actions.',footer_nord_p:'🔒 Every site you visit is tracked. NordVPN encrypts your connection and keeps your data private.',footer_nord_link:'Try NordVPN Risk-Free →',footer_powered:'AI-Powered Daily Intelligence',footer_affiliate:'Contains affiliate links',
-  prompt:`You are the editor of ILLUCEO at illuceo.space. Today is ${new Date().toDateString()}. Generate exactly 12 of the most important AI news stories from the last 24 hours. For each: headline, category (one of: Models, Tools, Business, Research, Policy, Agents), summary (2 sentences), why_matters (1 sentence), read_time (integer 2-5). Return ONLY valid JSON array, no markdown. Format: [{"headline":"...","category":"...","summary":"...","why_matters":"...","read_time":3}]`},
-  es:{live:'EN VIVO',tagline:'El momento en que la IA se vuelve clara',nord_strip:'🛡️ <strong>Mantén tu privacidad.</strong> NordVPN cifra tu conexión.',nord_cta:'73% DESCUENTO →',loading:'Iluminando el panorama de IA de hoy',ticker_label:'ILLUCEO',nav_all:'Todas',nav_models:'Modelos',nav_tools:'Herramientas',nav_business:'Negocios',nav_research:'Investigación',nav_policy:'Política',nav_agents:'Agentes',section_top:'Historia Principal',section_latest:'Última Inteligencia',section_brief:'Resumen Rápido',error_title:'Conexión Perdida',why:'POR QUÉ IMPORTA',read_min:'min lectura',nord_card_badge:'PATROCINADO · SOCIO',nord_card_title:'Lee noticias de IA en privado — 73% OFF NordVPN',nord_card_body:'Cada sitio que visitas te rastrea. NordVPN cifra tu conexión. Confiado por +14M usuarios.',nord_card_btn:'Obtener Descuento →',nord_card_fine:'Garantía de 30 días',footer_desc:'La inteligencia de IA más relevante, curada diariamente en tu idioma.',footer_about_h:'Acerca de',footer_about_p:'ILLUCEO agrega los desarrollos de IA más importantes cada 24 horas.',footer_nord_p:'🔒 NordVPN cifra tu conexión y protege tu privacidad.',footer_nord_link:'Prueba NordVPN →',footer_powered:'Inteligencia Diaria Impulsada por IA',footer_affiliate:'Contiene enlaces de afiliados',
-  prompt:`Eres el editor de ILLUCEO en illuceo.space. Hoy es ${new Date().toDateString()}. Genera exactamente 12 noticias de IA más importantes de las últimas 24 horas en español. Para cada una: headline (español), category (Models/Tools/Business/Research/Policy/Agents), summary (2 frases), why_matters (1 frase), read_time (2-5). Solo JSON. Formato: [{"headline":"...","category":"...","summary":"...","why_matters":"...","read_time":3}]`},
-  fr:{live:'EN DIRECT',tagline:'Le moment où l\'IA devient claire',nord_strip:'🛡️ <strong>Restez privé.</strong> NordVPN chiffre votre connexion.',nord_cta:'73% DE RÉDUCTION →',loading:'Illuminer le paysage IA d\'aujourd\'hui',ticker_label:'ILLUCEO',nav_all:'Tout',nav_models:'Modèles',nav_tools:'Outils',nav_business:'Affaires',nav_research:'Recherche',nav_policy:'Politique',nav_agents:'Agents',section_top:'À la Une',section_latest:'Dernières Nouvelles',section_brief:'Résumé Rapide',error_title:'Connexion Perdue',why:'POURQUOI C\'EST IMPORTANT',read_min:'min lecture',nord_card_badge:'SPONSORISÉ · PARTENAIRE',nord_card_title:'Lisez en privé — 73% REMISE NordVPN',nord_card_body:'Chaque site vous suit. NordVPN chiffre votre connexion. Approuvé par 14M+ utilisateurs.',nord_card_btn:'Obtenir la Réduction →',nord_card_fine:'Garantie 30 jours',footer_desc:'L\'actualité IA la plus pertinente, curatée quotidiennement dans votre langue.',footer_about_h:'À propos',footer_about_p:'ILLUCEO agrège les développements IA les plus importants toutes les 24 heures.',footer_nord_p:'🔒 NordVPN chiffre votre connexion.',footer_nord_link:'Essayer NordVPN →',footer_powered:'Intelligence Quotidienne par IA',footer_affiliate:'Contient des liens d\'affiliation',
-  prompt:`Tu es l'éditeur d'ILLUCEO sur illuceo.space. Aujourd'hui c'est ${new Date().toDateString()}. Génère 12 actualités IA importantes des 24 dernières heures en français. Pour chacune: headline, category (Models/Tools/Business/Research/Policy/Agents), summary (2 phrases), why_matters (1 phrase), read_time (2-5). JSON uniquement. Format: [{"headline":"...","category":"...","summary":"...","why_matters":"...","read_time":3}]`},
-  de:{live:'LIVE',tagline:'Der Moment, in dem KI klar wird',nord_strip:'🛡️ <strong>Privat bleiben.</strong> NordVPN verschlüsselt Ihre Verbindung.',nord_cta:'73% RABATT →',loading:'KI-Panorama von heute erhellen',ticker_label:'ILLUCEO',nav_all:'Alle',nav_models:'Modelle',nav_tools:'Tools',nav_business:'Business',nav_research:'Forschung',nav_policy:'Politik',nav_agents:'Agenten',section_top:'Top-Meldung',section_latest:'Neueste Nachrichten',section_brief:'Kurz-Briefing',error_title:'Verbindungsfehler',why:'WARUM ES WICHTIG IST',read_min:'Min Lesezeit',nord_card_badge:'GESPONSERT · PARTNER',nord_card_title:'Privat surfen — 73% RABATT NordVPN',nord_card_body:'Jede Website verfolgt Sie. NordVPN verschlüsselt Ihre Verbindung. 14M+ Nutzer vertrauen uns.',nord_card_btn:'Rabatt sichern →',nord_card_fine:'30 Tage Geld-zurück-Garantie',footer_desc:'Die schärfsten KI-Nachrichten täglich in Ihrer Sprache.',footer_about_h:'Über uns',footer_about_p:'ILLUCEO aggregiert täglich die wichtigsten KI-Entwicklungen.',footer_nord_p:'🔒 NordVPN verschlüsselt Ihre Verbindung.',footer_nord_link:'NordVPN testen →',footer_powered:'KI-gestützte Tages-Intelligenz',footer_affiliate:'Enthält Affiliate-Links',
-  prompt:`Du bist Redakteur von ILLUCEO auf illuceo.space. Heute ist ${new Date().toDateString()}. Generiere 12 wichtige KI-Nachrichten der letzten 24h auf Deutsch. headline, category (Models/Tools/Business/Research/Policy/Agents), summary (2 Sätze), why_matters (1 Satz), read_time (2-5). Nur JSON. Format: [{"headline":"...","category":"...","summary":"...","why_matters":"...","read_time":3}]`},
-  pt:{live:'AO VIVO',tagline:'O momento em que a IA se torna clara',nord_strip:'🛡️ <strong>Mantenha sua privacidade.</strong> NordVPN criptografa sua conexão.',nord_cta:'73% DE DESCONTO →',loading:'Iluminando o panorama de IA de hoje',ticker_label:'ILLUCEO',nav_all:'Todas',nav_models:'Modelos',nav_tools:'Ferramentas',nav_business:'Negócios',nav_research:'Pesquisa',nav_policy:'Política',nav_agents:'Agentes',section_top:'Destaque',section_latest:'Últimas Notícias',section_brief:'Resumo Rápido',error_title:'Conexão Perdida',why:'POR QUE IMPORTA',read_min:'min leitura',nord_card_badge:'PATROCINADO · PARCEIRO',nord_card_title:'Navegue com privacidade — 73% OFF NordVPN',nord_card_body:'Cada site te rastreia. NordVPN criptografa sua conexão. Confiado por +14M usuários.',nord_card_btn:'Obter Desconto →',nord_card_fine:'Garantia de 30 dias',footer_desc:'As notícias de IA mais relevantes, curadas diariamente no seu idioma.',footer_about_h:'Sobre',footer_about_p:'ILLUCEO agrega os desenvolvimentos de IA mais importantes a cada 24 horas.',footer_nord_p:'🔒 NordVPN criptografa sua conexão.',footer_nord_link:'Experimentar NordVPN →',footer_powered:'Inteligência Diária por IA',footer_affiliate:'Contém links de afiliados',
-  prompt:`Você é o editor do ILLUCEO em illuceo.space. Hoje é ${new Date().toDateString()}. Gere 12 notícias de IA importantes das últimas 24h em português. headline, category (Models/Tools/Business/Research/Policy/Agents), summary (2 frases), why_matters (1 frase), read_time (2-5). Apenas JSON. Formato: [{"headline":"...","category":"...","summary":"...","why_matters":"...","read_time":3}]`},
-  zh:{live:'直播',tagline:'AI变得清晰的那一刻',nord_strip:'🛡️ <strong>保护您的隐私。</strong> NordVPN 加密您的连接。',nord_cta:'享受73%折扣 →',loading:'照亮今日AI全景',ticker_label:'ILLUCEO',nav_all:'全部',nav_models:'模型',nav_tools:'工具',nav_business:'商业',nav_research:'研究',nav_policy:'政策',nav_agents:'智能体',section_top:'头条新闻',section_latest:'最新资讯',section_brief:'快速简报',error_title:'连接中断',why:'为什么重要',read_min:'分钟',nord_card_badge:'赞助·合作',nord_card_title:'私密浏览AI新闻 — NordVPN 7折',nord_card_body:'每个网站都追踪您。NordVPN加密连接。1400万+用户信赖。',nord_card_btn:'立即享受折扣 →',nord_card_fine:'30天退款保证',footer_desc:'最锋利的AI新闻，每日以您的语言精选。',footer_about_h:'关于',footer_about_p:'ILLUCEO每24小时汇总最重要的AI发展动态。',footer_nord_p:'🔒 NordVPN保持您的连接加密。',footer_nord_link:'免费试用NordVPN →',footer_powered:'AI驱动的每日资讯',footer_affiliate:'包含推广链接',
-  prompt:`你是ILLUCEO编辑，illuceo.space。今天${new Date().toDateString()}。用中文生成12条最重要AI新闻（过去24小时）。每条：headline，category（Models/Tools/Business/Research/Policy/Agents），summary（2句），why_matters（1句），read_time（2-5）。只返回JSON。格式：[{"headline":"...","category":"...","summary":"...","why_matters":"...","read_time":3}]`},
-  ar:{live:'مباشر',tagline:'اللحظة التي يصبح فيها الذكاء الاصطناعي واضحاً',nord_strip:'🛡️ <strong>حافظ على خصوصيتك.</strong> NordVPN يشفر اتصالك.',nord_cta:'خصم 73% →',loading:'إضاءة مشهد الذكاء الاصطناعي اليوم',ticker_label:'ILLUCEO',nav_all:'الكل',nav_models:'النماذج',nav_tools:'الأدوات',nav_business:'الأعمال',nav_research:'البحث',nav_policy:'السياسة',nav_agents:'الوكلاء',section_top:'القصة الرئيسية',section_latest:'آخر الأخبار',section_brief:'موجز سريع',error_title:'انقطع الاتصال',why:'لماذا هذا مهم',read_min:'دقيقة',nord_card_badge:'برعاية·شراكة',nord_card_title:'تصفح بخصوصية — خصم 73% NordVPN',nord_card_body:'كل موقع يتتبعك. NordVPN يشفر اتصالك. موثوق به من 14M+ مستخدم.',nord_card_btn:'احصل على الخصم →',nord_card_fine:'ضمان 30 يوم',footer_desc:'أحدث أخبار الذكاء الاصطناعي، مُختارة يومياً بلغتك.',footer_about_h:'عن الموقع',footer_about_p:'ILLUCEO يجمع أهم تطورات الذكاء الاصطناعي كل 24 ساعة.',footer_nord_p:'🔒 NordVPN يبقي اتصالك مشفراً.',footer_nord_link:'جرب NordVPN مجاناً →',footer_powered:'ذكاء يومي بالذكاء الاصطناعي',footer_affiliate:'يحتوي روابط تابعة',
-  prompt:`أنت محرر ILLUCEO على illuceo.space. اليوم ${new Date().toDateString()}. أنشئ 12 خبراً مهماً للذكاء الاصطناعي من الـ 24 ساعة الماضية بالعربية. لكل خبر: headline، category (Models/Tools/Business/Research/Policy/Agents)، summary (جملتان)، why_matters (جملة)، read_time (2-5). فقط JSON. الصيغة: [{"headline":"...","category":"...","summary":"...","why_matters":"...","read_time":3}]`},
-  ru:{live:'В ЭФИРЕ',tagline:'Момент, когда ИИ становится ясным',nord_strip:'🛡️ <strong>Оставайтесь конфиденциальными.</strong> NordVPN шифрует ваше соединение.',nord_cta:'СКИДКА 73% →',loading:'Освещаем сегодняшний ИИ-ландшафт',ticker_label:'ILLUCEO',nav_all:'Все',nav_models:'Модели',nav_tools:'Инструменты',nav_business:'Бизнес',nav_research:'Исследования',nav_policy:'Политика',nav_agents:'Агенты',section_top:'Главная История',section_latest:'Последние Новости',section_brief:'Краткий Обзор',error_title:'Соединение Прервано',why:'ПОЧЕМУ ЭТО ВАЖНО',read_min:'мин',nord_card_badge:'СПОНСИРОВАНО·ПАРТНЁР',nord_card_title:'Читайте приватно — СКИДКА 73% NordVPN',nord_card_body:'Каждый сайт отслеживает вас. NordVPN шифрует соединение. 14M+ пользователей доверяют.',nord_card_btn:'Получить Скидку →',nord_card_fine:'Гарантия возврата 30 дней',footer_desc:'Острейшие новости ИИ, ежедневно на вашем языке.',footer_about_h:'О нас',footer_about_p:'ILLUCEO агрегирует важнейшие разработки ИИ каждые 24 часа.',footer_nord_p:'🔒 NordVPN шифрует ваше соединение.',footer_nord_link:'Попробовать NordVPN →',footer_powered:'Ежедневная ИИ-разведка',footer_affiliate:'Содержит партнёрские ссылки',
-  prompt:`Ты редактор ILLUCEO на illuceo.space. Сегодня ${new Date().toDateString()}. Создай 12 важнейших новостей ИИ за последние 24 часа на русском. headline, category (Models/Tools/Business/Research/Policy/Agents), summary (2 предложения), why_matters (1 предложение), read_time (2-5). Только JSON. Формат: [{"headline":"...","category":"...","summary":"...","why_matters":"...","read_time":3}]`}
-};
-
 let lang='en', currentCat='all', allArticles=[];
-function t(k){return T[lang]?.[k]??T.en[k]??k;}
 
-function applyI18n(){
-  document.querySelectorAll('[data-i18n]').forEach(el=>{
-    const k=el.getAttribute('data-i18n'), v=t(k);
-    if(k==='nord_strip') el.innerHTML=v; else el.textContent=v;
-  });
-  document.documentElement.lang=lang;
-  document.documentElement.dir=lang==='ar'?'rtl':'ltr';
-  document.querySelectorAll('a[href*="nordvpn"]').forEach(a=>a.href=NORDVPN);
-}
-
-function updateDate(){
-  const loc=lang==='zh'?'zh-CN':lang==='ar'?'ar-SA':'en-US';
-  document.getElementById('topbar-date').textContent=
-    new Date().toLocaleDateString(loc,{weekday:'short',year:'numeric',month:'short',day:'numeric'}).toUpperCase();
-}
-
-function catDot(cat){return`<div class="cat ${CAT[cat]||'cat-models'}">${cat}</div>`;}
+function catDot(cat){return `<div class="cat ${CAT[cat]||'cat-models'}">${cat}</div>`;}
 
 function render(articles){
-  const src=(currentCat==='all'?articles:articles.filter(a=>a.category.toLowerCase()===currentCat));
-  const items=src.length?src:articles;
+  const items = (currentCat==='all' ? articles : articles.filter(a => a.category.toLowerCase() === currentCat));
+  if(!items.length) return;
 
-  document.getElementById('ticker-track').innerHTML=
-    [...items,...items].map(a=>`<div class="ticker-item">${a.headline}</div>`).join('');
-
-  const h=items[0];
-  document.getElementById('hero-row').innerHTML=`
+  const h = items[0];
+  document.getElementById('hero-row').innerHTML = `
     <div class="hero-main">
       ${catDot(h.category)}
       <div class="hl-xl">${h.headline}</div>
       <div class="deck">${h.summary}</div>
-      <div class="why-box"><div class="why-label">${t('why')}</div><div class="why-text">${h.why_matters}</div></div>
-      <div class="meta"><span class="readbadge">⏱ ${h.read_time} ${t('read_min')}</span><span>${new Date().toLocaleDateString()}</span></div>
+      <div class="why-box"><div class="why-label">WHY IT MATTERS</div><div class="why-text">${h.why_matters}</div></div>
+      <div class="meta"><span>⏱ ${h.read_time} min read</span></div>
     </div>
     <div class="hero-sidebar">
-      ${items.slice(1,4).map(a=>`
-        <div class="sidebar-story">
-          ${catDot(a.category)}
-          <div class="hl-sm">${a.headline}</div>
-          <div class="deck-sm">${a.summary}</div>
-          <div class="meta" style="margin-top:8px"><span>${a.read_time} ${t('read_min')}</span></div>
-        </div>`).join('')}
+      ${items.slice(1,4).map(a => `<div class="sidebar-story">${catDot(a.category)}<div>${a.headline}</div></div>`).join('')}
     </div>`;
 
-  document.getElementById('card-row').innerHTML=items.slice(4,7).map(a=>`
-    <div class="card">${catDot(a.category)}<div class="hl-md">${a.headline}</div>
-    <div class="deck-card">${a.summary}</div>
-    <div class="meta"><span>${a.read_time} ${t('read_min')}</span></div></div>`).join('');
-
-  document.getElementById('row2').innerHTML=items.slice(7,9).map(a=>`
-    <div class="card">${catDot(a.category)}<div class="hl-md">${a.headline}</div>
-    <div class="deck-card">${a.summary}</div>
-    <div class="why-box"><div class="why-label">${t('why')}</div><div class="why-text">${a.why_matters}</div></div>
-    <div class="meta"><span>${a.read_time} ${t('read_min')}</span></div></div>`).join('')+
-    `<div class="nord-card">
-      <div><div class="nord-card-badge">${t('nord_card_badge')}</div>
-      <div class="nord-card-title">${t('nord_card_title')}</div>
-      <div class="nord-card-body">${t('nord_card_body')}</div></div>
-      <div><a href="${NORDVPN}" target="_blank" rel="noopener sponsored" class="nord-card-btn">${t('nord_card_btn')}</a>
-      <div class="nord-card-fine">${t('nord_card_fine')}</div></div>
-    </div>`;
-
-  document.getElementById('bottom-row').innerHTML=items.slice(9,13).map(a=>`
-    <div class="card">${catDot(a.category)}<div class="hl-md">${a.headline}</div>
-    <div class="deck-card">${a.summary}</div>
-    <div class="meta"><span>${a.read_time} ${t('read_min')}</span></div></div>`).join('');
+  document.getElementById('card-row').innerHTML = items.slice(4,7).map(a => `
+    <div class="card">${catDot(a.category)}<div>${a.headline}</div></div>`).join('');
 
   document.getElementById('loading').style.display='none';
+  document.getElementById('bento').style.display='block';
   document.getElementById('bento').classList.add('visible');
 }
 
 async function fetchNews(){
   document.getElementById('loading').style.display='flex';
-  document.getElementById('bento').classList.remove('visible');
   document.getElementById('error-box').style.display='none';
-  try{
-    const res=await fetch('https://api.anthropic.com/v1/messages',{
-      method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,
-        messages:[{role:'user',content:t('prompt')}]})
-    });
-    if(!res.ok) throw new Error(`API ${res.status}`);
-    const data=await res.json();
-    let raw=data.content.map(b=>b.text||'').join('').replace(/```json|```/g,'').trim();
-    const articles=JSON.parse(raw);
-    if(!Array.isArray(articles)||!articles.length) throw new Error('Empty response');
-    allArticles=articles; render(articles);
-  }catch(err){
+  try {
+    // FIXED: Fetching local file instead of external API
+    const res = await fetch('./news-data.json');
+    if(!res.ok) throw new Error("News data not found. Please wait for the daily update.");
+    const data = await res.json();
+    allArticles = data.articles;
+    render(allArticles);
+  } catch(err) {
     document.getElementById('loading').style.display='none';
     document.getElementById('error-box').style.display='block';
-    document.getElementById('error-msg').textContent=`${err.message}. Add your Anthropic API key to activate ILLUCEO.`;
+    document.getElementById('error-msg').textContent = err.message;
   }
 }
 
-document.querySelectorAll('.lang-btn').forEach(btn=>btn.addEventListener('click',()=>{
-  lang=btn.dataset.lang;
-  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  applyI18n(); updateDate(); fetchNews();
-}));
-
-document.querySelectorAll('.nav-item').forEach(item=>item.addEventListener('click',()=>{
-  currentCat=item.dataset.cat;
-  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
-  item.classList.add('active');
-  if(allArticles.length) render(allArticles);
-}));
-
-applyI18n(); updateDate(); fetchNews();
+fetchNews();
 </script>
 </body>
 </html>
