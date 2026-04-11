@@ -16,28 +16,70 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - run: pip install anthropic
+      
+      - name: Install dependencies
+        run: pip install anthropic
+
       - name: Generate ILLUCEO news
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: |
           python3 - <<'PYEOF'
-          import anthropic, json, re
+          import anthropic, json, re, sys
           from datetime import datetime
+          
           client = anthropic.Anthropic()
           today = datetime.utcnow().strftime("%B %d, %Y")
-          prompt = f"""You are the editor of ILLUCEO at illuceo.space. Today is {today}. Generate exactly 12 important AI news stories from the last 24 hours. For each: headline, category (Models/Tools/Business/Research/Policy/Agents), summary (2 sentences), why_matters (1 sentence), read_time (2-5). Return ONLY valid JSON array. Format: [{{"headline":"...","category":"...","summary":"...","why_matters":"...","read_time":3}}]"""
-          msg = client.messages.create(model="claude-sonnet-4-20250514", max_tokens=1000, messages=[{"role":"user","content":prompt}])
-          raw = re.sub(r'```json|```','',msg.content[0].text).strip()
-          articles = json.loads(raw)
-          with open('news-data.json','w',encoding='utf-8') as f:
-              json.dump({"site":"ILLUCEO","url":"https://illuceo.space","generated_at":datetime.utcnow().isoformat()+"Z","date":today,"articles":articles},f,ensure_ascii=False,indent=2)
-          print(f"✅ {len(articles)} articles generated for {today}")
+          
+          prompt = f"""You are the editor of ILLUCEO at illuceo.space. Today is {today}. 
+          Generate exactly 12 important AI news stories from the last 24 hours. 
+          For each: headline, category (Models/Tools/Business/Research/Policy/Agents), summary (2 sentences), why_matters (1 sentence), read_time (2-5). 
+          Return ONLY a valid JSON array. 
+          Format: [{{"headline":"...","category":"...","summary":"...","why_matters":"...","read_time":3}}]"""
+
+          try:
+              # Increased max_tokens to 4000 to prevent the 'Unterminated string' error
+              msg = client.messages.create(
+                  model="claude-3-5-sonnet-20240620", 
+                  max_tokens=4000, 
+                  messages=[{"role":"user","content":prompt}]
+              )
+              
+              raw_content = msg.content[0].text
+              
+              # Extract JSON array using regex to handle potential leading/trailing text or markdown backticks
+              json_match = re.search(r'\[.*\]', raw_content, re.DOTALL)
+              if not json_match:
+                  raise ValueError("No JSON array found in response")
+              
+              articles = json.loads(json_match.group())
+              
+              output = {
+                  "site": "ILLUCEO",
+                  "url": "https://illuceo.space",
+                  "generated_at": datetime.utcnow().isoformat() + "Z",
+                  "date": today,
+                  "articles": articles
+              }
+              
+              with open('news-data.json', 'w', encoding='utf-8') as f:
+                  json.dump(output, f, ensure_ascii=False, indent=2)
+              
+              print(f"✅ Successfully generated {len(articles)} articles for {today}")
+              
+          except Exception as e:
+              print(f"❌ Error: {e}")
+              # This helps you see what went wrong in the GitHub Action logs
+              if 'raw_content' in locals():
+                  print("Full Model Response:")
+                  print(raw_content)
+              sys.exit(1)
           PYEOF
-      - name: Commit
+
+      - name: Commit and Push
         run: |
           git config --local user.email "bot@illuceo.space"
           git config --local user.name "ILLUCEO Bot"
           git add news-data.json
-          git diff --staged --quiet || git commit -m "⚡ Daily update $(date -u +'%Y-%m-%d')"
-          git push
+          # Only commit if there are changes
+          git diff --staged --quiet || (git commit -m "⚡ Daily update $(date -u +'%Y-%m-%d')" && git push)
