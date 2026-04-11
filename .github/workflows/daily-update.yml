@@ -4,6 +4,9 @@ on:
   schedule:
     - cron: '0 6 * * *'
   workflow_dispatch:
+  push:
+    branches:
+      - main
 
 jobs:
   update-news:
@@ -27,7 +30,7 @@ jobs:
           client = anthropic.Anthropic()
           today = datetime.utcnow().strftime("%B %d, %Y")
           prompt = f"""You are the editor of ILLUCEO at illuceo.space. Today is {today}. Generate exactly 12 important AI news stories from the last 24 hours. For each: headline, category (Models/Tools/Business/Research/Policy/Agents), summary (2 sentences), why_matters (1 sentence), read_time (2-5). Return ONLY valid JSON array. Format: [{{"headline":"...","category":"...","summary":"...","why_matters":"...","read_time":3}}]"""
-          msg = client.messages.create(model="claude-sonnet-4-20250514", max_tokens=1000, messages=[{"role":"user","content":prompt}])
+          msg = client.messages.create(model="claude-3-5-sonnet-20240620", max_tokens=1500, messages=[{"role":"user","content":prompt}])
           raw = re.sub(r'```json|```','',msg.content[0].text).strip()
           articles = json.loads(raw)
           with open('news-data.json','w',encoding='utf-8') as f:
