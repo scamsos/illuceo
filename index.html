@@ -358,26 +358,27 @@ function render(articles){
   document.getElementById('bento').classList.add('visible');
 }
 
-async function fetchNews(){
-  document.getElementById('loading').style.display='flex';
-  document.getElementById('bento').classList.remove('visible');
-  document.getElementById('error-box').style.display='none';
-  try{
-    const res=await fetch('https://api.anthropic.com/v1/messages',{
-      method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,
-        messages:[{role:'user',content:t('prompt')}]})
-    });
-    if(!res.ok) throw new Error(`API ${res.status}`);
-    const data=await res.json();
-    let raw=data.content.map(b=>b.text||'').join('').replace(/```json|```/g,'').trim();
-    const articles=JSON.parse(raw);
-    if(!Array.isArray(articles)||!articles.length) throw new Error('Empty response');
-    allArticles=articles; render(articles);
-  }catch(err){
-    document.getElementById('loading').style.display='none';
-    document.getElementById('error-box').style.display='block';
-    document.getElementById('error-msg').textContent=`${err.message}. Add your Anthropic API key to activate ILLUCEO.`;
+async function fetchNews() {
+  document.getElementById('loading').style.display = 'flex';
+  document.getElementById('error-box').style.display = 'none';
+
+  try {
+    // CHANGE: Point to your local file instead of the Anthropic API
+    const res = await fetch('./news-data.json');
+    
+    if (!res.ok) throw new Error(`Could not load news (Status ${res.status})`);
+    
+    const data = await res.json();
+    
+    // The GitHub Action structure wraps the data in 'articles'
+    allArticles = data.articles;
+    render(allArticles);
+    
+    document.getElementById('loading').style.display = 'none';
+  } catch (err) {
+    document.getElementById('loading').style.display = 'none';
+    document.getElementById('error-box').style.display = 'block';
+    document.getElementById('error-msg').textContent = err.message;
   }
 }
 
