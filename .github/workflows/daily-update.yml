@@ -38,7 +38,7 @@ jobs:
           Format: [{{"headline":"...","category":"...","summary":"...","why_matters":"...","read_time":3}}]"""
 
           try:
-              # Increased max_tokens to 4000 to prevent the 'Unterminated string' error
+              # Increased max_tokens to 4000 to prevent 'Unterminated string' errors
               msg = client.messages.create(
                   model="claude-sonnet-4-20250514", 
                   max_tokens=4000, 
@@ -47,7 +47,7 @@ jobs:
               
               raw_content = msg.content[0].text
               
-              # Extract JSON array using regex to handle potential leading/trailing text or markdown backticks
+              # Extract JSON array using regex to handle potential markdown formatting
               json_match = re.search(r'\[.*\]', raw_content, re.DOTALL)
               if not json_match:
                   raise ValueError("No JSON array found in response")
@@ -56,7 +56,6 @@ jobs:
               
               output = {
                   "site": "ILLUCEO",
-                  "url": "https://illuceo.space",
                   "generated_at": datetime.utcnow().isoformat() + "Z",
                   "date": today,
                   "articles": articles
@@ -65,14 +64,10 @@ jobs:
               with open('news-data.json', 'w', encoding='utf-8') as f:
                   json.dump(output, f, ensure_ascii=False, indent=2)
               
-              print(f"✅ Successfully generated {len(articles)} articles for {today}")
+              print(f"✅ Successfully generated {len(articles)} articles.")
               
           except Exception as e:
               print(f"❌ Error: {e}")
-              # This helps you see what went wrong in the GitHub Action logs
-              if 'raw_content' in locals():
-                  print("Full Model Response:")
-                  print(raw_content)
               sys.exit(1)
           PYEOF
 
@@ -81,5 +76,5 @@ jobs:
           git config --local user.email "bot@illuceo.space"
           git config --local user.name "ILLUCEO Bot"
           git add news-data.json
-          # Only commit if there are changes
-          git diff --staged --quiet || (git commit -m "⚡ Daily update $(date -u +'%Y-%m-%d')" && git push)
+          git commit -m "⚡ Daily update $(date -u +'%Y-%m-%d')" || exit 0
+          git push
