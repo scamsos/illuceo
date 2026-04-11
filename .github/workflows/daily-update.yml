@@ -40,7 +40,7 @@ jobs:
           try:
               # Increased max_tokens to 4000 to prevent the 'Unterminated string' error
               msg = client.messages.create(
-                  model="claude-3-5-sonnet-20240620", 
+                  model="claude-sonnet-4-20250514", 
                   max_tokens=4000, 
                   messages=[{"role":"user","content":prompt}]
               )
