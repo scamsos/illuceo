@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Contact ILLUCEO — get in touch for press, advertising, corrections or general enquiries.">
+<link rel="canonical" href="https://illuceo.space/contact/">
+<title>Contact — ILLUCEO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@300;400;500&family=Outfit:wght@200;300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/shell.css">
+<style>
+.contact-grid{display:grid;grid-template-columns:1fr 360px;gap:48px;align-items:start;margin-top:36px;}
+.contact-form-wrap{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:32px;}
+.form-group{margin-bottom:20px;}
+.form-label{font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--text3);display:block;margin-bottom:8px;}
+.form-input,.form-select,.form-textarea{width:100%;background:var(--bg3);border:1px solid var(--border2);border-radius:3px;padding:10px 14px;color:var(--text);font-family:var(--sans);font-size:14px;font-weight:300;outline:none;transition:border-color .18s;}
+.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--teal);}
+.form-select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23484540'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;cursor:pointer;}
+.form-select option{background:var(--bg2);}
+.form-textarea{height:140px;resize:vertical;line-height:1.6;}
+.form-submit{background:var(--teal);color:var(--bg);font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;padding:12px 28px;border:none;border-radius:3px;cursor:pointer;transition:opacity .18s;width:100%;}
+.form-submit:hover{opacity:.88;}
+.form-note{font-family:var(--mono);font-size:9px;color:var(--text3);letter-spacing:.05em;margin-top:10px;text-align:center;}
+.form-success{display:none;text-align:center;padding:40px 20px;}
+.form-success h3{font-family:var(--serif);font-size:28px;font-weight:600;color:var(--teal);margin-bottom:10px;}
+.form-success p{font-size:14px;color:var(--text2);}
+
+.contact-type-card{background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:20px 24px;margin-bottom:12px;}
+.contact-type-card h4{font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);margin-bottom:8px;}
+.contact-type-card p{font-size:13px;color:var(--text3);line-height:1.6;}
+
+.response-badge{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--text3);margin-top:6px;}
+.response-dot{width:5px;height:5px;background:var(--teal);border-radius:50%;}
+
+@media(max-width:900px){.contact-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div id="shell-top"></div>
+<nav id="shell-nav"></nav>
+<main class="main">
+  <div class="breadcrumb"><a href="/">Home</a><span>/</span><span>Contact</span></div>
+
+  <div style="padding:40px 0 20px;">
+    <div class="cat cat-agents">Contact</div>
+    <div class="hl-xl" style="margin-bottom:12px;">Get In Touch</div>
+    <div class="deck" style="max-width:560px;">We'd love to hear from you — whether it's a correction, a partnership enquiry, or just a question.</div>
+  </div>
+
+  <div class="contact-grid">
+    <div>
+      <div class="contact-form-wrap">
+        <form id="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+          <div class="form-group">
+            <label class="form-label" for="name">Your Name</label>
+            <input class="form-input" type="text" id="name" name="name" placeholder="Maria Garcia" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="email">Email Address</label>
+            <input class="form-input" type="email" id="email" name="email" placeholder="you@example.com" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="type">Enquiry Type</label>
+            <select class="form-select" id="type" name="type">
+              <option value="general">General Question</option>
+              <option value="correction">Content Correction</option>
+              <option value="advertise" id="advertise">Advertising / Sponsorship</option>
+              <option value="press">Press / Media</option>
+              <option value="affiliate">Affiliate Partnership</option>
+              <option value="privacy">Privacy / Data Request</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="subject">Subject</label>
+            <input class="form-input" type="text" id="subject" name="subject" placeholder="Brief description" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="message">Message</label>
+            <textarea class="form-textarea" id="message" name="message" placeholder="Tell us more…" required></textarea>
+          </div>
+          <button type="submit" class="form-submit">Send Message →</button>
+          <div class="form-note">We respond to all enquiries within 48 hours.</div>
+        </form>
+        <div class="form-success" id="form-success">
+          <h3>Message Sent</h3>
+          <p>Thank you for reaching out. We'll get back to you within 48 hours.</p>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="contact-type-card">
+        <h4>Content Corrections</h4>
+        <p>Found an error in one of our articles? We take accuracy seriously and will correct verified errors promptly. Please include the article URL and the specific error.</p>
+        <div class="response-badge"><div class="response-dot"></div>Responded within 24 hours</div>
+      </div>
+      <div class="contact-type-card">
+        <h4>Advertising &amp; Sponsorship</h4>
+        <p>Interested in reaching our audience of AI professionals, business owners, and technology enthusiasts? We offer sponsored content, newsletter placements, and display advertising.</p>
+        <div class="response-badge"><div class="response-dot"></div>Responded within 48 hours</div>
+      </div>
+      <div class="contact-type-card">
+        <h4>Press &amp; Media</h4>
+        <p>Journalists and researchers are welcome to quote ILLUCEO content with attribution. For interview requests or media enquiries, please include your publication and deadline.</p>
+        <div class="response-badge"><div class="response-dot"></div>Responded within 48 hours</div>
+      </div>
+      <div class="contact-type-card">
+        <h4>Privacy &amp; Data Requests</h4>
+        <p>To exercise your data rights (access, deletion, correction), please select "Privacy / Data Request" in the form. We process all requests within 30 days as required by law.</p>
+        <div class="response-badge"><div class="response-dot"></div>Responded within 30 days</div>
+      </div>
+      <div class="affiliate-cta" style="margin-top:16px;">
+        <div style="font-family:var(--mono);font-size:7px;letter-spacing:.3em;text-transform:uppercase;color:var(--nord);margin-bottom:8px;">AFFILIATE PARTNER</div>
+        <div class="affiliate-cta-title">Browse Privately</div>
+        <div class="affiliate-cta-body">NordVPN encrypts your internet connection. 14M+ users worldwide. 30-day money-back guarantee.</div>
+        <a href="https://go.nordvpn.net/aff_c?offer_id=15&aff_id=145247&url_id=902" target="_blank" rel="noopener sponsored" class="affiliate-cta-btn">Get 73% OFF →</a>
+      </div>
+    </div>
+  </div>
+</main>
+<div id="shell-bottom"></div>
+<script src="/assets/shell.js"></script>
+<script>
+// Handle form submission
+document.getElementById('contact-form').addEventListener('submit', async function(e){
+  e.preventDefault();
+  const btn = this.querySelector('.form-submit');
+  btn.textContent = 'Sending…';
+  btn.disabled = true;
+  try {
+    const res = await fetch(this.action, {
+      method: 'POST',
+      body: new FormData(this),
+      headers: { 'Accept': 'application/json' }
+    });
+    if(res.ok){
+      this.style.display = 'none';
+      document.getElementById('form-success').style.display = 'block';
+    } else {
+      btn.textContent = 'Error — try again';
+      btn.disabled = false;
+    }
+  } catch(err){
+    btn.textContent = 'Error — try again';
+    btn.disabled = false;
+  }
+});
+
+// Auto-select enquiry type from URL hash
+if(window.location.hash === '#advertise'){
+  document.getElementById('type').value = 'advertise';
+}
+</script>
+</body>
+</html>
