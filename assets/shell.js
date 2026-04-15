@@ -214,15 +214,20 @@
     });
   }
 
-  /* ── FAQ ACCORDION ── */
+  /* ── FAQ ACCORDION — event delegation, cannot double-fire ── */
   function initFaq(){
-    document.querySelectorAll('.faq-q').forEach(q=>{
-      q.addEventListener('click',()=>{
-        const item = q.closest('.faq-item');
-        const wasOpen = item.classList.contains('open');
-        document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
-        if(!wasOpen) item.classList.add('open');
-      });
+    // Use event delegation on document so it works regardless of load order
+    // and cannot be duplicated no matter how many times initFaq() is called
+    if(document._illuceoFaqBound) return;
+    document._illuceoFaqBound = true;
+    document.addEventListener('click', function(e){
+      const q = e.target.closest('.faq-q');
+      if(!q) return;
+      const item = q.closest('.faq-item');
+      if(!item) return;
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(i=>i.classList.remove('open'));
+      if(!wasOpen) item.classList.add('open');
     });
   }
 
