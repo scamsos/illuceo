@@ -246,22 +246,151 @@
       "@type": "Organization",
       "name": "ILLUCEO",
       "url": "https://illuceo.space",
+      "logo": "https://illuceo.space/favicon/android-chrome-512x512.png",
       "description": "The moment AI becomes clear — daily AI intelligence in 8 languages.",
       "sameAs": []
     });
     document.head.appendChild(s);
   }
 
+  /* ── FAVICON (injected into <head> so Google picks it up) ── */
+  function injectFavicon(){
+    const tags = [
+      { rel:'icon', type:'image/x-icon',      href:'/favicon/favicon.ico' },
+      { rel:'icon', type:'image/svg+xml',      href:'/favicon/favicon.svg' },
+      { rel:'icon', type:'image/png', sizes:'32x32', href:'/favicon/favicon-32.png' },
+      { rel:'apple-touch-icon', sizes:'180x180', href:'/favicon/apple-touch-icon.png' },
+      { rel:'manifest', href:'/favicon/site.webmanifest' },
+    ];
+    tags.forEach(t => {
+      // Don't duplicate if already in <head>
+      if(document.querySelector(`link[href="${t.href}"]`)) return;
+      const el = document.createElement('link');
+      Object.entries(t).forEach(([k,v]) => el.setAttribute(k,v));
+      document.head.appendChild(el);
+    });
+    // Theme color meta
+    if(!document.querySelector('meta[name="theme-color"]')){
+      const m = document.createElement('meta');
+      m.name = 'theme-color'; m.content = '#00e5b0';
+      document.head.appendChild(m);
+    }
+  }
+
+  /* ── GOOGLE TRANSLATE ── */
+  // Maps our lang codes to Google Translate language codes
+  const GT_LANGS = {
+    en:'en', es:'es', fr:'fr', de:'de',
+    pt:'pt', zh:'zh-CN', ar:'ar', ru:'ru'
+  };
+
+  function initGoogleTranslate(){
+    // Inject Google Translate script once
+    if(document.getElementById('gt-script')) return;
+
+    // Create hidden element Google Translate needs
+    const el = document.createElement('div');
+    el.id = 'google_translate_element';
+    el.style.display = 'none';
+    document.body.insertBefore(el, document.body.firstChild);
+
+    // Define callback before loading script
+    window.googleTranslateElementInit = function(){
+      new window.google.translate.TranslateElement(
+        { pageLanguage:'en', autoDisplay:false },
+        'google_translate_element'
+      );
+    };
+
+    const s = document.createElement('script');
+    s.id = 'gt-script';
+    s.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+    s.async = true;
+    document.body.appendChild(s);
+  }
+
+  function translatePage(langCode){
+    const gtCode = GT_LANGS[langCode] || langCode;
+    if(gtCode === 'en'){
+      // Restore original — reload without cookie
+      const frame = document.querySelector('.goog-te-banner-frame');
+      if(frame){
+        const restoreBtn = frame.contentDocument?.querySelector('.goog-te-banner-content .goog-close-link');
+        if(restoreBtn) restoreBtn.click();
+      }
+      // Clear Google Translate cookie and reload
+      document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+      document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=' + location.hostname;
+      location.reload();
+      return;
+    }
+    // Set Google Translate cookie — this triggers translation
+    const cookieVal = `/en/${gtCode}`;
+    document.cookie = `googtrans=${cookieVal}; path=/`;
+    document.cookie = `googtrans=${cookieVal}; path=/; domain=${location.hostname}`;
+
+    // Trigger via select element Google Translate creates
+    const tryTranslate = () => {
+      const sel = document.querySelector('.goog-te-combo');
+      if(sel){
+        sel.value = gtCode;
+        sel.dispatchEvent(new Event('change'));
+      } else {
+        setTimeout(tryTranslate, 300);
+      }
+    };
+    setTimeout(tryTranslate, 500);
+  }
+
+  /* ── LANG SWITCHER (updated to use Google Translate) ── */
+  function initLang(){
+    // Detect current translation from cookie
+    const match = document.cookie.match(/googtrans=\/en\/([^;]+)/);
+    const activeLang = match ? Object.entries(GT_LANGS).find(([k,v])=>v===match[1])?.[0] || 'en' : 'en';
+
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      // Set active state
+      if(btn.dataset.lang === activeLang){
+        btn.classList.add('active');
+      } else {
+        btn.classList.remove('active');
+      }
+
+      btn.addEventListener('click', () => {
+        const lang = btn.dataset.lang;
+        document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        document.documentElement.lang = lang;
+        document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+        translatePage(lang);
+        document.dispatchEvent(new CustomEvent('illuceo:lang', { detail: lang }));
+      });
+    });
+  }
+
+  /* ── HIDE GOOGLE TOOLBAR (optional aesthetic fix) ── */
+  function hideGoogleBar(){
+    const style = document.createElement('style');
+    style.textContent = `
+      .goog-te-banner-frame { display:none !important; }
+      body { top: 0 !important; }
+      .skiptranslate { display:none !important; }
+    `;
+    document.head.appendChild(style);
+  }
+
   /* ── INIT ── */
   function init(){
+    injectFavicon();
     injectTopbar();
     injectNav();
     injectFooter();
     injectCookieBanner();
+    initGoogleTranslate();
     initLang();
     initFaq();
     injectOrgSchema();
-    // Signal to page scripts that shell is ready
+    hideGoogleBar();
     document.dispatchEvent(new CustomEvent('illuceo:ready'));
   }
 
