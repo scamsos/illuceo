@@ -74,27 +74,24 @@
 @keyframes risein{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
 /* MODAL */
 .modal-overlay{position:fixed;inset:0;z-index:500;background:rgba(0,0,0,0);backdrop-filter:blur(0px);display:flex;align-items:flex-start;justify-content:center;overflow-y:auto;padding:24px 16px;pointer-events:none;transition:background .3s,backdrop-filter .3s;}
-.modal-overlay.open{background:rgba(0,0,0,.78);backdrop-filter:blur(10px);pointer-events:all;}
-.modal-panel{width:100%;max-width:760px;background:var(--bg2);border:1px solid var(--border2);border-radius:8px;overflow:hidden;transform:translateY(32px);opacity:0;transition:transform .35s cubic-bezier(.22,1,.36,1),opacity .3s;margin:auto;position:relative;}
+.modal-overlay.open{background:rgba(0,0,0,.8);backdrop-filter:blur(10px);pointer-events:all;}
+.modal-panel{width:100%;max-width:780px;background:var(--bg2);border:1px solid var(--border2);border-radius:8px;overflow:hidden;transform:translateY(32px);opacity:0;transition:transform .35s cubic-bezier(.22,1,.36,1),opacity .3s;margin:auto;position:relative;}
 .modal-overlay.open .modal-panel{transform:translateY(0);opacity:1;}
 .modal-close{position:absolute;top:16px;right:16px;width:32px;height:32px;background:var(--bg3);border:1px solid var(--border2);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:10;font-family:var(--mono);font-size:14px;color:var(--text3);transition:all .18s;}
 .modal-close:hover{border-color:var(--teal);color:var(--teal);}
-.modal-header{padding:36px 40px 28px;border-bottom:1px solid var(--border);}
-.modal-body{padding:32px 40px 40px;}
+.modal-header{padding:36px 44px 28px;border-bottom:1px solid var(--border);}
+.modal-body{padding:32px 44px 44px;}
 .article-content{font-size:15px;line-height:1.85;color:var(--text2);}
 .article-content h2{font-family:var(--serif);font-size:26px;font-weight:600;color:var(--text);margin:32px 0 14px;letter-spacing:-.01em;}
-.article-content h3{font-family:var(--serif);font-size:20px;font-weight:600;color:var(--text);margin:24px 0 10px;}
 .article-content p{margin-bottom:16px;}
-.article-content ul,.article-content ol{padding-left:22px;margin-bottom:16px;}
-.article-content li{margin-bottom:7px;}
 .article-content strong{color:var(--text);font-weight:500;}
-.key-facts{background:var(--bg3);border:1px solid var(--border2);border-left:2px solid var(--teal);border-radius:0 4px 4px 0;padding:16px 20px;margin:20px 0;}
-.key-facts-title{font-family:var(--mono);font-size:8px;letter-spacing:.3em;text-transform:uppercase;color:var(--teal);margin-bottom:10px;}
+.key-facts{background:var(--bg3);border:1px solid var(--border2);border-left:2px solid var(--teal);border-radius:0 4px 4px 0;padding:18px 22px;margin:24px 0;}
+.key-facts-title{font-family:var(--mono);font-size:8px;letter-spacing:.3em;text-transform:uppercase;color:var(--teal);margin-bottom:12px;}
 .key-facts ul{list-style:none;padding:0;}
-.key-facts li{font-size:13px;color:var(--text2);padding:6px 0;border-bottom:1px solid var(--border);}
+.key-facts li{font-size:13px;color:var(--text2);padding:7px 0;border-bottom:1px solid var(--border);line-height:1.5;}
 .key-facts li:last-child{border-bottom:none;}
 .key-facts li::before{content:'→ ';color:var(--teal);}
-.modal-footer{padding:20px 40px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.modal-footer{padding:20px 44px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
 .modal-footer-meta{font-family:var(--mono);font-size:9px;color:var(--text3);letter-spacing:.1em;}
 .modal-share{display:flex;gap:8px;}
 .share-btn{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;padding:5px 12px;border-radius:3px;cursor:pointer;transition:all .18s;background:transparent;border:1px solid var(--border2);color:var(--text3);text-decoration:none;display:inline-block;}
@@ -105,10 +102,12 @@
 .modal-nord p strong{color:#c8deff;}
 .modal-nord a{flex-shrink:0;background:linear-gradient(135deg,#4687ff,#2654c8);color:#fff;font-family:var(--mono);font-size:9px;letter-spacing:.15em;text-transform:uppercase;padding:8px 16px;border-radius:3px;text-decoration:none;transition:all .2s;white-space:nowrap;}
 .modal-nord a:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(70,135,255,.3);}
-.modal-loading{padding:60px 40px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:16px;}
+.article-date-bar{display:flex;align-items:center;gap:12px;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid var(--border);}
+.article-date-bar .cat{margin-bottom:0;}
+.article-date-str{font-family:var(--mono);font-size:9px;color:var(--text3);letter-spacing:.1em;}
 @media(max-width:1100px){.row2{grid-template-columns:1fr 1fr;}.nord-card{grid-column:span 2;flex-direction:row;align-items:center;}}
 @media(max-width:900px){.hero-row{grid-template-columns:1fr;}.hero-sidebar{flex-direction:row;flex-wrap:wrap;}.sidebar-story{min-width:200px;}.card-row{grid-template-columns:1fr 1fr;}.bottom-row{grid-template-columns:1fr 1fr;}}
-@media(max-width:640px){.masthead{padding:32px 16px 24px;}.hero-main{padding:22px 18px;}.card-row,.row2,.bottom-row{grid-template-columns:1fr;}.nord-card{grid-column:1;flex-direction:column;}.modal-header{padding:24px 20px 18px;}.modal-body{padding:20px 20px 28px;}.modal-footer{padding:16px 20px;}}
+@media(max-width:640px){.masthead{padding:32px 16px 24px;}.hero-main{padding:22px 18px;}.card-row,.row2,.bottom-row{grid-template-columns:1fr;}.nord-card{grid-column:1;flex-direction:column;}.modal-header,.modal-body,.modal-footer{padding-left:20px;padding-right:20px;}}
 </style>
 </head>
 <body>
@@ -140,118 +139,155 @@
     <div class="bottom-row" id="bottom-row"></div>
   </div>
 </main>
+
+<!-- ARTICLE MODAL -->
 <div class="modal-overlay" id="modal-overlay">
   <div class="modal-panel" id="modal-panel">
     <div class="modal-close" id="modal-close">✕</div>
     <div id="modal-content"></div>
   </div>
 </div>
+
 <div id="shell-bottom"></div>
 <script src="/assets/shell.js"></script>
 <script>
-const NORDVPN='https://go.nordvpn.net/aff_c?offer_id=15&aff_id=145247&url_id=902';
-const CAT={Models:'cat-models',Tools:'cat-tools',Business:'cat-business',Research:'cat-research',Policy:'cat-policy',Agents:'cat-agents'};
-let currentCat='all',allArticles=[];
+const NORDVPN = 'https://go.nordvpn.net/aff_c?offer_id=15&aff_id=145247&url_id=902';
+const CAT = {Models:'cat-models',Tools:'cat-tools',Business:'cat-business',Research:'cat-research',Policy:'cat-policy',Agents:'cat-agents'};
+let currentCat = 'all', allArticles = [];
 
-function catDot(cat){return`<div class="cat ${CAT[cat]||'cat-models'}">${cat}</div>`;}
-function dateStr(){return new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});}
+function catDot(cat){ return `<div class="cat ${CAT[cat]||'cat-models'}">${cat}</div>`; }
+function dateStr(){ return new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'}); }
 
-/* ── MODAL ── */
-const overlay=document.getElementById('modal-overlay');
-const closeBtn=document.getElementById('modal-close');
-const modalContent=document.getElementById('modal-content');
+/* ── MODAL — uses pre-baked full article from news-data.json ── */
+const overlay    = document.getElementById('modal-overlay');
+const closeBtn   = document.getElementById('modal-close');
+const modalContent = document.getElementById('modal-content');
 
-function openArticle(article){
-  modalContent.innerHTML=`<div class="modal-loading"><div class="loading-logo"><span>I</span>LLUCEO</div><div class="loading-bar"></div><div class="loading-msg">Expanding article…</div></div>`;
+function openArticle(article) {
+  renderModal(article);
   overlay.classList.add('open');
-  document.body.style.overflow='hidden';
-  document.getElementById('modal-panel').scrollTop=0;
-  const slug=article.headline.toLowerCase().replace(/[^a-z0-9]+/g,'-').slice(0,60);
-  history.pushState(null,'',`#${slug}`);
-  expandArticle(article);
+  document.body.style.overflow = 'hidden';
+  document.getElementById('modal-panel').scrollTop = 0;
+  const slug = article.headline.toLowerCase().replace(/[^a-z0-9]+/g,'-').slice(0,60);
+  history.pushState(null, '', `#${slug}`);
 }
 
-async function expandArticle(article){
-  try{
-    const prompt=`You are a journalist at ILLUCEO (illuceo.space), a premium AI news site. Today is ${new Date().toDateString()}.
+function renderModal(article) {
+  // Check if we have pre-generated full content
+  const hasFull = article.lede && article.sections && article.sections.length > 0;
 
-Write a complete in-depth article about this story:
-HEADLINE: ${article.headline}
-CATEGORY: ${article.category}
-SUMMARY: ${article.summary}
-WHY IT MATTERS: ${article.why_matters}
+  if (hasFull) {
+    // ✅ Full pre-baked article — instant, no API call needed
+    const sections = article.sections.map(s => `
+      <h2>${s.heading}</h2>
+      ${s.body.split('\n\n').map(p => `<p>${p.trim()}</p>`).join('')}
+    `).join('');
 
-Return ONLY valid JSON, no markdown:
-{"lede":"opening paragraph","sections":[{"heading":"H2 heading","body":"2-3 paragraphs separated by \\n\\n"},{"heading":"H2 heading","body":"2-3 paragraphs"}],"takeaways":["point 1","point 2","point 3","point 4","point 5"],"closing":"closing paragraph"}`;
+    const takeaways = (article.takeaways || []).map(t => `<li>${t}</li>`).join('');
 
-    const res=await fetch('https://api.anthropic.com/v1/messages',{
-      method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,messages:[{role:'user',content:prompt}]})
-    });
-    if(!res.ok) throw new Error(`API ${res.status}`);
-    const data=await res.json();
-    let raw=data.content.map(b=>b.text||'').join('').replace(/```json|```/g,'').trim();
-    const art=JSON.parse(raw);
-    renderModal(article,art);
-  }catch(err){
-    renderModalFallback(article);
-  }
-}
-
-function renderModal(article,art){
-  const sections=art.sections.map(s=>`<h2>${s.heading}</h2>${s.body.split('\n\n').map(p=>`<p>${p}</p>`).join('')}`).join('');
-  const takeaways=art.takeaways.map(t=>`<li>${t}</li>`).join('');
-  modalContent.innerHTML=`
-    <div class="modal-header">
-      ${catDot(article.category)}
-      <div class="hl-xl" style="margin-bottom:14px;">${article.headline}</div>
-      <div class="deck">${art.lede}</div>
-      <div class="meta"><span class="readbadge">⏱ ${article.read_time} min read</span><span>${dateStr()}</span><span>illuceo.space</span></div>
-    </div>
-    <div class="modal-body">
-      <div class="article-content">${sections}<div class="key-facts"><div class="key-facts-title">Key Takeaways</div><ul>${takeaways}</ul></div><p>${art.closing}</p></div>
-      <div class="modal-nord"><p>🛡️ <strong>Stay private while reading AI news.</strong> NordVPN encrypts your connection — trusted by 14M+ users.</p><a href="${NORDVPN}" target="_blank" rel="noopener sponsored">Get 73% OFF →</a></div>
-      <div class="why-box"><div class="why-label">Why This Matters</div><div class="why-text">${article.why_matters}</div></div>
-    </div>
-    <div class="modal-footer">
-      <div class="modal-footer-meta">ILLUCEO · ${dateStr()} · ${article.category}</div>
-      <div class="modal-share">
-        <button class="share-btn" id="share-copy">Copy Link</button>
-        <a class="share-btn" href="https://twitter.com/intent/tweet?text=${encodeURIComponent(article.headline)}&url=${encodeURIComponent(window.location.href)}" target="_blank" rel="noopener">Share →</a>
+    modalContent.innerHTML = `
+      <div class="modal-header">
+        <div class="article-date-bar">
+          ${catDot(article.category)}
+          <span class="article-date-str">${dateStr()} · ${article.read_time} min read · illuceo.space</span>
+        </div>
+        <div class="hl-xl" style="margin-bottom:14px;">${article.headline}</div>
+        <div class="deck">${article.lede}</div>
       </div>
-    </div>`;
-  document.getElementById('share-copy')?.addEventListener('click',function(){
-    navigator.clipboard.writeText(window.location.href).then(()=>{
-      this.textContent='Copied!';this.classList.add('copied');
-      setTimeout(()=>{this.textContent='Copy Link';this.classList.remove('copied');},2000);
+      <div class="modal-body">
+        <div class="article-content">
+          ${sections}
+          ${takeaways ? `
+            <div class="key-facts">
+              <div class="key-facts-title">Key Takeaways</div>
+              <ul>${takeaways}</ul>
+            </div>` : ''}
+          <p>${article.closing || ''}</p>
+        </div>
+        <div class="modal-nord">
+          <p>🛡️ <strong>Stay private while reading AI news.</strong> NordVPN encrypts your connection — trusted by 14M+ users.</p>
+          <a href="${NORDVPN}" target="_blank" rel="noopener sponsored">Get 73% OFF →</a>
+        </div>
+        <div class="why-box">
+          <div class="why-label">Why This Matters</div>
+          <div class="why-text">${article.why_matters}</div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="modal-footer-meta">ILLUCEO · ${dateStr()} · ${article.category}</div>
+        <div class="modal-share">
+          <button class="share-btn" id="share-copy">Copy Link</button>
+          <a class="share-btn" href="https://twitter.com/intent/tweet?text=${encodeURIComponent(article.headline)}&url=${encodeURIComponent(window.location.href)}" target="_blank" rel="noopener">Post on X →</a>
+        </div>
+      </div>`;
+
+  } else {
+    // ⚠️ Fallback — old news-data.json without full articles
+    modalContent.innerHTML = `
+      <div class="modal-header">
+        <div class="article-date-bar">
+          ${catDot(article.category)}
+          <span class="article-date-str">${dateStr()} · ${article.read_time} min read</span>
+        </div>
+        <div class="hl-xl" style="margin-bottom:14px;">${article.headline}</div>
+        <div class="deck">${article.summary}</div>
+      </div>
+      <div class="modal-body">
+        <div class="why-box" style="margin-top:0;">
+          <div class="why-label">Why This Matters</div>
+          <div class="why-text">${article.why_matters}</div>
+        </div>
+        <div class="article-content">
+          <p>${article.summary}</p>
+          <p style="font-family:var(--mono);font-size:10px;color:var(--text3);margin-top:24px;">Full article will be available after the next daily update.</p>
+        </div>
+        <div class="modal-nord">
+          <p>🛡️ <strong>Stay private while reading AI news.</strong> NordVPN encrypts your connection.</p>
+          <a href="${NORDVPN}" target="_blank" rel="noopener sponsored">Get 73% OFF →</a>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="modal-footer-meta">ILLUCEO · ${dateStr()}</div>
+        <div class="modal-share"><button class="share-btn" id="share-copy">Copy Link</button></div>
+      </div>`;
+  }
+
+  // Copy link button
+  document.getElementById('share-copy')?.addEventListener('click', function(){
+    navigator.clipboard.writeText(window.location.href).then(() => {
+      this.textContent = 'Copied!';
+      this.classList.add('copied');
+      setTimeout(() => { this.textContent='Copy Link'; this.classList.remove('copied'); }, 2000);
     });
   });
 }
 
-function renderModalFallback(article){
-  modalContent.innerHTML=`
-    <div class="modal-header">${catDot(article.category)}<div class="hl-xl" style="margin-bottom:14px;">${article.headline}</div><div class="deck">${article.summary}</div><div class="meta"><span class="readbadge">⏱ ${article.read_time} min read</span><span>${dateStr()}</span></div></div>
-    <div class="modal-body"><div class="why-box"><div class="why-label">Why This Matters</div><div class="why-text">${article.why_matters}</div></div><div class="modal-nord"><p>🛡️ <strong>Stay private while reading AI news.</strong> NordVPN encrypts your connection.</p><a href="${NORDVPN}" target="_blank" rel="noopener sponsored">Get 73% OFF →</a></div></div>
-    <div class="modal-footer"><div class="modal-footer-meta">ILLUCEO · ${dateStr()}</div><div class="modal-share"><button class="share-btn" id="share-copy">Copy Link</button></div></div>`;
-  document.getElementById('share-copy')?.addEventListener('click',function(){navigator.clipboard.writeText(window.location.href);this.textContent='Copied!';this.classList.add('copied');});
+function closeModal(){
+  overlay.classList.remove('open');
+  document.body.style.overflow = '';
+  history.pushState(null, '', window.location.pathname);
 }
+closeBtn.addEventListener('click', closeModal);
+overlay.addEventListener('click', e => { if(e.target === overlay) closeModal(); });
+document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModal(); });
 
-function closeModal(){overlay.classList.remove('open');document.body.style.overflow='';history.pushState(null,'',window.location.pathname);}
-closeBtn.addEventListener('click',closeModal);
-overlay.addEventListener('click',e=>{if(e.target===overlay)closeModal();});
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+/* ── RENDER BENTO GRID ── */
+function render(articles) {
+  const src = currentCat === 'all' ? articles : articles.filter(a => a.category.toLowerCase() === currentCat);
+  const items = src.length ? src : articles;
 
-/* ── RENDER ── */
-function render(articles){
-  const src=currentCat==='all'?articles:articles.filter(a=>a.category.toLowerCase()===currentCat);
-  const items=src.length?src:articles;
+  // Ticker
+  document.getElementById('ticker-track').innerHTML =
+    [...items, ...items].map((a,i) =>
+      `<div class="ticker-item" data-idx="${i % items.length}">⚡ ${a.headline}</div>`
+    ).join('');
+  document.querySelectorAll('.ticker-item').forEach(el =>
+    el.addEventListener('click', () => openArticle(items[+el.dataset.idx]))
+  );
 
-  document.getElementById('ticker-track').innerHTML=
-    [...items,...items].map((a,i)=>`<div class="ticker-item" data-idx="${i%items.length}">⚡ ${a.headline}</div>`).join('');
-  document.querySelectorAll('.ticker-item').forEach(el=>el.addEventListener('click',()=>openArticle(items[+el.dataset.idx])));
-
-  const h=items[0];
-  document.getElementById('hero-row').innerHTML=`
+  // Hero
+  const h = items[0];
+  document.getElementById('hero-row').innerHTML = `
     <div class="hero-main" data-idx="0">
       ${catDot(h.category)}
       <div class="hl-xl">${h.headline}</div>
@@ -261,61 +297,82 @@ function render(articles){
       <div class="read-hint">Read full story →</div>
     </div>
     <div class="hero-sidebar">
-      ${items.slice(1,4).map((a,i)=>`
+      ${items.slice(1,4).map((a,i) => `
         <div class="sidebar-story" data-idx="${i+1}">
-          ${catDot(a.category)}<div class="hl-sm">${a.headline}</div>
+          ${catDot(a.category)}
+          <div class="hl-sm">${a.headline}</div>
           <div class="deck-sm">${a.summary}</div>
           <div class="meta" style="margin-top:8px"><span>${a.read_time} min read</span></div>
           <div class="read-hint">Read full story →</div>
         </div>`).join('')}
     </div>`;
 
-  document.getElementById('card-row').innerHTML=items.slice(4,7).map((a,i)=>`
-    <div class="card" data-idx="${i+4}">${catDot(a.category)}<div class="hl-md">${a.headline}</div>
-    <div class="deck-card">${a.summary}</div><div class="meta"><span>${a.read_time} min read</span></div>
-    <div class="read-hint">Read full story →</div></div>`).join('');
-
-  document.getElementById('row2').innerHTML=items.slice(7,9).map((a,i)=>`
-    <div class="card" data-idx="${i+7}">${catDot(a.category)}<div class="hl-md">${a.headline}</div>
+  // Cards 4-6
+  document.getElementById('card-row').innerHTML = items.slice(4,7).map((a,i) => `
+    <div class="card" data-idx="${i+4}">${catDot(a.category)}
+    <div class="hl-md">${a.headline}</div>
     <div class="deck-card">${a.summary}</div>
-    <div class="why-box"><div class="why-label">WHY IT MATTERS</div><div class="why-text">${a.why_matters}</div></div>
     <div class="meta"><span>${a.read_time} min read</span></div>
-    <div class="read-hint">Read full story →</div></div>`).join('')+
-    `<div class="nord-card"><div><div class="nord-card-badge">SPONSORED · PARTNER</div><div class="nord-card-title">Read AI news privately — 73% OFF NordVPN</div><div class="nord-card-body">Every site you visit is tracked. NordVPN encrypts your connection and keeps your reading habits yours. Trusted by 14M+ users worldwide.</div></div><div><a href="${NORDVPN}" target="_blank" rel="noopener sponsored" class="nord-card-btn">Claim Your Discount →</a><div class="nord-card-fine">30-day money-back guarantee</div></div></div>`;
-
-  document.getElementById('bottom-row').innerHTML=items.slice(9,13).map((a,i)=>`
-    <div class="card" data-idx="${i+9}">${catDot(a.category)}<div class="hl-md">${a.headline}</div>
-    <div class="deck-card">${a.summary}</div><div class="meta"><span>${a.read_time} min read</span></div>
     <div class="read-hint">Read full story →</div></div>`).join('');
 
-  document.querySelectorAll('[data-idx]').forEach(el=>el.addEventListener('click',()=>openArticle(items[+el.dataset.idx])));
-  document.getElementById('loading').style.display='none';
+  // Row 2 (7-8 + nord card)
+  document.getElementById('row2').innerHTML =
+    items.slice(7,9).map((a,i) => `
+      <div class="card" data-idx="${i+7}">${catDot(a.category)}
+      <div class="hl-md">${a.headline}</div>
+      <div class="deck-card">${a.summary}</div>
+      <div class="why-box"><div class="why-label">WHY IT MATTERS</div><div class="why-text">${a.why_matters}</div></div>
+      <div class="meta"><span>${a.read_time} min read</span></div>
+      <div class="read-hint">Read full story →</div></div>`).join('') +
+    `<div class="nord-card">
+      <div><div class="nord-card-badge">SPONSORED · PARTNER</div>
+      <div class="nord-card-title">Read AI news privately — 73% OFF NordVPN</div>
+      <div class="nord-card-body">Every site you visit is tracked. NordVPN encrypts your connection and keeps your reading habits yours. Trusted by 14M+ users worldwide.</div></div>
+      <div><a href="${NORDVPN}" target="_blank" rel="noopener sponsored" class="nord-card-btn">Claim Your Discount →</a>
+      <div class="nord-card-fine">30-day money-back guarantee</div></div>
+    </div>`;
+
+  // Bottom row 9-12
+  document.getElementById('bottom-row').innerHTML = items.slice(9,13).map((a,i) => `
+    <div class="card" data-idx="${i+9}">${catDot(a.category)}
+    <div class="hl-md">${a.headline}</div>
+    <div class="deck-card">${a.summary}</div>
+    <div class="meta"><span>${a.read_time} min read</span></div>
+    <div class="read-hint">Read full story →</div></div>`).join('');
+
+  // Wire all click handlers
+  document.querySelectorAll('[data-idx]').forEach(el =>
+    el.addEventListener('click', () => openArticle(items[+el.dataset.idx]))
+  );
+
+  document.getElementById('loading').style.display = 'none';
   document.getElementById('bento').classList.add('visible');
 }
 
-async function fetchNews(){
-  document.getElementById('loading').style.display='flex';
-  document.getElementById('error-box').style.display='none';
-  try{
-    const res=await fetch('/news-data.json');
-    if(!res.ok) throw new Error(`Could not load news (${res.status})`);
-    const data=await res.json();
-    allArticles=data.articles;
+/* ── FETCH & INIT ── */
+async function fetchNews() {
+  document.getElementById('loading').style.display = 'flex';
+  document.getElementById('error-box').style.display = 'none';
+  try {
+    const res = await fetch('/news-data.json');
+    if (!res.ok) throw new Error(`Could not load news (${res.status})`);
+    const data = await res.json();
+    allArticles = data.articles;
     render(allArticles);
-  }catch(err){
-    document.getElementById('loading').style.display='none';
-    document.getElementById('error-box').style.display='block';
-    document.getElementById('error-msg').textContent=err.message;
+  } catch(err) {
+    document.getElementById('loading').style.display = 'none';
+    document.getElementById('error-box').style.display = 'block';
+    document.getElementById('error-msg').textContent = err.message;
   }
 }
 
-document.addEventListener('illuceo:ready',()=>{
-  document.querySelectorAll('.nav-item[data-cat]').forEach(item=>{
-    item.addEventListener('click',()=>{
-      currentCat=item.dataset.cat;
-      document.querySelectorAll('.nav-item[data-cat]').forEach(n=>n.classList.remove('active'));
+document.addEventListener('illuceo:ready', () => {
+  document.querySelectorAll('.nav-item[data-cat]').forEach(item => {
+    item.addEventListener('click', () => {
+      currentCat = item.dataset.cat;
+      document.querySelectorAll('.nav-item[data-cat]').forEach(n => n.classList.remove('active'));
       item.classList.add('active');
-      if(allArticles.length) render(allArticles);
+      if (allArticles.length) render(allArticles);
     });
   });
 });
