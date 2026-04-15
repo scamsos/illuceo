@@ -10,88 +10,91 @@
   const NORDVPN = 'https://go.nordvpn.net/aff_c?offer_id=15&aff_id=145247&url_id=902';
   const YEAR    = new Date().getFullYear();
 
-  /* ── NAV STRUCTURE ── */
+  /* ── NAV STRUCTURE — only links to pages that exist ── */
   const NAV = [
-    { label:'News',      href:'/index.html',   cat:'news' },
-    { label:'AI Tools',  href:'/tools/',        cat:'tools',
+    { label:'News', href:'/' },
+    { label:'AI Tools', href:'/tools/',
       sub:[
-        { label:'All Tools',            href:'/tools/' },
-        { label:'Best Of Lists',        href:'/tools/best/' },
-        { label:'Tool Comparisons',     href:'/tools/compare/' },
-        { label:'Free Tools',           href:'/tools/free/' },
-        { label:'Tools by Industry',    href:'/tools/industry/' },
+        { label:'All AI Tools',               href:'/tools/' },
+        { label:'Best AI Writing Tools',      href:'/tools/best/ai-writing-tools/' },
+        { label:'ChatGPT vs Claude vs Gemini',href:'/tools/compare/chatgpt-vs-claude-vs-gemini/' },
+        { label:'Best Free AI Tools',         href:'/tools/free/' },
+        { label:'AI Tools for Small Business',href:'/tools/best/ai-tools-small-business/' },
+        { label:'Best AI Coding Assistants',  href:'/tools/best/ai-coding-assistants/' },
       ]
     },
-    { label:'Tutorials', href:'/tutorials/',    cat:'tutorials',
+    { label:'Tutorials', href:'/tutorials/',
       sub:[
-        { label:'ChatGPT Guides',       href:'/tutorials/chatgpt/' },
-        { label:'Midjourney',           href:'/tutorials/midjourney/' },
-        { label:'Claude AI',            href:'/tutorials/claude/' },
-        { label:'AI Automation',        href:'/tutorials/automation/' },
+        { label:'All Tutorials',        href:'/tutorials/' },
+        { label:'How to Use ChatGPT',   href:'/tutorials/chatgpt/' },
+        { label:'Midjourney Prompts',   href:'/tutorials/midjourney/' },
         { label:'Prompt Engineering',   href:'/tutorials/prompts/' },
+        { label:'AI Automation',        href:'/tutorials/automation/' },
+        { label:'How to Use Claude',    href:'/tutorials/claude/' },
       ]
     },
-    { label:'Professions', href:'/professions/',  cat:'professions',
+    { label:'Professions', href:'/professions/',
       sub:[
-        { label:'Healthcare',           href:'/professions/healthcare/' },
-        { label:'Legal',                href:'/professions/legal/' },
-        { label:'Education',            href:'/professions/education/' },
-        { label:'Real Estate',          href:'/professions/real-estate/' },
-        { label:'Marketing',            href:'/professions/marketing/' },
         { label:'All Professions',      href:'/professions/' },
+        { label:'Real Estate',          href:'/professions/real-estate/' },
+        { label:'Education',            href:'/professions/education/' },
+        { label:'Legal',                href:'/professions/legal/' },
+        { label:'Healthcare',           href:'/professions/healthcare/' },
+        { label:'Marketing',            href:'/professions/marketing/' },
       ]
     },
-    { label:'Make Money',  href:'/make-money/',   cat:'money',
+    { label:'Make Money', href:'/make-money/',
       sub:[
+        { label:'All Methods',          href:'/make-money/' },
         { label:'AI Side Hustles',      href:'/make-money/side-hustles/' },
-        { label:'Freelancing with AI',  href:'/make-money/freelancing/' },
+        { label:'AI Freelancing',       href:'/make-money/freelancing/' },
         { label:'Sell AI Products',     href:'/make-money/sell/' },
         { label:'AI Passive Income',    href:'/make-money/passive/' },
       ]
     },
-    { label:'Explained',   href:'/explained/',    cat:'explained',
+    { label:'Explained', href:'/explained/',
       sub:[
-        { label:'AI Glossary',          href:'/explained/glossary/' },
-        { label:'How LLMs Work',        href:'/explained/llms/' },
-        { label:'AI vs AI',             href:'/explained/comparisons/' },
-        { label:'AI Agents',            href:'/explained/agents/' },
+        { label:'All Explainers',         href:'/explained/' },
+        { label:'What is AI?',            href:'/explained/what-is-ai/' },
+        { label:'What is an LLM?',        href:'/explained/what-is-llm/' },
+        { label:'What is an AI Agent?',   href:'/explained/what-is-ai-agent/' },
+        { label:'AI Hallucinations',      href:'/explained/ai-hallucinations/' },
+        { label:'Prompt Engineering',     href:'/explained/prompt-engineering/' },
       ]
     },
-    { label:'Industries',  href:'/industries/',   cat:'industries',
+    { label:'AI Agents', href:'/agents/',
       sub:[
-        { label:'Healthcare AI',        href:'/industries/healthcare/' },
-        { label:'Finance AI',           href:'/industries/finance/' },
-        { label:'Legal AI',             href:'/industries/legal/' },
-        { label:'Retail AI',            href:'/industries/retail/' },
-        { label:'All Industries',       href:'/industries/' },
+        { label:'All Agent Guides',       href:'/agents/' },
+        { label:'What Are AI Agents?',    href:'/agents/what-are-agents/' },
+        { label:'Build an AI Agent',      href:'/agents/build-ai-agent/' },
+        { label:'AI Workflow Automation', href:'/agents/ai-workflow-automation/' },
+        { label:'MCP Protocol',           href:'/agents/mcp-protocol/' },
+        { label:'Best AI Agents 2026',    href:'/agents/best-ai-agents/' },
       ]
     },
-    { label:'Prompts',     href:'/prompts/',      cat:'prompts' },
-    { label:'Courses',     href:'/courses/',      cat:'courses' },
-    { label:'Agents',      href:'/agents/',       cat:'agents' },
   ];
 
   const FOOTER_LINKS = {
-    'AI Tools':    [
-      { l:'Best AI Writing Tools',    h:'/tools/best/ai-writing-tools/' },
-      { l:'Best Free AI Tools',       h:'/tools/free/' },
-      { l:'ChatGPT Alternatives',     h:'/tools/compare/chatgpt-alternatives/' },
-      { l:'AI Image Generators',      h:'/tools/best/ai-image-generators/' },
-      { l:'AI Coding Assistants',     h:'/tools/best/ai-coding-assistants/' },
+    'AI Tools': [
+      { l:'Best AI Writing Tools',      h:'/tools/best/ai-writing-tools/' },
+      { l:'Best Free AI Tools',         h:'/tools/free/' },
+      { l:'ChatGPT vs Claude vs Gemini',h:'/tools/compare/chatgpt-vs-claude-vs-gemini/' },
+      { l:'AI Tools for Small Business',h:'/tools/best/ai-tools-small-business/' },
+      { l:'Best AI Coding Assistants',  h:'/tools/best/ai-coding-assistants/' },
     ],
-    'Learn':       [
-      { l:'Prompt Engineering Guide', h:'/tutorials/prompts/' },
-      { l:'How to Use ChatGPT',       h:'/tutorials/chatgpt/' },
-      { l:'What Is an AI Agent?',     h:'/explained/agents/' },
-      { l:'AI Glossary',              h:'/explained/glossary/' },
-      { l:'AI Courses 2026',          h:'/courses/' },
+    'Learn': [
+      { l:'Prompt Engineering Guide',   h:'/tutorials/prompts/' },
+      { l:'How to Use ChatGPT',         h:'/tutorials/chatgpt/' },
+      { l:'What Is an AI Agent?',       h:'/explained/what-is-ai-agent/' },
+      { l:'What Is an LLM?',            h:'/explained/what-is-llm/' },
+      { l:'AI Hallucinations Explained',h:'/explained/ai-hallucinations/' },
     ],
-    'Company':     [
-      { l:'About ILLUCEO',            h:'/about/' },
-      { l:'Contact',                  h:'/contact/' },
-      { l:'Privacy Policy',           h:'/privacy/' },
-      { l:'Terms of Service',         h:'/terms/' },
-      { l:'Advertise',                h:'/contact/#advertise' },
+    'Company': [
+      { l:'About ILLUCEO',  h:'/about/' },
+      { l:'Contact',        h:'/contact/' },
+      { l:'Privacy Policy', h:'/privacy/' },
+      { l:'Terms of Service',h:'/terms/' },
+      { l:'Advertise',      h:'/contact/#advertise' },
     ],
   };
 
