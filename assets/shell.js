@@ -116,8 +116,8 @@
     el.innerHTML = `
       <div class="illuceo-topbar">
         <div class="topbar-left">
-          <div class="live-pill"><div class="live-dot"></div><span>LIVE</span></div>
-          <div class="topbar-date">${todayStr()}</div>
+          <a href="/" class="live-pill notranslate" translate="no" style="text-decoration:none;"><div class="live-dot"></div><span>ILLUCEO</span></a>
+          <div class="topbar-date notranslate" translate="no">${todayStr()}</div>
         </div>
         <div class="lang-switcher" id="lang-switcher">
           <button class="lang-btn active" data-lang="en">EN</button>
@@ -166,8 +166,8 @@
       <footer class="illuceo-footer">
         <div class="footer-grid">
           <div class="footer-brand">
-            <div class="footer-brand-name"><span>I</span>LLUCEO</div>
-            <div class="footer-brand-latin">illuceo · latin · "to begin giving light"</div>
+            <a href="/" class="footer-brand-name notranslate" translate="no"><span>I</span>LLUCEO</a>
+            <div class="footer-brand-latin notranslate" translate="no">illuceo · latin · "to begin giving light"</div>
             <p class="footer-brand-desc">The sharpest AI intelligence on the planet — curated daily, delivered in your language, free forever.</p>
             <div class="footer-nord-widget" style="margin-top:20px;">
               <p>🔒 Every site you visit is tracked. NordVPN encrypts your connection and keeps your data private.</p>
@@ -177,7 +177,7 @@
           ${cols}
         </div>
         <div class="footer-copy">
-          <p>© ${YEAR} ILLUCEO · AI-Powered Daily Intelligence · illuceo.space</p>
+          <p>© ${YEAR} <span class="notranslate" translate="no">ILLUCEO</span> · AI-Powered Daily Intelligence · <span class="notranslate" translate="no">illuceo.space</span></p>
           <p>Contains affiliate links · <a href="${NORDVPN}" target="_blank" rel="noopener sponsored">NordVPN Partner</a> · <a href="/privacy/">Privacy</a> · <a href="/terms/">Terms</a></p>
         </div>
       </footer>`;
@@ -375,8 +375,28 @@
       .goog-te-banner-frame { display:none !important; }
       body { top: 0 !important; }
       .skiptranslate { display:none !important; }
+      /* Protect ILLUCEO brand from translation */
+      .notranslate { font-family: inherit !important; }
+      /* Footer brand name as link */
+      a.footer-brand-name {
+        text-decoration: none;
+        display: block;
+        transition: opacity .18s;
+      }
+      a.footer-brand-name:hover { opacity: .75; }
     `;
     document.head.appendChild(style);
+  }
+
+  /* ── PROTECT BRAND NAME from Google Translate ── */
+  function protectBrandName(){
+    // Mark all ILLUCEO text nodes so Google Translate skips them
+    document.querySelectorAll('.notranslate').forEach(el => {
+      el.setAttribute('translate', 'no');
+      el.classList.add('notranslate');
+    });
+    // Also set on <html> to hint translators about brand
+    document.documentElement.setAttribute('data-notranslate-brand', 'ILLUCEO');
   }
 
   /* ── INIT ── */
@@ -391,6 +411,7 @@
     initFaq();
     injectOrgSchema();
     hideGoogleBar();
+    protectBrandName();
     document.dispatchEvent(new CustomEvent('illuceo:ready'));
   }
 
