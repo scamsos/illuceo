@@ -1,1 +1,205 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="What is MCP (Model Context Protocol)? Clear explanation of Anthropic's open standard for connecting AI to tools and data — with practical examples for 2026.">
+<meta property="og:title" content="What Is MCP (Model Context Protocol)? — Explained for 2026 — ILLUCEO">
+<meta property="og:description" content="What is MCP (Model Context Protocol)? Clear explanation of Anthropic's open standard for connecting AI to tools and data — with practical examples for 2026.">
+<meta property="og:url" content="https://illuceo.space/agents/mcp-protocol/">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2026-04-15T06:00:00Z">
+<link rel="canonical" href="https://illuceo.space/agents/mcp-protocol/">
+<title>What Is MCP (Model Context Protocol)? — Explained for 2026 — ILLUCEO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@300;400;500&family=Outfit:wght@200;300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/shell.css">
+<link rel="stylesheet" href="/assets/article.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"What Is MCP (Model Context Protocol)? — Explained for 2026","description":"What is MCP (Model Context Protocol)? Clear explanation of Anthropic's open standard for connecting AI to tools and data — with practical examples for 2026.","datePublished":"2026-04-15T06:00:00Z","dateModified":"2026-04-15T06:00:00Z","author":{"@type":"Organization","name":"ILLUCEO","url":"https://illuceo.space"},"publisher":{"@type":"Organization","name":"ILLUCEO","url":"https://illuceo.space","logo":{"@type":"ImageObject","url":"https://illuceo.space/favicon/android-chrome-512x512.png"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://illuceo.space/agents/mcp-protocol/"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type": "Question", "name": "What is MCP in simple terms?", "acceptedAnswer": {"@type": "Answer", "text": "MCP (Model Context Protocol) is a standard created by Anthropic that defines how AI models communicate with external tools and data sources. Think of it as a universal adapter — like USB-C for AI integrations. Instead of each AI tool needing a custom connection to each service, MCP provides one standard way to connect everything."}}, {"@type": "Question", "name": "Who created MCP?", "acceptedAnswer": {"@type": "Answer", "text": "Anthropic created and open-sourced MCP in late 2024. It has since been adopted by major AI platforms and tool vendors as the emerging standard for AI-tool integration."}}, {"@type": "Question", "name": "What can MCP connect AI to?", "acceptedAnswer": {"@type": "Answer", "text": "MCP servers exist for: file systems, databases, GitHub, Google Drive, Slack, email, calendars, web browsers, code execution environments, and hundreds of other services. Any developer can build an MCP server for any service."}}, {"@type": "Question", "name": "Is MCP only for Claude?", "acceptedAnswer": {"@type": "Answer", "text": "MCP was created by Anthropic for Claude, but it's an open standard. It's been adopted by other AI systems and platforms. The goal is interoperability — any AI model can connect to any MCP server."}}, {"@type": "Question", "name": "Do I need to code to use MCP?", "acceptedAnswer": {"@type": "Answer", "text": "To set up pre-built MCP servers: basic command-line comfort is helpful but not essential. Many MCP servers can be configured through settings files. To build custom MCP servers: Python or TypeScript knowledge is needed."}}]}
+</script>
+</head>
+<body>
+<div id="shell-top"></div>
+<nav id="shell-nav"></nav>
 
+<!-- AD: Leaderboard 728x90 — above fold, below nav -->
+<div class="ad-wrap ad-wrap-top">
+  <div class="ad-slot ad-leaderboard" id="ad-top"><!-- AdSense 728x90 --></div>
+  <div class="ad-slot ad-mobile" id="ad-top-mob"><!-- AdSense 320x50 --></div>
+</div>
+
+<main class="main">
+  <div class="breadcrumb"><a href="/">Home</a><span>/</span><a href="/agents/">AI Agents</a><span>/</span><span>MCP Protocol</span></div>
+  <div class="article-wrap">
+
+    <article class="article-main">
+      <header class="article-hero">
+        <div class="article-meta-row">
+          <div class="cat cat-agents">Agents</div>
+          <span class="article-meta-date notranslate" translate="no">April 15, 2026</span>
+          <span class="article-read-time">8 min read</span>
+        </div>
+        <h1 class="hl-xl">What Is MCP (Model Context Protocol)? — Explained for 2026</h1>
+        <p class="deck">The Model Context Protocol is the new standard that lets AI assistants connect to your tools, files, and services. Here's what it is, why it matters, and how to use it.</p>
+        <div class="why-box">
+          <div class="why-label">Why Read This</div>
+          <div class="why-text">MCP is becoming the universal connector between AI models and the real world. Understanding it now helps you build more capable AI workflows and choose the right tools.</div>
+        </div>
+      </header>
+
+      <div class="article-body">
+        
+<div class="takeaways-box">
+  <h3>MCP at a Glance</h3>
+  <ul>
+    <li>Created by Anthropic, released as open source in 2024</li>
+    <li>A universal standard for AI-to-tool connections</li>
+    <li>Replaces hundreds of custom integrations with one protocol</li>
+    <li>Works with Claude, and increasingly other AI systems</li>
+    <li>Rapidly becoming the industry standard for agentic AI</li>
+  </ul>
+</div>
+
+<h2>The Problem MCP Solves</h2>
+<p>Before MCP, connecting an AI assistant to external tools was messy. Every tool needed a custom integration. If you wanted Claude to access your Google Drive, someone had to build a specific Claude-to-Google Drive connector. If you then wanted it to access Notion, another custom connector. And again for GitHub, Slack, and every other service.</p>
+<p>This created an impossible maintenance burden and locked AI capabilities to whatever integrations had been specifically built. MCP solves this with a single, open standard.</p>
+<div class="highlight-box"><p><strong>The USB-C analogy:</strong> Before USB-C, every device had a different charging port. MCP is to AI tools what USB-C is to device charging — one standard connector that works everywhere.</p></div>
+
+<h2>How MCP Works</h2>
+<p>MCP has three components that work together:</p>
+<p><strong>MCP Hosts:</strong> The AI application the user interacts with — Claude Desktop, an IDE like Cursor, or a custom application. The host manages connections to MCP servers.</p>
+<p><strong>MCP Clients:</strong> The component inside the host that speaks the MCP protocol and connects to servers.</p>
+<p><strong>MCP Servers:</strong> Lightweight programs that expose specific capabilities to AI models. A GitHub MCP server gives the AI access to repositories. A filesystem MCP server gives access to local files. A database MCP server gives access to query a database.</p>
+<p>When you ask Claude to "check my latest GitHub pull requests," Claude's MCP client connects to the GitHub MCP server, which fetches the data and returns it to Claude in a standardised format.</p>
+
+<h2>What MCP Servers Are Available in 2026</h2>
+<table>
+  <tr><th>Category</th><th>Available MCP Servers</th></tr>
+  <tr><td>File &amp; Storage</td><td>Local filesystem, Google Drive, Dropbox, S3, OneDrive</td></tr>
+  <tr><td>Code &amp; Development</td><td>GitHub, GitLab, code execution (Python, JS), terminal</td></tr>
+  <tr><td>Productivity</td><td>Google Calendar, Gmail, Notion, Obsidian, Todoist</td></tr>
+  <tr><td>Communication</td><td>Slack, Microsoft Teams, Discord, email (SMTP/IMAP)</td></tr>
+  <tr><td>Data &amp; Databases</td><td>PostgreSQL, MySQL, SQLite, MongoDB, Airtable</td></tr>
+  <tr><td>Web</td><td>Browser control, web search, URL fetching, screenshots</td></tr>
+  <tr><td>Business</td><td>Salesforce, HubSpot, Stripe, Shopify, QuickBooks</td></tr>
+</table>
+
+<h2>Setting Up MCP with Claude Desktop</h2>
+<ol class="step-list">
+  <li><strong>Install Claude Desktop</strong> — Download from anthropic.com/claude. This is the desktop application with MCP support built in.</li>
+  <li><strong>Open MCP settings</strong> — In Claude Desktop, go to Settings → Developer. You'll see a configuration file path.</li>
+  <li><strong>Add an MCP server</strong> — Edit the configuration file to add a server. For the filesystem server:<br>
+  <code style="font-family:var(--mono);font-size:12px;background:var(--bg3);padding:8px;display:block;margin-top:8px;border-radius:3px;">{"mcpServers":{"filesystem":{"command":"npx","args":["-y","@modelcontextprotocol/server-filesystem","/path/to/your/files"]}}}</code></li>
+  <li><strong>Restart Claude Desktop</strong> — The server starts automatically. You'll see a hammer icon confirming tools are connected.</li>
+  <li><strong>Test it</strong> — Ask Claude: "List the files in my documents folder" or "Summarise the content of [filename]." Claude now has direct access.</li>
+</ol>
+
+<h2>Why MCP Matters for the Future of AI</h2>
+<p>MCP represents a structural shift in how AI integrates with existing software. Previously, AI tools sat alongside your workflow — you'd take information out, put it into the AI, take the AI's output, and put it back. With MCP, AI sits inside your workflow, with direct access to the tools and data it needs.</p>
+<p>The compounding effect: as more services build MCP servers, the capability of AI assistants grows without the AI itself needing to change. Claude connected to 50 MCP servers is a fundamentally different tool than Claude without MCP — even though the underlying model is identical.</p>
+<p>Anthropic's decision to open-source MCP means it's being adopted beyond Claude — other AI systems are implementing MCP compatibility, creating the ecosystem network effects that turn a good idea into an industry standard.</p>
+
+
+        <!-- AD: In-content 468x60 — mid article -->
+        <div class="ad-wrap ad-wrap-in-content">
+          <div class="ad-slot ad-banner" id="ad-mid"><!-- AdSense 468x60 --></div>
+        </div>
+
+        <section class="faq-section">
+          <h2>Frequently Asked Questions</h2>
+          <div class="faq-item">
+          <div class="faq-q">What is MCP in simple terms?</div>
+          <div class="faq-a">MCP (Model Context Protocol) is a standard created by Anthropic that defines how AI models communicate with external tools and data sources. Think of it as a universal adapter — like USB-C for AI integrations. Instead of each AI tool needing a custom connection to each service, MCP provides one standard way to connect everything.</div>
+        </div><div class="faq-item">
+          <div class="faq-q">Who created MCP?</div>
+          <div class="faq-a">Anthropic created and open-sourced MCP in late 2024. It has since been adopted by major AI platforms and tool vendors as the emerging standard for AI-tool integration.</div>
+        </div><div class="faq-item">
+          <div class="faq-q">What can MCP connect AI to?</div>
+          <div class="faq-a">MCP servers exist for: file systems, databases, GitHub, Google Drive, Slack, email, calendars, web browsers, code execution environments, and hundreds of other services. Any developer can build an MCP server for any service.</div>
+        </div><div class="faq-item">
+          <div class="faq-q">Is MCP only for Claude?</div>
+          <div class="faq-a">MCP was created by Anthropic for Claude, but it's an open standard. It's been adopted by other AI systems and platforms. The goal is interoperability — any AI model can connect to any MCP server.</div>
+        </div><div class="faq-item">
+          <div class="faq-q">Do I need to code to use MCP?</div>
+          <div class="faq-a">To set up pre-built MCP servers: basic command-line comfort is helpful but not essential. Many MCP servers can be configured through settings files. To build custom MCP servers: Python or TypeScript knowledge is needed.</div>
+        </div>
+        </section>
+      </div>
+
+      <footer class="article-footer">
+        <div class="article-tags"><a class="article-tag" href="/tags/mcp/">MCP</a> <a class="article-tag" href="/tags/model-context-protocol/">Model Context Protocol</a> <a class="article-tag" href="/tags/ai-agents/">AI Agents</a> <a class="article-tag" href="/tags/anthropic/">Anthropic</a> <a class="article-tag" href="/tags/claude/">Claude</a> <a class="article-tag" href="/tags/tool-use/">Tool Use</a> <a class="article-tag" href="/tags/ai-standards/">AI Standards</a></div>
+        <h3 class="related-heading">Related Articles</h3>
+        <div class="related-grid"><a class="related-card" href="/agents/what-are-agents/">
+          <div class="related-cat cat-agents">Agents</div>
+          <div class="related-title">What Are AI Agents?</div>
+        </a><a class="related-card" href="/agents/build-ai-agent/">
+          <div class="related-cat cat-agents">Agents</div>
+          <div class="related-title">Build Your First AI Agent</div>
+        </a><a class="related-card" href="/agents/best-ai-agents/">
+          <div class="related-cat cat-agents">Agents</div>
+          <div class="related-title">Best AI Agents 2026</div>
+        </a></div>
+      </footer>
+    </article>
+
+    <aside class="article-sidebar">
+      <!-- AD: Rectangle 300x250 — top of sidebar -->
+      <div class="ad-wrap-sidebar">
+        <div class="ad-slot ad-rectangle" id="ad-sidebar-rect"><!-- AdSense 300x250 --></div>
+      </div>
+
+      <div class="affiliate-cta">
+        <div class="aff-badge">PARTNER</div>
+        <div class="affiliate-cta-title">Browse Privately</div>
+        <div class="affiliate-cta-body">NordVPN encrypts your connection while you research. 14M+ users. 30-day guarantee.</div>
+        <a href="https://go.nordvpn.net/aff_c?offer_id=15&aff_id=145247&url_id=902" target="_blank" rel="noopener sponsored" class="affiliate-cta-btn">Get 73% OFF →</a>
+      </div>
+
+      <div class="sidebar-widget" id="toc-widget">
+        <h4>In This Article</h4>
+        <ul id="toc-list"></ul>
+      </div>
+
+      <!-- AD: Half page 300x600 — high RPM sidebar -->
+      <div class="ad-wrap-sidebar">
+        <div class="ad-slot ad-halfpage" id="ad-sidebar-half"><!-- AdSense 300x600 --></div>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<!-- AD: Leaderboard 728x90 — below content, above footer -->
+<div class="ad-wrap" style="border-top:1px solid var(--border);padding:20px 0;max-width:var(--max-w);margin:0 auto;text-align:center;">
+  <div class="ad-slot ad-leaderboard" id="ad-bottom"><!-- AdSense 728x90 --></div>
+  <div class="ad-slot ad-mobile" id="ad-bottom-mob"><!-- AdSense 320x50 --></div>
+</div>
+
+<div id="shell-bottom"></div>
+<script src="/assets/shell.js"></script>
+<script>
+(function(){
+  const hs=document.querySelectorAll('.article-body h2');
+  const toc=document.getElementById('toc-list');
+  if(!hs.length||!toc){document.getElementById('toc-widget').style.display='none';return;}
+  hs.forEach((h,i)=>{
+    const id='s'+i; h.id=id;
+    const li=document.createElement('li');
+    li.innerHTML=`<a href="#${id}">${h.textContent}</a>`;
+    toc.appendChild(li);
+  });
+})();
+document.querySelectorAll('.faq-q').forEach(q=>{
+  q.addEventListener('click',()=>{
+    const item=q.closest('.faq-item');
+    const open=item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+    if(!open) item.classList.add('open');
+  });
+});
+</script>
+</body>
+</html>
