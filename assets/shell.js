@@ -45,7 +45,7 @@
     },
     { label:'Make Money', href:'/make-money/',
       sub:[
-        { label:'All Methods',          href:'/make-money/' },
+        { label:'15 Proven Methods',     href:'/make-money/15-methods/' },
         { label:'AI Side Hustles',      href:'/make-money/side-hustles/' },
         { label:'AI Freelancing',       href:'/make-money/freelancing/' },
         { label:'Sell AI Products',     href:'/make-money/sell/' },
