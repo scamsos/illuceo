@@ -14,20 +14,25 @@
 <style>
 .masthead{text-align:center;padding:52px 32px 36px;border-bottom:1px solid var(--border);position:relative;overflow:hidden;}
 .masthead::before{content:'';position:absolute;top:-80px;left:50%;transform:translateX(-50%);width:700px;height:280px;background:radial-gradient(ellipse,rgba(0,229,176,.055) 0%,transparent 68%);pointer-events:none;}
-.site-name{font-family:var(--serif);font-size:clamp(68px,13vw,140px);font-weight:700;letter-spacing:.12em;line-height:.88;color:var(--text);display:inline-block;}
+.site-name{font-family:var(--serif);font-size:clamp(68px,13vw,140px);font-weight:700;letter-spacing:.12em;line-height:.88;color:var(--text);display:inline-block;text-decoration:none;}
 .site-name .ib{color:var(--teal);position:relative;display:inline-block;}
 .site-name .ib::after{content:'';position:absolute;bottom:-8px;left:50%;transform:translateX(-50%);width:2px;height:36px;background:linear-gradient(to bottom,var(--teal),transparent);animation:beam 3s ease-in-out infinite;}
 @keyframes beam{0%,100%{opacity:.5;height:28px;}50%{opacity:1;height:40px;}}
 .site-tagline{font-family:var(--serif);font-style:italic;font-size:clamp(14px,2vw,20px);color:var(--text2);margin-top:22px;letter-spacing:.04em;}
 .latin-note{font-family:var(--mono);font-size:8px;letter-spacing:.2em;color:var(--text3);margin-top:10px;opacity:.55;}
+
+/* TICKER */
 .ticker-wrap{background:var(--bg3);border:1px solid var(--border);border-radius:4px;overflow:hidden;margin-bottom:20px;display:flex;align-items:stretch;}
 .ticker-label{background:var(--teal);color:var(--bg);font-family:var(--mono);font-size:8px;letter-spacing:.3em;text-transform:uppercase;font-weight:500;padding:0 16px;display:flex;align-items:center;flex-shrink:0;}
 .ticker-overflow{overflow:hidden;flex:1;padding:10px 0;}
-.ticker-track{display:flex;animation:ticker 50s linear infinite;white-space:nowrap;}
+.ticker-track{display:flex;animation:ticker 60s linear infinite;white-space:nowrap;}
+.ticker-track:hover{animation-play-state:paused;}
 @keyframes ticker{from{transform:translateX(0);}to{transform:translateX(-50%);}}
 .ticker-item{font-family:var(--mono);font-size:10px;color:var(--text2);padding:0 28px;letter-spacing:.04em;white-space:nowrap;cursor:pointer;transition:color .15s;}
 .ticker-item:hover{color:var(--teal);}
 .ticker-item::after{content:'·';margin-left:28px;color:var(--border2);}
+
+/* BENTO */
 .hero-row{display:grid;grid-template-columns:1fr 320px;border:1px solid var(--border);border-radius:6px;overflow:hidden;background:var(--border);gap:1px;margin-bottom:1px;}
 .hero-main{background:var(--bg2);padding:36px 40px;cursor:pointer;position:relative;transition:background .2s;overflow:hidden;}
 .hero-main::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--teal),transparent);transform:scaleX(0);transform-origin:left;transition:transform .35s;}
@@ -35,7 +40,7 @@
 .hero-main:hover::before{transform:scaleX(1);}
 .hero-main:hover .hl-xl{color:var(--teal);}
 .hero-sidebar{background:var(--bg2);display:flex;flex-direction:column;}
-.sidebar-story{padding:18px 22px;border-bottom:1px solid var(--border);cursor:pointer;flex:1;transition:background .18s;}
+.sidebar-story{padding:18px 22px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .18s;}
 .sidebar-story:last-child{border-bottom:none;}
 .sidebar-story:hover{background:rgba(255,255,255,.018);}
 .sidebar-story:hover .hl-sm{color:var(--teal);}
@@ -55,9 +60,11 @@
 .nord-card-badge{font-family:var(--mono);font-size:7px;letter-spacing:.3em;text-transform:uppercase;color:var(--nord);margin-bottom:2px;}
 .nord-card-title{font-family:var(--serif);font-size:18px;font-weight:600;color:#e8f0ff;line-height:1.3;margin-bottom:8px;}
 .nord-card-body{font-size:11px;color:#6b96d4;line-height:1.65;flex:1;}
-.nord-card-btn{display:block;text-align:center;background:linear-gradient(135deg,#4687ff,#2654c8);color:#fff;font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;padding:10px 14px;border-radius:3px;text-decoration:none;transition:all .2s;border:1px solid rgba(255,255,255,.06);}
+.nord-card-btn{display:block;text-align:center;background:linear-gradient(135deg,#4687ff,#2654c8);color:#fff;font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;padding:10px 14px;border-radius:3px;text-decoration:none;transition:all .2s;}
 .nord-card-btn:hover{transform:translateY(-1px);box-shadow:0 6px 22px rgba(70,135,255,.3);}
 .nord-card-fine{font-family:var(--mono);font-size:7px;color:#2a4060;text-align:center;letter-spacing:.1em;margin-top:4px;}
+
+/* LOADING */
 .loading{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:52vh;gap:20px;}
 .loading-logo{font-family:var(--serif);font-size:36px;font-weight:600;letter-spacing:.2em;color:var(--text3);animation:fadeloop 2s ease-in-out infinite;}
 .loading-logo span{color:var(--teal);}
@@ -72,18 +79,21 @@
 .bento{display:none;animation:risein .5s ease forwards;}
 .bento.visible{display:block;}
 @keyframes risein{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+
 /* MODAL */
-.modal-overlay{position:fixed;inset:0;z-index:500;background:rgba(0,0,0,0);backdrop-filter:blur(0px);display:flex;align-items:flex-start;justify-content:center;overflow-y:auto;padding:24px 16px;pointer-events:none;transition:background .3s,backdrop-filter .3s;}
+.modal-overlay{position:fixed;inset:0;z-index:500;background:rgba(0,0,0,0);backdrop-filter:blur(0px);display:flex;align-items:flex-start;justify-content:center;padding:24px 16px;pointer-events:none;transition:background .3s,backdrop-filter .3s;overflow:hidden;}
 .modal-overlay.open{background:rgba(0,0,0,.8);backdrop-filter:blur(10px);pointer-events:all;}
-.modal-panel{width:100%;max-width:780px;background:var(--bg2);border:1px solid var(--border2);border-radius:8px;overflow:hidden;transform:translateY(32px);opacity:0;transition:transform .35s cubic-bezier(.22,1,.36,1),opacity .3s;margin:auto;position:relative;}
+.modal-panel{width:100%;max-width:780px;background:var(--bg2);border:1px solid var(--border2);border-radius:8px;overflow-y:auto;overflow-x:hidden;transform:translateY(32px);opacity:0;transition:transform .35s cubic-bezier(.22,1,.36,1),opacity .3s;margin:auto;position:relative;max-height:90vh;}
 .modal-overlay.open .modal-panel{transform:translateY(0);opacity:1;}
 .modal-close{position:absolute;top:16px;right:16px;width:32px;height:32px;background:var(--bg3);border:1px solid var(--border2);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:10;font-family:var(--mono);font-size:14px;color:var(--text3);transition:all .18s;}
 .modal-close:hover{border-color:var(--teal);color:var(--teal);}
 .modal-header{padding:36px 44px 28px;border-bottom:1px solid var(--border);}
 .modal-body{padding:32px 44px 44px;}
 .article-content{font-size:15px;line-height:1.85;color:var(--text2);}
-.article-content h2{font-family:var(--serif);font-size:26px;font-weight:600;color:var(--text);margin:32px 0 14px;letter-spacing:-.01em;}
+.article-content h2{font-family:var(--serif);font-size:24px;font-weight:600;color:var(--text);margin:28px 0 12px;}
 .article-content p{margin-bottom:16px;}
+.article-content ul,.article-content ol{padding-left:22px;margin-bottom:16px;}
+.article-content li{margin-bottom:7px;}
 .article-content strong{color:var(--text);font-weight:500;}
 .key-facts{background:var(--bg3);border:1px solid var(--border2);border-left:2px solid var(--teal);border-radius:0 4px 4px 0;padding:18px 22px;margin:24px 0;}
 .key-facts-title{font-family:var(--mono);font-size:8px;letter-spacing:.3em;text-transform:uppercase;color:var(--teal);margin-bottom:12px;}
@@ -101,23 +111,32 @@
 .modal-nord p{font-size:12px;color:#7ba8e8;flex:1;line-height:1.5;}
 .modal-nord p strong{color:#c8deff;}
 .modal-nord a{flex-shrink:0;background:linear-gradient(135deg,#4687ff,#2654c8);color:#fff;font-family:var(--mono);font-size:9px;letter-spacing:.15em;text-transform:uppercase;padding:8px 16px;border-radius:3px;text-decoration:none;transition:all .2s;white-space:nowrap;}
-.modal-nord a:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(70,135,255,.3);}
-.article-date-bar{display:flex;align-items:center;gap:12px;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid var(--border);}
-.article-date-bar .cat{margin-bottom:0;}
-.article-date-str{font-family:var(--mono);font-size:9px;color:var(--text3);letter-spacing:.1em;}
+.modal-nord a:hover{transform:translateY(-1px);}
+.modal-loading{padding:60px 40px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:16px;}
+
+/* RESPONSIVE */
 @media(max-width:1100px){.row2{grid-template-columns:1fr 1fr;}.nord-card{grid-column:span 2;flex-direction:row;align-items:center;}}
-@media(max-width:900px){.hero-row{grid-template-columns:1fr;}.hero-sidebar{flex-direction:row;flex-wrap:wrap;}.sidebar-story{min-width:200px;}.card-row{grid-template-columns:1fr 1fr;}.bottom-row{grid-template-columns:1fr 1fr;}}
-@media(max-width:640px){.masthead{padding:32px 16px 24px;}.hero-main{padding:22px 18px;}.card-row,.row2,.bottom-row{grid-template-columns:1fr;}.nord-card{grid-column:1;flex-direction:column;}.modal-header,.modal-body,.modal-footer{padding-left:20px;padding-right:20px;}}
+@media(max-width:900px){.hero-row{grid-template-columns:1fr;}.hero-sidebar{flex-direction:row;flex-wrap:wrap;}.sidebar-story{min-width:180px;flex:1;}.card-row{grid-template-columns:1fr 1fr;}.bottom-row{grid-template-columns:1fr 1fr;}}
+@media(max-width:640px){
+  .masthead{padding:32px 16px 24px;}
+  .hero-main{padding:22px 18px;}
+  .card-row,.row2,.bottom-row{grid-template-columns:1fr;}
+  .nord-card{grid-column:1;flex-direction:column;}
+  .modal-header,.modal-body,.modal-footer{padding-left:20px;padding-right:20px;}
+}
 </style>
 </head>
 <body>
 <div id="shell-top"></div>
+
 <header class="masthead">
-  <a href="/" class="site-name notranslate" translate="no" style="text-decoration:none;display:inline-block;"><span class="ib">I</span>LLUCEO</a>
+  <a href="/" class="site-name notranslate" translate="no"><span class="ib">I</span>LLUCEO</a>
   <div class="site-tagline">The moment AI becomes clear</div>
   <div class="latin-note notranslate" translate="no">illuceo · latin · "to begin giving light · to dawn upon the mind"</div>
 </header>
+
 <nav id="shell-nav"></nav>
+
 <main class="main">
   <div class="loading" id="loading">
     <div class="loading-logo"><span>I</span>LLUCEO</div>
@@ -127,7 +146,7 @@
   <div class="error-box" id="error-box"><h3>Connection Lost</h3><p id="error-msg"></p></div>
   <div class="bento" id="bento">
     <div class="ticker-wrap">
-      <div class="ticker-label">ILLUCEO</div>
+      <div class="ticker-label">LIVE</div>
       <div class="ticker-overflow"><div class="ticker-track" id="ticker-track"></div></div>
     </div>
     <div class="section-hd"><span>Top Story</span><hr></div>
@@ -153,14 +172,14 @@
 <script>
 const NORDVPN = 'https://go.nordvpn.net/aff_c?offer_id=15&aff_id=145247&url_id=902';
 const CAT = {Models:'cat-models',Tools:'cat-tools',Business:'cat-business',Research:'cat-research',Policy:'cat-policy',Agents:'cat-agents'};
-let currentCat = 'all', allArticles = [];
+let allArticles = [];
 
-function catDot(cat){ return `<div class="cat ${CAT[cat]||'cat-models'}">${cat}</div>`; }
+function catDot(cat){ return `<div class="cat ${CAT[cat]||'cat-models'}">${cat||'AI'}</div>`; }
 function dateStr(){ return new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'}); }
 
-/* ── MODAL — uses pre-baked full article from news-data.json ── */
-const overlay    = document.getElementById('modal-overlay');
-const closeBtn   = document.getElementById('modal-close');
+/* ── MODAL — purely from pre-baked news-data.json, NO API calls ── */
+const overlay  = document.getElementById('modal-overlay');
+const closeBtn = document.getElementById('modal-close');
 const modalContent = document.getElementById('modal-content');
 
 function openArticle(article) {
@@ -168,28 +187,25 @@ function openArticle(article) {
   overlay.classList.add('open');
   document.body.style.overflow = 'hidden';
   document.getElementById('modal-panel').scrollTop = 0;
-  const slug = article.headline.toLowerCase().replace(/[^a-z0-9]+/g,'-').slice(0,60);
-  history.pushState(null, '', `#${slug}`);
+  const slug = (article.headline||'article').toLowerCase().replace(/[^a-z0-9]+/g,'-').slice(0,60);
+  history.pushState(null, '', '#' + slug);
 }
 
 function renderModal(article) {
-  // Check if we have pre-generated full content
-  const hasFull = article.lede && article.sections && article.sections.length > 0;
+  const hasFull = article.lede && article.sections && article.sections.length;
 
   if (hasFull) {
-    // ✅ Full pre-baked article — instant, no API call needed
-    const sections = article.sections.map(s => `
-      <h2>${s.heading}</h2>
-      ${s.body.split('\n\n').map(p => `<p>${p.trim()}</p>`).join('')}
-    `).join('');
-
-    const takeaways = (article.takeaways || []).map(t => `<li>${t}</li>`).join('');
+    /* Full pre-baked article from news-data.json */
+    const sections = article.sections.map(s =>
+      `<h2>${s.heading}</h2>${s.body.split('\n\n').map(p=>`<p>${p.trim()}</p>`).join('')}`
+    ).join('');
+    const takeaways = (article.takeaways||[]).map(t=>`<li>${t}</li>`).join('');
 
     modalContent.innerHTML = `
       <div class="modal-header">
-        <div class="article-date-bar">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;flex-wrap:wrap;">
           ${catDot(article.category)}
-          <span class="article-date-str">${dateStr()} · ${article.read_time} min read · illuceo.space</span>
+          <span style="font-family:var(--mono);font-size:9px;color:var(--text3);letter-spacing:.1em;">${dateStr()} · ${article.read_time||5} min read</span>
         </div>
         <div class="hl-xl" style="margin-bottom:14px;">${article.headline}</div>
         <div class="deck">${article.lede}</div>
@@ -197,54 +213,48 @@ function renderModal(article) {
       <div class="modal-body">
         <div class="article-content">
           ${sections}
-          ${takeaways ? `
-            <div class="key-facts">
-              <div class="key-facts-title">Key Takeaways</div>
-              <ul>${takeaways}</ul>
-            </div>` : ''}
-          <p>${article.closing || ''}</p>
-        </div>
-        <div class="modal-nord">
-          <p>🛡️ <strong>Stay private while reading AI news.</strong> NordVPN encrypts your connection — trusted by 14M+ users.</p>
-          <a href="${NORDVPN}" target="_blank" rel="noopener sponsored">Get 73% OFF →</a>
-        </div>
-        <div class="why-box">
-          <div class="why-label">Why This Matters</div>
-          <div class="why-text">${article.why_matters}</div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <div class="modal-footer-meta">ILLUCEO · ${dateStr()} · ${article.category}</div>
-        <div class="modal-share">
-          <button class="share-btn" id="share-copy">Copy Link</button>
-          <a class="share-btn" href="https://twitter.com/intent/tweet?text=${encodeURIComponent(article.headline)}&url=${encodeURIComponent(window.location.href)}" target="_blank" rel="noopener">Post on X →</a>
-        </div>
-      </div>`;
-
-  } else {
-    // ⚠️ Fallback — old news-data.json without full articles
-    modalContent.innerHTML = `
-      <div class="modal-header">
-        <div class="article-date-bar">
-          ${catDot(article.category)}
-          <span class="article-date-str">${dateStr()} · ${article.read_time} min read</span>
-        </div>
-        <div class="hl-xl" style="margin-bottom:14px;">${article.headline}</div>
-        <div class="deck">${article.summary}</div>
-      </div>
-      <div class="modal-body">
-        <div class="why-box" style="margin-top:0;">
-          <div class="why-label">Why This Matters</div>
-          <div class="why-text">${article.why_matters}</div>
-        </div>
-        <div class="article-content">
-          <p>${article.summary}</p>
-          <p style="font-family:var(--mono);font-size:10px;color:var(--text3);margin-top:24px;">Full article will be available after the next daily update.</p>
+          ${takeaways ? `<div class="key-facts"><div class="key-facts-title">Key Takeaways</div><ul>${takeaways}</ul></div>` : ''}
+          <p>${article.closing||''}</p>
         </div>
         <div class="modal-nord">
           <p>🛡️ <strong>Stay private while reading AI news.</strong> NordVPN encrypts your connection.</p>
           <a href="${NORDVPN}" target="_blank" rel="noopener sponsored">Get 73% OFF →</a>
         </div>
+        <div class="why-box">
+          <div class="why-label">Why This Matters</div>
+          <div class="why-text">${article.why_matters||article.summary}</div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="modal-footer-meta">ILLUCEO · ${dateStr()} · ${article.category||'AI'}</div>
+        <div class="modal-share">
+          <button class="share-btn" id="share-copy">Copy Link</button>
+          <a class="share-btn" href="https://twitter.com/intent/tweet?text=${encodeURIComponent((article.headline||'')+'  illuceo.space')}" target="_blank" rel="noopener">Post →</a>
+        </div>
+      </div>`;
+
+  } else {
+    /* Fallback: summary-only (older news-data.json without full articles) */
+    const body = article.summary || '';
+    const wm   = article.why_matters || '';
+    modalContent.innerHTML = `
+      <div class="modal-header">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;">
+          ${catDot(article.category)}
+          <span style="font-family:var(--mono);font-size:9px;color:var(--text3);letter-spacing:.1em;">${dateStr()} · ${article.read_time||5} min read</span>
+        </div>
+        <div class="hl-xl" style="margin-bottom:14px;">${article.headline}</div>
+        <div class="deck">${body}</div>
+      </div>
+      <div class="modal-body">
+        ${wm ? `<div class="why-box"><div class="why-label">Why This Matters</div><div class="why-text">${wm}</div></div>` : ''}
+        <div class="modal-nord">
+          <p>🛡️ <strong>Stay private while reading AI news.</strong> NordVPN encrypts your connection.</p>
+          <a href="${NORDVPN}" target="_blank" rel="noopener sponsored">Get 73% OFF →</a>
+        </div>
+        <p style="font-family:var(--mono);font-size:10px;color:var(--text3);margin-top:20px;">
+          Full article available after the next daily update.
+        </p>
       </div>
       <div class="modal-footer">
         <div class="modal-footer-meta">ILLUCEO · ${dateStr()}</div>
@@ -252,12 +262,10 @@ function renderModal(article) {
       </div>`;
   }
 
-  // Copy link button
   document.getElementById('share-copy')?.addEventListener('click', function(){
-    navigator.clipboard.writeText(window.location.href).then(() => {
-      this.textContent = 'Copied!';
-      this.classList.add('copied');
-      setTimeout(() => { this.textContent='Copy Link'; this.classList.remove('copied'); }, 2000);
+    navigator.clipboard.writeText(window.location.href).then(()=>{
+      this.textContent='Copied!'; this.classList.add('copied');
+      setTimeout(()=>{this.textContent='Copy Link';this.classList.remove('copied');},2000);
     });
   });
 }
@@ -265,99 +273,105 @@ function renderModal(article) {
 function closeModal(){
   overlay.classList.remove('open');
   document.body.style.overflow = '';
-  history.pushState(null, '', window.location.pathname);
+  history.pushState(null,'',window.location.pathname);
 }
 closeBtn.addEventListener('click', closeModal);
-overlay.addEventListener('click', e => { if(e.target === overlay) closeModal(); });
-document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModal(); });
+overlay.addEventListener('click', e=>{ if(e.target===overlay) closeModal(); });
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeModal(); });
 
-/* ── RENDER BENTO GRID ── */
-function render(articles) {
-  const src = currentCat === 'all' ? articles : articles.filter(a => a.category.toLowerCase() === currentCat);
-  const items = src.length ? src : articles;
+/* ── BENTO RENDER ── */
+function render(articles){
+  const items = articles.length ? articles : [];
+  if(!items.length) return;
 
-  // Ticker
+  /* Ticker */
   document.getElementById('ticker-track').innerHTML =
-    [...items, ...items].map((a,i) =>
-      `<div class="ticker-item" data-idx="${i % items.length}">⚡ ${a.headline}</div>`
+    [...items,...items].map((a,i)=>
+      `<div class="ticker-item" data-idx="${i%items.length}">⚡ ${a.headline}</div>`
     ).join('');
-  document.querySelectorAll('.ticker-item').forEach(el =>
-    el.addEventListener('click', () => openArticle(items[+el.dataset.idx]))
+  document.querySelectorAll('.ticker-item').forEach(el=>
+    el.addEventListener('click',()=>openArticle(items[+el.dataset.idx]))
   );
 
-  // Hero
+  /* Hero */
   const h = items[0];
+  const sidebarItems = items.slice(1,4);
+  const sidebarHTML = sidebarItems.length >= 2 ? `
+    <div class="hero-sidebar">
+      ${sidebarItems.map((a,i)=>`
+        <div class="sidebar-story" data-idx="${i+1}">
+          ${catDot(a.category)}<div class="hl-sm">${a.headline}</div>
+          <div class="deck-sm">${a.summary}</div>
+          <div class="meta" style="margin-top:8px"><span>${a.read_time||5} min read</span></div>
+          <div class="read-hint">Read full story →</div>
+        </div>`).join('')}
+    </div>` : '';
+
+  // If no sidebar, hero goes full width
+  if(!sidebarItems.length) {
+    document.getElementById('hero-row').style.gridTemplateColumns = '1fr';
+  }
+
   document.getElementById('hero-row').innerHTML = `
     <div class="hero-main" data-idx="0">
       ${catDot(h.category)}
       <div class="hl-xl">${h.headline}</div>
       <div class="deck">${h.summary}</div>
-      <div class="why-box"><div class="why-label">WHY IT MATTERS</div><div class="why-text">${h.why_matters}</div></div>
-      <div class="meta"><span class="readbadge">⏱ ${h.read_time} min read</span><span>${dateStr()}</span></div>
+      <div class="why-box"><div class="why-label">WHY IT MATTERS</div><div class="why-text">${h.why_matters||h.summary}</div></div>
+      <div class="meta"><span class="readbadge">⏱ ${h.read_time||5} min read</span><span>${dateStr()}</span></div>
       <div class="read-hint">Read full story →</div>
     </div>
-    <div class="hero-sidebar">
-      ${items.slice(1,4).map((a,i) => `
-        <div class="sidebar-story" data-idx="${i+1}">
-          ${catDot(a.category)}
-          <div class="hl-sm">${a.headline}</div>
-          <div class="deck-sm">${a.summary}</div>
-          <div class="meta" style="margin-top:8px"><span>${a.read_time} min read</span></div>
-          <div class="read-hint">Read full story →</div>
-        </div>`).join('')}
-    </div>`;
+    ${sidebarHTML}`;
 
-  // Cards 4-6
-  document.getElementById('card-row').innerHTML = items.slice(4,7).map((a,i) => `
+  /* Cards 4-6 */
+  document.getElementById('card-row').innerHTML = items.slice(4,7).map((a,i)=>`
     <div class="card" data-idx="${i+4}">${catDot(a.category)}
     <div class="hl-md">${a.headline}</div>
     <div class="deck-card">${a.summary}</div>
-    <div class="meta"><span>${a.read_time} min read</span></div>
+    <div class="meta"><span>${a.read_time||5} min read</span></div>
     <div class="read-hint">Read full story →</div></div>`).join('');
 
-  // Row 2 (7-8 + nord card)
+  /* Row2: 7-8 + nord */
   document.getElementById('row2').innerHTML =
-    items.slice(7,9).map((a,i) => `
+    items.slice(7,9).map((a,i)=>`
       <div class="card" data-idx="${i+7}">${catDot(a.category)}
       <div class="hl-md">${a.headline}</div>
       <div class="deck-card">${a.summary}</div>
-      <div class="why-box"><div class="why-label">WHY IT MATTERS</div><div class="why-text">${a.why_matters}</div></div>
-      <div class="meta"><span>${a.read_time} min read</span></div>
+      <div class="why-box"><div class="why-label">WHY IT MATTERS</div><div class="why-text">${a.why_matters||a.summary}</div></div>
+      <div class="meta"><span>${a.read_time||5} min read</span></div>
       <div class="read-hint">Read full story →</div></div>`).join('') +
     `<div class="nord-card">
       <div><div class="nord-card-badge">SPONSORED · PARTNER</div>
       <div class="nord-card-title">Read AI news privately — 73% OFF NordVPN</div>
-      <div class="nord-card-body">Every site you visit is tracked. NordVPN encrypts your connection and keeps your reading habits yours. Trusted by 14M+ users worldwide.</div></div>
+      <div class="nord-card-body">Every site you visit is tracked. NordVPN encrypts your connection. Trusted by 14M+ users worldwide.</div></div>
       <div><a href="${NORDVPN}" target="_blank" rel="noopener sponsored" class="nord-card-btn">Claim Your Discount →</a>
       <div class="nord-card-fine">30-day money-back guarantee</div></div>
     </div>`;
 
-  // Bottom row 9-12
-  document.getElementById('bottom-row').innerHTML = items.slice(9,13).map((a,i) => `
+  /* Bottom 9-12 */
+  document.getElementById('bottom-row').innerHTML = items.slice(9,13).map((a,i)=>`
     <div class="card" data-idx="${i+9}">${catDot(a.category)}
     <div class="hl-md">${a.headline}</div>
     <div class="deck-card">${a.summary}</div>
-    <div class="meta"><span>${a.read_time} min read</span></div>
+    <div class="meta"><span>${a.read_time||5} min read</span></div>
     <div class="read-hint">Read full story →</div></div>`).join('');
 
-  // Wire all click handlers
-  document.querySelectorAll('[data-idx]').forEach(el =>
-    el.addEventListener('click', () => openArticle(items[+el.dataset.idx]))
+  /* Wire ALL data-idx clicks */
+  document.querySelectorAll('[data-idx]').forEach(el=>
+    el.addEventListener('click',()=>openArticle(items[+el.dataset.idx]))
   );
 
   document.getElementById('loading').style.display = 'none';
   document.getElementById('bento').classList.add('visible');
 }
 
-/* ── FETCH & INIT ── */
-async function fetchNews() {
-  document.getElementById('loading').style.display = 'flex';
-  document.getElementById('error-box').style.display = 'none';
+/* ── FETCH — static JSON only, no API ── */
+async function fetchNews(){
   try {
     const res = await fetch('/news-data.json');
-    if (!res.ok) throw new Error(`Could not load news (${res.status})`);
+    if(!res.ok) throw new Error(`Could not load news (${res.status})`);
     const data = await res.json();
-    allArticles = data.articles;
+    allArticles = data.articles || [];
     render(allArticles);
   } catch(err) {
     document.getElementById('loading').style.display = 'none';
@@ -365,17 +379,6 @@ async function fetchNews() {
     document.getElementById('error-msg').textContent = err.message;
   }
 }
-
-document.addEventListener('illuceo:ready', () => {
-  document.querySelectorAll('.nav-item[data-cat]').forEach(item => {
-    item.addEventListener('click', () => {
-      currentCat = item.dataset.cat;
-      document.querySelectorAll('.nav-item[data-cat]').forEach(n => n.classList.remove('active'));
-      item.classList.add('active');
-      if (allArticles.length) render(allArticles);
-    });
-  });
-});
 
 fetchNews();
 </script>
