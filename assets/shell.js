@@ -139,10 +139,12 @@
       </div>`;
   }
 
-  /* ── INJECT MEGA NAV ── */
+  /* ── INJECT MEGA NAV + MOBILE DRAWER ── */
   function injectNav(){
     const el = document.getElementById('shell-nav');
     if(!el) return;
+
+    // Desktop nav items
     const items = NAV.map(n => {
       const active = isActive(n.href) ? 'active' : '';
       const sub = n.sub ? `
@@ -151,7 +153,56 @@
         </ul>` : '';
       return `<li><a href="${n.href}" class="nav-item ${active}">${n.label}</a>${sub}</li>`;
     }).join('');
-    el.innerHTML = `<ul class="nav-primary">${items}</ul>`;
+
+    // Mobile nav items
+    const mobileItems = NAV.map(n => {
+      const active = isActive(n.href) ? 'active' : '';
+      const sub = n.sub ? `
+        <ul class="nav-mobile-sub">
+          ${n.sub.map(s=>`<li><a href="${s.href}">${s.label}</a></li>`).join('')}
+        </ul>` : '';
+      return `<li><a href="${n.href}" class="${active}">${n.label}</a>${sub}</li>`;
+    }).join('');
+
+    el.innerHTML = `
+      <ul class="nav-primary">${items}</ul>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>`;
+
+    // Inject mobile drawer into body
+    const drawer = document.createElement('div');
+    drawer.className = 'nav-mobile-drawer';
+    drawer.id = 'nav-mobile-drawer';
+    drawer.innerHTML = `
+      <div class="nav-mobile-panel">
+        <div class="nav-mobile-header">
+          <a href="/" class="nav-mobile-logo notranslate" translate="no"><span>I</span>LLUCEO</a>
+          <div class="nav-mobile-close" id="nav-mobile-close">✕</div>
+        </div>
+        <ul class="nav-mobile-list">${mobileItems}</ul>
+      </div>`;
+    document.body.appendChild(drawer);
+
+    // Wire hamburger
+    const burger = document.getElementById('nav-hamburger');
+    const closeBtn = document.getElementById('nav-mobile-close');
+
+    function openDrawer(){
+      drawer.classList.add('open');
+      burger.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeDrawer(){
+      drawer.classList.remove('open');
+      burger.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    burger.addEventListener('click', openDrawer);
+    closeBtn.addEventListener('click', closeDrawer);
+    drawer.addEventListener('click', e => { if(e.target === drawer) closeDrawer(); });
+    document.addEventListener('keydown', e => { if(e.key === 'Escape') closeDrawer(); });
   }
 
   /* ── INJECT FOOTER ── */
