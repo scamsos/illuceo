@@ -33,17 +33,18 @@
 .ticker-item::after{content:'·';margin-left:28px;color:var(--border2);}
 
 /* BENTO */
-.hero-top{border:1px solid var(--border);border-radius:6px;overflow:hidden;margin-bottom:1px;cursor:pointer;background:var(--bg2);position:relative;padding:36px 40px;transition:background .2s;}
-.hero-top::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--teal),transparent);transform:scaleX(0);transform-origin:left;transition:transform .35s;}
-.hero-top:hover{background:#101013;}
-.hero-top:hover::before{transform:scaleX(1);}
-.hero-top:hover .hl-xl{color:var(--teal);}
-.hero-row{display:grid;grid-template-columns:1fr 300px;border:1px solid var(--border);border-top:none;border-radius:0 0 6px 6px;overflow:hidden;background:var(--border);gap:1px;margin-bottom:1px;}
-.hero-main{background:var(--bg2);padding:28px 32px;cursor:pointer;position:relative;transition:background .2s;}
+.hero-row{border:1px solid var(--border);border-radius:6px;overflow:hidden;margin-bottom:1px;}
+.hero-main{background:var(--bg2);padding:40px 48px;cursor:pointer;position:relative;transition:background .2s;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start;}
+.hero-main::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--teal),transparent);transform:scaleX(0);transform-origin:left;transition:transform .35s;}
 .hero-main:hover{background:#101013;}
+.hero-main:hover::before{transform:scaleX(1);}
 .hero-main:hover .hl-xl{color:var(--teal);}
-.hero-sidebar{background:var(--bg2);display:flex;flex-direction:column;border-left:1px solid var(--border);}
-.sidebar-story{padding:16px 20px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .18s;flex:1;}
+.hero-left{}
+.hero-right{border-left:1px solid var(--border);padding-left:40px;}
+.hero-lede{font-size:15px;line-height:1.8;color:var(--text2);margin-bottom:20px;}
+.hero-sections h3{font-family:var(--serif);font-size:17px;font-weight:600;color:var(--text);margin:16px 0 6px;}
+.hero-sections p{font-size:13px;line-height:1.7;color:var(--text3);margin-bottom:12px;}
+.sidebar-story{padding:16px 20px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .18s;}
 .sidebar-story:last-child{border-bottom:none;}
 .sidebar-story:hover{background:rgba(255,255,255,.018);}
 .sidebar-story:hover .hl-sm{color:var(--teal);}
@@ -119,7 +120,7 @@
 
 /* RESPONSIVE */
 @media(max-width:1100px){.row2{grid-template-columns:1fr 1fr;}.nord-card{grid-column:span 2;flex-direction:row;align-items:center;}}
-@media(max-width:900px){.hero-top{padding:24px 20px;}.hero-row{grid-template-columns:1fr;}.hero-sidebar{flex-direction:row;flex-wrap:wrap;border-left:none;border-top:1px solid var(--border);}.sidebar-story{min-width:160px;flex:1;border-bottom:none;border-right:1px solid var(--border);}.sidebar-story:last-child{border-right:none;}.card-row{grid-template-columns:1fr 1fr;}.bottom-row{grid-template-columns:1fr 1fr;}}
+@media(max-width:900px){.hero-main{grid-template-columns:1fr;gap:20px;padding:24px 20px;}.hero-right{border-left:none;border-top:1px solid var(--border);padding-left:0;padding-top:20px;}.card-row{grid-template-columns:1fr 1fr;}.bottom-row{grid-template-columns:1fr 1fr;}}
 @media(max-width:640px){
   .masthead{padding:32px 16px 24px;}
   .hero-main{padding:22px 18px;}
@@ -153,7 +154,6 @@
       <div class="ticker-overflow"><div class="ticker-track" id="ticker-track"></div></div>
     </div>
     <div class="section-hd"><span>Top Story</span><hr></div>
-    <div class="hero-top" id="hero-top"></div>
     <div class="hero-row" id="hero-row"></div>
     <div class="card-row" id="card-row"></div>
     <div class="section-hd" style="margin-top:18px"><span>Latest Intelligence</span><hr></div>
@@ -297,47 +297,38 @@ function render(articles){
     el.addEventListener('click',()=>openArticle(items[+el.dataset.idx]))
   );
 
-  /* Hero — top story full width, then second story + sidebar below */
+  /* Hero — one article, 2-column layout inside: headline+meta left, lede+sections right */
   const h = items[0];
-  const h2 = items[1];
 
-  // Top story — full width
-  document.getElementById('hero-top').setAttribute('data-idx','0');
-  document.getElementById('hero-top').innerHTML = `
-    ${catDot(h.category)}
-    <div class="hl-xl" style="margin-bottom:14px;">${h.headline}</div>
-    <div class="deck">${h.summary}</div>
-    <div class="why-box"><div class="why-label">WHY IT MATTERS</div><div class="why-text">${h.why_matters||h.summary}</div></div>
-    <div class="meta"><span class="readbadge">⏱ ${h.read_time||5} min read</span><span>${dateStr()}</span></div>
-    <div class="read-hint">Read full story →</div>`;
+  // Build section previews from full article data if available
+  const heroSections = (h.sections||[]).slice(0,2).map(s=>
+    `<h3>${s.heading}</h3><p>${s.body.split('\n\n')[0].slice(0,220)}${s.body.length>220?'…':''}</p>`
+  ).join('');
 
-  // Second story left + sidebar stories right
-  const sidebarItems = items.slice(2,5);
-  const sidebarHTML = sidebarItems.length ? `
-    <div class="hero-sidebar">
-      ${sidebarItems.map((a,i)=>`
-        <div class="sidebar-story" data-idx="${i+2}">
-          ${catDot(a.category)}<div class="hl-sm">${a.headline}</div>
-          <div class="deck-sm">${a.summary}</div>
-          <div class="meta" style="margin-top:8px"><span>${a.read_time||5} min read</span></div>
-          <div class="read-hint">Read full story →</div>
-        </div>`).join('')}
-    </div>` : '';
+  const heroRight = h.lede
+    ? `<div class="hero-lede">${h.lede}</div>
+       <div class="hero-sections">${heroSections}</div>
+       <div class="read-hint" style="opacity:1;margin-top:4px;">Read full story →</div>`
+    : `<div class="hero-lede">${h.summary}</div>
+       <div class="why-box" style="margin-top:16px;"><div class="why-label">WHY IT MATTERS</div><div class="why-text">${h.why_matters||''}</div></div>
+       <div class="read-hint" style="opacity:1;margin-top:12px;">Read full story →</div>`;
 
-  document.getElementById('hero-row').innerHTML = h2 ? `
-    <div class="hero-main" data-idx="1">
-      ${catDot(h2.category)}
-      <div class="hl-xl" style="font-size:clamp(22px,2.8vw,34px);margin-bottom:12px;">${h2.headline}</div>
-      <div class="deck">${h2.summary}</div>
-      <div class="why-box"><div class="why-label">WHY IT MATTERS</div><div class="why-text">${h2.why_matters||h2.summary}</div></div>
-      <div class="meta"><span class="readbadge">⏱ ${h2.read_time||5} min read</span><span>${dateStr()}</span></div>
-      <div class="read-hint">Read full story →</div>
-    </div>
-    ${sidebarHTML}` : '';
+  document.getElementById('hero-row').innerHTML = `
+    <div class="hero-main" data-idx="0">
+      <div class="hero-left">
+        ${catDot(h.category)}
+        <div class="hl-xl" style="margin-bottom:16px;">${h.headline}</div>
+        <div class="why-box"><div class="why-label">WHY IT MATTERS</div><div class="why-text">${h.why_matters||h.summary}</div></div>
+        <div class="meta" style="margin-top:16px;"><span class="readbadge">⏱ ${h.read_time||5} min read</span><span>${dateStr()}</span></div>
+      </div>
+      <div class="hero-right">
+        ${heroRight}
+      </div>
+    </div>`;
 
   /* Cards 4-6 */
-  document.getElementById('card-row').innerHTML = items.slice(5,8).map((a,i)=>`
-    <div class="card" data-idx="${i+5}">${catDot(a.category)}
+  document.getElementById('card-row').innerHTML = items.slice(1,4).map((a,i)=>`
+    <div class="card" data-idx="${i+1}">${catDot(a.category)}
     <div class="hl-md">${a.headline}</div>
     <div class="deck-card">${a.summary}</div>
     <div class="meta"><span>${a.read_time||5} min read</span></div>
@@ -345,8 +336,8 @@ function render(articles){
 
   /* Row2: 7-8 + nord */
   document.getElementById('row2').innerHTML =
-    items.slice(8,10).map((a,i)=>`
-      <div class="card" data-idx="${i+8}">${catDot(a.category)}
+    items.slice(4,6).map((a,i)=>`
+      <div class="card" data-idx="${i+4}">${catDot(a.category)}
       <div class="hl-md">${a.headline}</div>
       <div class="deck-card">${a.summary}</div>
       <div class="why-box"><div class="why-label">WHY IT MATTERS</div><div class="why-text">${a.why_matters||a.summary}</div></div>
@@ -361,8 +352,8 @@ function render(articles){
     </div>`;
 
   /* Bottom 9-12 */
-  document.getElementById('bottom-row').innerHTML = items.slice(10,14).map((a,i)=>`
-    <div class="card" data-idx="${i+10}">${catDot(a.category)}
+  document.getElementById('bottom-row').innerHTML = items.slice(6,10).map((a,i)=>`
+    <div class="card" data-idx="${i+6}">${catDot(a.category)}
     <div class="hl-md">${a.headline}</div>
     <div class="deck-card">${a.summary}</div>
     <div class="meta"><span>${a.read_time||5} min read</span></div>
