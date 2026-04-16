@@ -12,7 +12,16 @@
 
   /* ── NAV STRUCTURE — only links to pages that exist ── */
   const NAV = [
-    { label:'News', href:'/' },
+    { label:'News', href:'/',
+      sub:[
+        { label:'Today\'s Headlines',    href:'/' },
+        { label:'AI Models',             href:'/?cat=Models' },
+        { label:'AI Business',           href:'/?cat=Business' },
+        { label:'AI Policy',             href:'/?cat=Policy' },
+        { label:'AI Research',           href:'/?cat=Research' },
+        { label:'AI Agents News',        href:'/?cat=Agents' },
+      ]
+    },
     { label:'AI Tools', href:'/tools/',
       sub:[
         { label:'All AI Tools',               href:'/tools/' },

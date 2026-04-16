@@ -747,7 +747,7 @@ body::after {
   display: flex;
   align-items: center;
   white-space: nowrap;
-  animation: navticker 35s linear infinite;
+  animation: navticker 90s linear infinite;
   gap: 0;
 }
 .nav-ticker-track:hover { animation-play-state: paused; }
