@@ -33,13 +33,13 @@
 .ticker-item::after{content:'·';margin-left:28px;color:var(--border2);}
 
 /* BENTO */
-.hero-row{display:grid;grid-template-columns:1fr 320px;border:1px solid var(--border);border-radius:6px;overflow:hidden;background:var(--border);gap:1px;margin-bottom:1px;}
-.hero-main{background:var(--bg2);padding:36px 40px;cursor:pointer;position:relative;transition:background .2s;overflow:hidden;}
+.hero-row{display:grid;grid-template-columns:1fr 320px;border:1px solid var(--border);border-radius:6px;overflow:hidden;background:var(--border);gap:1px;margin-bottom:1px;align-items:start;}
+.hero-main{background:var(--bg2);padding:36px 40px;cursor:pointer;position:relative;transition:background .2s;overflow:hidden;align-self:start;}
 .hero-main::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--teal),transparent);transform:scaleX(0);transform-origin:left;transition:transform .35s;}
 .hero-main:hover{background:#101013;}
 .hero-main:hover::before{transform:scaleX(1);}
 .hero-main:hover .hl-xl{color:var(--teal);}
-.hero-sidebar{background:var(--bg2);display:flex;flex-direction:column;}
+.hero-sidebar{background:var(--bg2);display:flex;flex-direction:column;align-self:start;}
 .sidebar-story{padding:18px 22px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .18s;}
 .sidebar-story:last-child{border-bottom:none;}
 .sidebar-story:hover{background:rgba(255,255,255,.018);}
