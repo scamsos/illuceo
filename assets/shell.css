@@ -632,9 +632,8 @@ body::after {
   border: 1px solid var(--border2);
   border-radius: 4px;
   background: transparent;
-  position: absolute;
-  right: 16px; top: 50%;
-  transform: translateY(-50%);
+  flex-shrink: 0;
+  margin: 0 8px;
   z-index: 10;
 }
 .nav-hamburger span {
@@ -723,14 +722,7 @@ body::after {
 }
 .nav-mobile-sub li a:hover { color: var(--teal); }
 
-@media(max-width:768px) {
-  .nav-hamburger { display: flex; }
-  .nav-primary { display: none; }
-  .shell-nav { position: relative; min-height: 44px; }
-}
-@media(min-width:769px) {
-  .nav-mobile-drawer { display: none !important; }
-}
+
 
 /* ── MOBILE NAV BAR + TICKER ── */
 .nav-mobile-bar {
@@ -783,13 +775,23 @@ body::after {
   background: rgba(0,229,176,.04);
 }
 
+
+
+/* ── MOBILE NAV RESPONSIVE (single definitive block) ── */
 @media(max-width:768px) {
-  .nav-hamburger { position: static; transform: none; flex-shrink: 0; margin: 0 8px; }
-  .nav-mobile-bar { display: flex; }
-  .nav-primary { display: none; }
-  .shell-nav { min-height: auto; border-bottom: none; }
+  /* Hide desktop nav */
+  .nav-primary { display: none !important; }
+  /* Show mobile bar */
+  .nav-mobile-bar { display: flex !important; }
+  /* Show hamburger inside bar */
+  .nav-hamburger { display: flex !important; }
+  /* Nav bar takes its own height, no min-height needed */
+  .shell-nav { min-height: 0; border-bottom: none; }
 }
 @media(min-width:769px) {
+  /* Hide mobile elements on desktop */
   .nav-mobile-bar { display: none !important; }
   .nav-mobile-drawer { display: none !important; }
+  /* Ensure desktop nav shows */
+  .nav-primary { display: flex !important; }
 }
