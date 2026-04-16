@@ -139,7 +139,7 @@
       </div>`;
   }
 
-  /* ── INJECT MEGA NAV + MOBILE DRAWER ── */
+  /* ── INJECT MEGA NAV + MOBILE DRAWER + MOBILE NAV TICKER ── */
   function injectNav(){
     const el = document.getElementById('shell-nav');
     if(!el) return;
@@ -154,7 +154,7 @@
       return `<li><a href="${n.href}" class="nav-item ${active}">${n.label}</a>${sub}</li>`;
     }).join('');
 
-    // Mobile nav items
+    // Mobile nav items (for drawer)
     const mobileItems = NAV.map(n => {
       const active = isActive(n.href) ? 'active' : '';
       const sub = n.sub ? `
@@ -164,11 +164,26 @@
       return `<li><a href="${n.href}" class="${active}">${n.label}</a>${sub}</li>`;
     }).join('');
 
+    // Mobile ticker — all nav links in one scrolling strip
+    const allLinks = [];
+    NAV.forEach(n => {
+      allLinks.push({ label: n.label, href: n.href });
+      if(n.sub) n.sub.forEach(s => allLinks.push({ label: s.label, href: s.href }));
+    });
+    const tickerItems = [...allLinks, ...allLinks].map(l =>
+      `<a class="nav-ticker-item" href="${l.href}">${l.label}</a>`
+    ).join('');
+
     el.innerHTML = `
       <ul class="nav-primary">${items}</ul>
-      <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">
-        <span></span><span></span><span></span>
-      </button>`;
+      <div class="nav-mobile-bar">
+        <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+        <div class="nav-ticker-wrap">
+          <div class="nav-ticker-track" id="nav-ticker-track">${tickerItems}</div>
+        </div>
+      </div>`;
 
     // Inject mobile drawer into body
     const drawer = document.createElement('div');
