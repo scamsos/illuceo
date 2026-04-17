@@ -514,7 +514,115 @@
     document.documentElement.setAttribute('data-notranslate-brand', 'ILLUCEO');
   }
 
-  /* ── INIT ── */
+  /* ── BOOKMARK / ADD TO HOME SCREEN PROMPT ── */
+  function initBookmarkPrompt(){
+    // Don't show if already installed or dismissed
+    if(localStorage.getItem('illuceo_install') === 'done') return;
+    const isInStandaloneMode = window.matchMedia('(display-mode: standalone)').matches
+      || window.navigator.standalone;
+    if(isInStandaloneMode) return;
+
+    const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+    const isMobile = /android|iphone|ipad|ipod/i.test(navigator.userAgent);
+    let deferredPrompt = null;
+
+    // Catch Android Chrome native install event
+    window.addEventListener('beforeinstallprompt', e => {
+      e.preventDefault();
+      deferredPrompt = e;
+    });
+
+    function dismiss(){
+      const el = document.getElementById('install-popup');
+      if(el){ el.classList.remove('visible'); setTimeout(()=>el.remove(), 400); }
+    }
+
+    setTimeout(() => {
+      const popup = document.createElement('div');
+      popup.id = 'install-popup';
+      popup.className = 'install-popup';
+
+      // Different message per platform
+      let actionHTML = '';
+      if(isIOS){
+        actionHTML = `
+          <div class="install-steps">
+            <div class="install-step"><span class="install-step-num">1</span>Tap the <strong>Share</strong> button ⎙ at the bottom of your browser</div>
+            <div class="install-step"><span class="install-step-num">2</span>Scroll down and tap <strong>"Add to Home Screen"</strong></div>
+            <div class="install-step"><span class="install-step-num">3</span>Tap <strong>"Add"</strong> — ILLUCEO will appear on your home screen</div>
+          </div>
+          <button class="install-btn-primary" id="install-got-it">Got it ✓</button>`;
+      } else if(deferredPrompt || isMobile){
+        actionHTML = `
+          <p class="install-desc">Install ILLUCEO as an app for instant access to daily AI news — no app store needed.</p>
+          <div class="install-btn-row">
+            <button class="install-btn-primary" id="install-yes">Install App →</button>
+            <button class="install-btn-secondary" id="install-no">Maybe later</button>
+          </div>`;
+      } else {
+        // Desktop
+        actionHTML = `
+          <p class="install-desc">Add ILLUCEO to your browser for one-click access to daily AI intelligence.</p>
+          <div class="install-btn-row">
+            <button class="install-btn-primary" id="install-yes">Add to Browser →</button>
+            <button class="install-btn-secondary" id="install-no">Maybe later</button>
+          </div>`;
+      }
+
+      popup.innerHTML = `
+        <div class="install-popup-inner">
+          <button class="install-close" id="install-close">✕</button>
+          <div class="install-header">
+            <div class="install-app-icon">
+              <img src="/favicon/android-chrome-192x192.png" alt="ILLUCEO" width="64" height="64">
+            </div>
+            <div class="install-header-text">
+              <div class="install-app-name notranslate" translate="no">ILLUCEO</div>
+              <div class="install-app-url notranslate" translate="no">illuceo.space</div>
+              <div class="install-app-tag">Daily AI Intelligence</div>
+            </div>
+          </div>
+          ${actionHTML}
+        </div>`;
+
+      document.body.appendChild(popup);
+      setTimeout(() => popup.classList.add('visible'), 100);
+
+      // Wire buttons
+      document.getElementById('install-close')?.addEventListener('click', () => {
+        localStorage.setItem('illuceo_install','done');
+        dismiss();
+      });
+      document.getElementById('install-no')?.addEventListener('click', () => {
+        localStorage.setItem('illuceo_install','done');
+        dismiss();
+      });
+      document.getElementById('install-got-it')?.addEventListener('click', () => {
+        localStorage.setItem('illuceo_install','done');
+        dismiss();
+      });
+      document.getElementById('install-yes')?.addEventListener('click', async () => {
+        if(deferredPrompt){
+          deferredPrompt.prompt();
+          const { outcome } = await deferredPrompt.userChoice;
+          deferredPrompt = null;
+          localStorage.setItem('illuceo_install','done');
+          dismiss();
+        } else {
+          // Desktop — trigger browser install if available
+          const el = document.querySelector('#install-yes');
+          if(el) el.textContent = 'Use browser menu → Install…';
+          setTimeout(() => { localStorage.setItem('illuceo_install','done'); dismiss(); }, 2000);
+        }
+      });
+
+      // Close on backdrop click
+      popup.addEventListener('click', e => {
+        if(e.target === popup){ localStorage.setItem('illuceo_install','done'); dismiss(); }
+      });
+
+    }, 3000); // 3 seconds — quick enough to catch, not so fast it's jarring
+  }
   function init(){
     injectFavicon();
     injectTopbar();
@@ -527,6 +635,7 @@
     injectOrgSchema();
     hideGoogleBar();
     protectBrandName();
+    initBookmarkPrompt();
     document.dispatchEvent(new CustomEvent('illuceo:ready'));
   }
 

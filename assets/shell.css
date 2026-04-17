@@ -799,3 +799,225 @@ body::after {
   /* Ensure desktop nav shows */
   .nav-primary { display: flex !important; }
 }
+
+/* ── BOOKMARK / ADD TO HOME SCREEN PROMPT ── */
+.bookmark-prompt {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(120px);
+  z-index: 800;
+  background: var(--bg2);
+  border: 1px solid var(--border2);
+  border-top: 2px solid var(--teal);
+  border-radius: 12px;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  box-shadow: 0 8px 40px rgba(0,0,0,.5);
+  transition: transform .4s cubic-bezier(.22,1,.36,1);
+  max-width: 340px;
+  width: calc(100vw - 32px);
+}
+.bookmark-prompt.visible {
+  transform: translateX(-50%) translateY(0);
+}
+.bookmark-icon {
+  width: 44px; height: 44px;
+  background: var(--teal-dim);
+  border: 1px solid rgba(0,229,176,.2);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  font-size: 20px;
+}
+.bookmark-text { flex: 1; }
+.bookmark-text strong {
+  font-family: var(--serif);
+  font-size: 15px; font-weight: 600;
+  color: var(--text);
+  display: block; margin-bottom: 3px;
+}
+.bookmark-text span {
+  font-family: var(--mono);
+  font-size: 9px; letter-spacing: .1em;
+  color: var(--text3);
+}
+.bookmark-actions { display: flex; gap: 8px; flex-shrink: 0; }
+.bookmark-btn {
+  font-family: var(--mono);
+  font-size: 9px; letter-spacing: .15em;
+  text-transform: uppercase;
+  padding: 6px 12px; border-radius: 4px;
+  cursor: pointer; border: none;
+  transition: all .18s; white-space: nowrap;
+}
+.bookmark-btn-yes {
+  background: var(--teal); color: var(--bg);
+}
+.bookmark-btn-yes:hover { opacity: .85; }
+.bookmark-btn-no {
+  background: transparent;
+  color: var(--text3);
+  border: 1px solid var(--border2);
+}
+.bookmark-btn-no:hover { color: var(--text2); }
+
+/* Mobile specific instruction */
+.bookmark-ios-tip {
+  display: none;
+  font-family: var(--mono);
+  font-size: 9px; letter-spacing: .08em;
+  color: var(--teal);
+  margin-top: 6px;
+}
+
+/* ── APP INSTALL POPUP ── */
+.install-popup {
+  position: fixed;
+  inset: 0;
+  z-index: 900;
+  background: rgba(0,0,0,0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  pointer-events: none;
+  transition: background .3s;
+}
+.install-popup.visible {
+  background: rgba(0,0,0,.75);
+  backdrop-filter: blur(8px);
+  pointer-events: all;
+}
+.install-popup-inner {
+  background: var(--bg2);
+  border: 1px solid var(--border2);
+  border-top: 2px solid var(--teal);
+  border-radius: 16px;
+  padding: 32px;
+  max-width: 380px;
+  width: 100%;
+  position: relative;
+  transform: scale(.92) translateY(20px);
+  opacity: 0;
+  transition: transform .35s cubic-bezier(.22,1,.36,1), opacity .3s;
+}
+.install-popup.visible .install-popup-inner {
+  transform: scale(1) translateY(0);
+  opacity: 1;
+}
+.install-close {
+  position: absolute;
+  top: 14px; right: 14px;
+  width: 28px; height: 28px;
+  background: var(--bg3);
+  border: 1px solid var(--border2);
+  border-radius: 50%;
+  color: var(--text3);
+  font-size: 12px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all .15s;
+}
+.install-close:hover { color: var(--teal); border-color: var(--teal); }
+
+.install-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.install-app-icon img {
+  width: 64px; height: 64px;
+  border-radius: 14px;
+  display: block;
+}
+.install-app-name {
+  font-family: var(--serif);
+  font-size: 24px; font-weight: 700;
+  letter-spacing: .08em;
+  color: var(--text);
+  line-height: 1;
+}
+.install-app-name span { color: var(--teal); }
+.install-app-url {
+  font-family: var(--mono);
+  font-size: 9px; letter-spacing: .15em;
+  color: var(--text3); margin: 4px 0 2px;
+}
+.install-app-tag {
+  font-family: var(--mono);
+  font-size: 8px; letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--teal);
+}
+
+.install-desc {
+  font-size: 14px;
+  color: var(--text2);
+  line-height: 1.65;
+  margin-bottom: 20px;
+}
+
+/* iOS steps */
+.install-steps {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.install-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 13px;
+  color: var(--text2);
+  line-height: 1.5;
+}
+.install-step strong { color: var(--text); }
+.install-step-num {
+  width: 22px; height: 22px;
+  background: var(--teal);
+  color: var(--bg);
+  border-radius: 50%;
+  font-family: var(--mono);
+  font-size: 10px; font-weight: 600;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.install-btn-row {
+  display: flex;
+  gap: 10px;
+}
+.install-btn-primary {
+  flex: 1;
+  background: var(--teal);
+  color: var(--bg);
+  font-family: var(--mono);
+  font-size: 10px; letter-spacing: .18em;
+  text-transform: uppercase;
+  padding: 12px 16px;
+  border: none; border-radius: 6px;
+  cursor: pointer;
+  transition: opacity .18s;
+  font-weight: 500;
+}
+.install-btn-primary:hover { opacity: .88; }
+.install-btn-secondary {
+  background: transparent;
+  color: var(--text3);
+  font-family: var(--mono);
+  font-size: 10px; letter-spacing: .15em;
+  text-transform: uppercase;
+  padding: 12px 16px;
+  border: 1px solid var(--border2);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all .18s;
+  white-space: nowrap;
+}
+.install-btn-secondary:hover { color: var(--text2); border-color: var(--border2); }
