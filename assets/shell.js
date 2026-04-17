@@ -372,7 +372,16 @@
     document.head.appendChild(s);
   }
 
-  /* ── FAVICON (injected into <head> so Google picks it up) ── */
+  /* ── ADSENSE ── */
+  function injectAdSense(){
+    if(document.getElementById('adsense-script')) return;
+    const s = document.createElement('script');
+    s.id = 'adsense-script';
+    s.async = true;
+    s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3306478541748582';
+    s.setAttribute('crossorigin','anonymous');
+    document.head.appendChild(s);
+  }
   function injectFavicon(){
     const tags = [
       { rel:'icon', type:'image/x-icon',      href:'/favicon/favicon.ico' },
@@ -628,6 +637,7 @@
     }, 3000); // 3 seconds — quick enough to catch, not so fast it's jarring
   }
   function init(){
+    injectAdSense();
     injectFavicon();
     injectTopbar();
     injectNav();
