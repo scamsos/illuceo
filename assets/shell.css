@@ -742,6 +742,7 @@ body::after {
   align-items: center;
   mask-image: linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%);
   -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%);
+  cursor: pointer;
 }
 .nav-ticker-track {
   display: flex;
@@ -749,8 +750,11 @@ body::after {
   white-space: nowrap;
   animation: navticker 90s linear infinite;
   gap: 0;
+  will-change: transform;
+  touch-action: manipulation;
 }
-.nav-ticker-track:hover { animation-play-state: paused; }
+.nav-ticker-track:hover,
+.nav-ticker-track:active { animation-play-state: paused; }
 @keyframes navticker {
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
@@ -769,10 +773,16 @@ body::after {
   align-items: center;
   transition: color .15s, background .15s;
   flex-shrink: 0;
+  -webkit-tap-highlight-color: rgba(0,229,176,.15);
+  touch-action: manipulation;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
 }
-.nav-ticker-item:hover {
+.nav-ticker-item:hover,
+.nav-ticker-item:active {
   color: var(--teal);
-  background: rgba(0,229,176,.04);
+  background: rgba(0,229,176,.07);
 }
 
 

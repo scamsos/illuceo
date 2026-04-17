@@ -194,6 +194,39 @@
         </div>
       </div>`;
 
+    // Wire touch on ticker — pause on touchstart so tap registers, navigate on touchend
+    const track = document.getElementById('nav-ticker-track');
+    if(track) {
+      let touchStartX = 0;
+      let touchStartY = 0;
+      let touchStartTime = 0;
+
+      track.addEventListener('touchstart', e => {
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+        touchStartTime = Date.now();
+        track.style.animationPlayState = 'paused';
+      }, { passive: true });
+
+      track.addEventListener('touchend', e => {
+        const dx = Math.abs(e.changedTouches[0].clientX - touchStartX);
+        const dy = Math.abs(e.changedTouches[0].clientY - touchStartY);
+        const dt = Date.now() - touchStartTime;
+
+        // It's a tap (not a swipe) if movement < 8px and time < 300ms
+        if(dx < 8 && dy < 8 && dt < 300) {
+          // Find the link element that was tapped
+          const link = e.target.closest('.nav-ticker-item');
+          if(link && link.href) {
+            window.location.href = link.href;
+            return;
+          }
+        }
+        // It was a swipe — resume animation after a moment
+        setTimeout(() => { track.style.animationPlayState = 'running'; }, 1000);
+      }, { passive: true });
+    }
+
     // Inject mobile drawer into body
     const drawer = document.createElement('div');
     drawer.className = 'nav-mobile-drawer';
