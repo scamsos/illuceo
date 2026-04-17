@@ -742,7 +742,6 @@ body::after {
   align-items: center;
   mask-image: linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%);
   -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%);
-  cursor: pointer;
 }
 .nav-ticker-track {
   display: flex;
@@ -753,8 +752,7 @@ body::after {
   will-change: transform;
   touch-action: manipulation;
 }
-.nav-ticker-track:hover,
-.nav-ticker-track:active { animation-play-state: paused; }
+.nav-ticker-track:hover { animation-play-state: paused; }
 @keyframes navticker {
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
@@ -779,11 +777,7 @@ body::after {
   user-select: none;
   -webkit-user-select: none;
 }
-.nav-ticker-item:hover,
-.nav-ticker-item:active {
-  color: var(--teal);
-  background: rgba(0,229,176,.07);
-}
+.nav-ticker-item:hover { color: var(--teal); background: rgba(0,229,176,.07); }
 
 
 

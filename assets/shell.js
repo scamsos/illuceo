@@ -213,17 +213,16 @@
         const dy = Math.abs(e.changedTouches[0].clientY - touchStartY);
         const dt = Date.now() - touchStartTime;
 
-        // It's a tap (not a swipe) if movement < 8px and time < 300ms
-        if(dx < 8 && dy < 8 && dt < 300) {
-          // Find the link element that was tapped
-          const link = e.target.closest('.nav-ticker-item');
-          if(link && link.href) {
-            window.location.href = link.href;
+        if(dx < 10 && dy < 10 && dt < 400) {
+          // Use coordinates to find exactly what was under the finger
+          const el = document.elementFromPoint(touchStartX, touchStartY);
+          const link = el ? el.closest('.nav-ticker-item') : null;
+          if(link && link.getAttribute('href')) {
+            window.location.href = link.getAttribute('href');
             return;
           }
         }
-        // It was a swipe — resume animation after a moment
-        setTimeout(() => { track.style.animationPlayState = 'running'; }, 1000);
+        setTimeout(() => { track.style.animationPlayState = 'running'; }, 800);
       }, { passive: true });
     }
 
