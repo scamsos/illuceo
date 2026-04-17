@@ -35,6 +35,7 @@
 
 @media(max-width:900px){.contact-grid{grid-template-columns:1fr;}}
 </style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3306478541748582" crossorigin="anonymous"></script>
 </head>
 <body>
 <div id="shell-top"></div>
@@ -137,7 +138,9 @@ document.getElementById('form-send').addEventListener('click', function() {
     message
   );
 
-  window.location.href = 'mailto:info@scamsos.com?subject=' + mailSubject + '&body=' + mailBody;
+  // Open Gmail compose directly — works on both mobile and desktop
+  const gmailURL = 'https://mail.google.com/mail/?view=cm&to=info@scamsos.com&su=' + mailSubject + '&body=' + mailBody;
+  window.open(gmailURL, '_blank');
 });
 
 // Auto-select enquiry type from URL hash
