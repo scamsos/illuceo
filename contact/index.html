@@ -51,41 +51,37 @@
   <div class="contact-grid">
     <div>
       <div class="contact-form-wrap">
-        <form id="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        <div id="contact-form">
           <div class="form-group">
             <label class="form-label" for="name">Your Name</label>
-            <input class="form-input" type="text" id="name" name="name" placeholder="Maria Garcia" required>
+            <input class="form-input" type="text" id="name" placeholder="Maria Garcia">
           </div>
           <div class="form-group">
-            <label class="form-label" for="email">Email Address</label>
-            <input class="form-input" type="email" id="email" name="email" placeholder="you@example.com" required>
+            <label class="form-label" for="email">Your Email</label>
+            <input class="form-input" type="email" id="email" placeholder="you@example.com">
           </div>
           <div class="form-group">
             <label class="form-label" for="type">Enquiry Type</label>
-            <select class="form-select" id="type" name="type">
-              <option value="general">General Question</option>
-              <option value="correction">Content Correction</option>
-              <option value="advertise" id="advertise">Advertising / Sponsorship</option>
-              <option value="press">Press / Media</option>
-              <option value="affiliate">Affiliate Partnership</option>
-              <option value="privacy">Privacy / Data Request</option>
-              <option value="other">Other</option>
+            <select class="form-select" id="type">
+              <option value="General Question">General Question</option>
+              <option value="Content Correction">Content Correction</option>
+              <option value="Advertising / Sponsorship" id="advertise">Advertising / Sponsorship</option>
+              <option value="Press / Media">Press / Media</option>
+              <option value="Affiliate Partnership">Affiliate Partnership</option>
+              <option value="Privacy / Data Request">Privacy / Data Request</option>
+              <option value="Other">Other</option>
             </select>
           </div>
           <div class="form-group">
             <label class="form-label" for="subject">Subject</label>
-            <input class="form-input" type="text" id="subject" name="subject" placeholder="Brief description" required>
+            <input class="form-input" type="text" id="subject" placeholder="Brief description">
           </div>
           <div class="form-group">
             <label class="form-label" for="message">Message</label>
-            <textarea class="form-textarea" id="message" name="message" placeholder="Tell us more…" required></textarea>
+            <textarea class="form-textarea" id="message" placeholder="Tell us more…"></textarea>
           </div>
-          <button type="submit" class="form-submit">Send Message →</button>
-          <div class="form-note">We respond to all enquiries within 48 hours.</div>
-        </form>
-        <div class="form-success" id="form-success">
-          <h3>Message Sent</h3>
-          <p>Thank you for reaching out. We'll get back to you within 48 hours.</p>
+          <button class="form-submit" id="form-send">Send Message →</button>
+          <div class="form-note">Opens your email app — no account or sign-up needed.</div>
         </div>
       </div>
     </div>
@@ -121,36 +117,32 @@
   </div>
 </main>
 <div id="shell-bottom"></div>
-<script src="/assets/shell.js"></script>
+<script src="/assets/shell.js?v=2"></script>
 <script>
-// Handle form submission
-document.getElementById('contact-form').addEventListener('submit', async function(e){
-  e.preventDefault();
-  const btn = this.querySelector('.form-submit');
-  btn.textContent = 'Sending…';
-  btn.disabled = true;
-  try {
-    const res = await fetch(this.action, {
-      method: 'POST',
-      body: new FormData(this),
-      headers: { 'Accept': 'application/json' }
-    });
-    if(res.ok){
-      this.style.display = 'none';
-      document.getElementById('form-success').style.display = 'block';
-    } else {
-      btn.textContent = 'Error — try again';
-      btn.disabled = false;
-    }
-  } catch(err){
-    btn.textContent = 'Error — try again';
-    btn.disabled = false;
-  }
+// Mailto contact form — no third party needed
+document.getElementById('form-send').addEventListener('click', function() {
+  const name    = document.getElementById('name').value.trim();
+  const email   = document.getElementById('email').value.trim();
+  const type    = document.getElementById('type').value;
+  const subject = document.getElementById('subject').value.trim();
+  const message = document.getElementById('message').value.trim();
+
+  if(!message) { alert('Please enter a message.'); return; }
+
+  const mailSubject = encodeURIComponent('[ILLUCEO] ' + (subject || type));
+  const mailBody = encodeURIComponent(
+    (name  ? 'Name: ' + name + '\n'  : '') +
+    (email ? 'Email: ' + email + '\n' : '') +
+    'Type: ' + type + '\n\n' +
+    message
+  );
+
+  window.location.href = 'mailto:info@scamsos.com?subject=' + mailSubject + '&body=' + mailBody;
 });
 
 // Auto-select enquiry type from URL hash
 if(window.location.hash === '#advertise'){
-  document.getElementById('type').value = 'advertise';
+  document.getElementById('type').value = 'Advertising / Sponsorship';
 }
 </script>
 </body>
