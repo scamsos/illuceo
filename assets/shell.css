@@ -135,12 +135,14 @@ body::after {
   border-bottom: 1px solid var(--border);
   position: relative;
   background: var(--bg);
+  overflow: visible;
 }
 
 .nav-primary {
   display: flex; justify-content: center;
-  overflow-x: auto; scrollbar-width: none;
+  overflow: visible;
   list-style: none;
+  scrollbar-width: none;
 }
 .nav-primary::-webkit-scrollbar { display: none; }
 
@@ -172,7 +174,7 @@ body::after {
 .nav-dropdown {
   display: none;
   position: absolute; top: 100%; left: 0;
-  min-width: 220px; z-index: 300;
+  min-width: 220px; z-index: 9000;
   background: var(--bg2);
   border: 1px solid var(--border2);
   border-top: 2px solid var(--teal);

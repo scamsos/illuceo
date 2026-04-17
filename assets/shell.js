@@ -179,8 +179,11 @@
       allLinks.push({ label: n.label, href: n.href });
       if(n.sub) n.sub.forEach(s => allLinks.push({ label: s.label, href: s.href }));
     });
-    const tickerItems = [...allLinks, ...allLinks].map(l =>
-      `<a class="nav-ticker-item" href="${l.href}">${l.label}</a>`
+
+    // Build ticker — duplicate for seamless loop
+    const tickerLinks = [...allLinks, ...allLinks];
+    const tickerItems = tickerLinks.map(l =>
+      `<a class="nav-ticker-item" href="${l.href}" onclick="window.location.href='${l.href}';return false;">${l.label}</a>`
     ).join('');
 
     el.innerHTML = `
@@ -194,35 +197,36 @@
         </div>
       </div>`;
 
-    // Wire touch on ticker — pause on touchstart so tap registers, navigate on touchend
+    // Wire touch — simple approach: pause on touchstart, navigate on touchend if no swipe
     const track = document.getElementById('nav-ticker-track');
     if(track) {
-      let touchStartX = 0;
-      let touchStartY = 0;
-      let touchStartTime = 0;
+      let startX = 0, startY = 0, startT = 0;
 
       track.addEventListener('touchstart', e => {
-        touchStartX = e.touches[0].clientX;
-        touchStartY = e.touches[0].clientY;
-        touchStartTime = Date.now();
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+        startT = Date.now();
         track.style.animationPlayState = 'paused';
       }, { passive: true });
 
       track.addEventListener('touchend', e => {
-        const dx = Math.abs(e.changedTouches[0].clientX - touchStartX);
-        const dy = Math.abs(e.changedTouches[0].clientY - touchStartY);
-        const dt = Date.now() - touchStartTime;
+        const dx = Math.abs(e.changedTouches[0].clientX - startX);
+        const dy = Math.abs(e.changedTouches[0].clientY - startY);
+        const dt = Date.now() - startT;
 
-        if(dx < 10 && dy < 10 && dt < 400) {
-          // Use coordinates to find exactly what was under the finger
-          const el = document.elementFromPoint(touchStartX, touchStartY);
-          const link = el ? el.closest('.nav-ticker-item') : null;
-          if(link && link.getAttribute('href')) {
-            window.location.href = link.getAttribute('href');
-            return;
+        if(dx < 10 && dy < 10 && dt < 350) {
+          // Tap — find link by walking up from target
+          let el = e.target;
+          while(el && el !== track) {
+            if(el.tagName === 'A' && el.getAttribute('href')) {
+              window.location.href = el.getAttribute('href');
+              return;
+            }
+            el = el.parentElement;
           }
         }
-        setTimeout(() => { track.style.animationPlayState = 'running'; }, 800);
+        // Swipe — resume after delay
+        setTimeout(() => { track.style.animationPlayState = 'running'; }, 600);
       }, { passive: true });
     }
 
