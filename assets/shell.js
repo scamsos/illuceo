@@ -636,6 +636,116 @@
 
     }, 3000); // 3 seconds — quick enough to catch, not so fast it's jarring
   }
+
+  /* ── NEW ARTICLE NOTIFICATION BAR ── */
+  function initNewsChecker(){
+    const SEEN_KEY    = 'illuceo_seen_articles';
+    const NOTIF_KEY   = 'illuceo_last_notif_day';
+
+    // Get today's date string e.g. "2026-04-17"
+    function today(){ return new Date().toISOString().slice(0,10); }
+
+    // Already notified today?
+    function notifiedToday(){ return localStorage.getItem(NOTIF_KEY) === today(); }
+
+    // Get set of article slugs already seen
+    function getSeenSlugs(){
+      try { return new Set(JSON.parse(localStorage.getItem(SEEN_KEY) || '[]')); }
+      catch(e){ return new Set(); }
+    }
+
+    // Save seen slugs (keep last 100 to avoid unbounded growth)
+    function saveSeenSlugs(set){
+      const arr = Array.from(set).slice(-100);
+      localStorage.setItem(SEEN_KEY, JSON.stringify(arr));
+    }
+
+    // Build a slug from article title
+    function toSlug(str){ return (str||'').toLowerCase().replace(/[^a-z0-9]+/g,'-').slice(0,60); }
+
+    async function checkForNewArticles(){
+      // Never show more than once per day
+      if(notifiedToday()) return;
+
+      try {
+        const res = await fetch('/news-data.json?t=' + Date.now());
+        if(!res.ok) return;
+        const data = await res.json();
+        const articles = data.articles || [];
+        if(!articles.length) return;
+
+        const seen = getSeenSlugs();
+        const newArticles = articles.filter(a => !seen.has(toSlug(a.headline)));
+
+        if(!newArticles.length){
+          // All known — just make sure slugs are saved
+          articles.forEach(a => seen.add(toSlug(a.headline)));
+          saveSeenSlugs(seen);
+          return;
+        }
+
+        // First ever visit — just save slugs silently, no notification
+        if(seen.size === 0){
+          articles.forEach(a => seen.add(toSlug(a.headline)));
+          saveSeenSlugs(seen);
+          return;
+        }
+
+        // New articles found and user has visited before — show notification
+        showArticleBar(newArticles.length, newArticles[0]);
+
+        // Mark all current articles as seen
+        articles.forEach(a => seen.add(toSlug(a.headline)));
+        saveSeenSlugs(seen);
+
+        // Mark today as notified
+        localStorage.setItem(NOTIF_KEY, today());
+
+      } catch(e){ /* silent */ }
+    }
+
+    function showArticleBar(count, topArticle){
+      if(document.getElementById('news-update-bar')) return;
+
+      const label = count === 1
+        ? '1 new article published'
+        : count + ' new articles published';
+
+      const bar = document.createElement('div');
+      bar.id = 'news-update-bar';
+      bar.className = 'news-update-bar';
+      bar.innerHTML = `
+        <div class="news-update-inner">
+          <span class="news-update-dot"></span>
+          <span class="news-update-text">
+            <strong>${label}</strong>
+            ${topArticle ? ' — ' + topArticle.headline.slice(0,55) + '…' : ''}
+          </span>
+          <button class="news-update-cta" onclick="window.location.href='/';return false;">See articles →</button>
+          <button class="news-update-close" id="news-update-close">✕</button>
+        </div>`;
+
+      document.body.appendChild(bar);
+      setTimeout(() => bar.classList.add('visible'), 100);
+
+      document.getElementById('news-update-close').addEventListener('click', () => {
+        bar.classList.remove('visible');
+        setTimeout(() => bar.remove(), 400);
+      });
+
+      // Auto-dismiss after 12 seconds
+      setTimeout(() => {
+        if(document.getElementById('news-update-bar')){
+          bar.classList.remove('visible');
+          setTimeout(() => bar.remove(), 400);
+        }
+      }, 12000);
+    }
+
+    // Check on page load after 4 seconds
+    setTimeout(checkForNewArticles, 4000);
+  }
+
   function init(){
     injectAdSense();
     injectFavicon();
@@ -650,6 +760,7 @@
     hideGoogleBar();
     protectBrandName();
     initBookmarkPrompt();
+    initNewsChecker();
     document.dispatchEvent(new CustomEvent('illuceo:ready'));
   }
 
