@@ -197,25 +197,34 @@
         </div>
       </div>`;
 
-    // Wire touch — simple approach: pause on touchstart, navigate on touchend if no swipe
+    // Wire touch on ticker — completely passive, never blocks scroll
     const track = document.getElementById('nav-ticker-track');
     if(track) {
-      let startX = 0, startY = 0, startT = 0;
+      let startX = 0, startY = 0, startT = 0, moved = false;
 
       track.addEventListener('touchstart', e => {
         startX = e.touches[0].clientX;
         startY = e.touches[0].clientY;
         startT = Date.now();
+        moved = false;
+        // Only pause animation, never call preventDefault
         track.style.animationPlayState = 'paused';
       }, { passive: true });
 
+      track.addEventListener('touchmove', e => {
+        const dx = Math.abs(e.touches[0].clientX - startX);
+        const dy = Math.abs(e.touches[0].clientY - startY);
+        // If moved more than 8px in any direction it's a scroll/swipe — mark it
+        if(dx > 8 || dy > 8) moved = true;
+      }, { passive: true });
+
       track.addEventListener('touchend', e => {
+        const dt = Date.now() - startT;
         const dx = Math.abs(e.changedTouches[0].clientX - startX);
         const dy = Math.abs(e.changedTouches[0].clientY - startY);
-        const dt = Date.now() - startT;
 
-        if(dx < 10 && dy < 10 && dt < 350) {
-          // Tap — find link by walking up from target
+        // Only navigate if it was a clean tap (not a scroll or swipe)
+        if(!moved && dx < 8 && dy < 8 && dt < 300) {
           let el = e.target;
           while(el && el !== track) {
             if(el.tagName === 'A' && el.getAttribute('href')) {
@@ -225,8 +234,8 @@
             el = el.parentElement;
           }
         }
-        // Swipe — resume after delay
-        setTimeout(() => { track.style.animationPlayState = 'running'; }, 600);
+        // Resume animation after any interaction
+        setTimeout(() => { track.style.animationPlayState = 'running'; }, 400);
       }, { passive: true });
     }
 

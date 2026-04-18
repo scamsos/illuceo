@@ -665,6 +665,8 @@ body::after {
   background: var(--bg2);
   border-left: 1px solid var(--border2);
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
   transform: translateX(100%);
   transition: transform .3s cubic-bezier(.22,1,.36,1);
 }
@@ -744,6 +746,7 @@ body::after {
   align-items: center;
   mask-image: linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%);
   -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%);
+  touch-action: pan-y;
 }
 .nav-ticker-track {
   display: flex;
@@ -774,7 +777,7 @@ body::after {
   transition: color .15s, background .15s;
   flex-shrink: 0;
   -webkit-tap-highlight-color: rgba(0,229,176,.15);
-  touch-action: manipulation;
+  touch-action: pan-y;
   cursor: pointer;
   user-select: none;
   -webkit-user-select: none;
@@ -1090,3 +1093,6 @@ body::after {
 @media(max-width:640px) {
   .news-update-text { font-size: 10px; }
 }
+
+/* Prevent overscroll interference with swipe gestures */
+body { overscroll-behavior-x: none; }
