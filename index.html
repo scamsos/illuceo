@@ -87,7 +87,7 @@
 /* MODAL */
 .modal-overlay{position:fixed;inset:0;z-index:500;background:rgba(0,0,0,0);backdrop-filter:blur(0px);display:flex;align-items:flex-start;justify-content:center;padding:24px 16px;pointer-events:none;transition:background .3s,backdrop-filter .3s;overflow:hidden;}
 .modal-overlay.open{background:rgba(0,0,0,.8);backdrop-filter:blur(10px);pointer-events:all;}
-.modal-panel{width:100%;max-width:780px;background:var(--bg2);border:1px solid var(--border2);border-radius:8px;overflow-y:auto;overflow-x:hidden;transform:translateY(32px);opacity:0;transition:transform .35s cubic-bezier(.22,1,.36,1),opacity .3s;margin:auto;position:relative;max-height:90vh;}
+.modal-panel{width:100%;max-width:780px;background:var(--bg2);border:1px solid var(--border2);border-radius:8px;overflow-y:auto;overflow-x:hidden;transform:translateY(32px);opacity:0;transition:transform .35s cubic-bezier(.22,1,.36,1),opacity .3s;margin:auto;position:relative;max-height:90vh;}.modal-panel::before{content:'';display:block;width:40px;height:4px;background:var(--border2);border-radius:2px;margin:12px auto 0;opacity:.6;}@media(min-width:769px){.modal-panel::before{display:none;}}
 .modal-overlay.open .modal-panel{transform:translateY(0);opacity:1;}
 .modal-close{position:absolute;top:16px;right:16px;width:32px;height:32px;background:var(--bg3);border:1px solid var(--border2);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:10;font-family:var(--mono);font-size:14px;color:var(--text3);transition:all .18s;}
 .modal-close:hover{border-color:var(--teal);color:var(--teal);}
@@ -129,6 +129,7 @@
   .modal-header,.modal-body,.modal-footer{padding-left:20px;padding-right:20px;}
 }
 </style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3306478541748582" crossorigin="anonymous"></script>
 </head>
 <body>
 <div id="shell-top"></div>
@@ -282,6 +283,24 @@ function closeModal(){
 closeBtn.addEventListener('click', closeModal);
 overlay.addEventListener('click', e=>{ if(e.target===overlay) closeModal(); });
 document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeModal(); });
+
+// Swipe down or swipe right to close modal on mobile
+let mSwipeStartX = 0, mSwipeStartY = 0;
+const panel = document.getElementById('modal-panel');
+panel.addEventListener('touchstart', e => {
+  mSwipeStartX = e.touches[0].clientX;
+  mSwipeStartY = e.touches[0].clientY;
+}, { passive: true });
+panel.addEventListener('touchend', e => {
+  const dx = e.changedTouches[0].clientX - mSwipeStartX;
+  const dy = e.changedTouches[0].clientY - mSwipeStartY;
+  const absDx = Math.abs(dx);
+  const absDy = Math.abs(dy);
+  // Swipe right (dx > 60, mostly horizontal) or swipe down from top (dy > 80)
+  if((absDx > 60 && absDx > absDy * 1.5) || (dy > 80 && absDy > absDx)) {
+    closeModal();
+  }
+}, { passive: true });
 
 /* ── BENTO RENDER ── */
 function render(articles){
