@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-04-18T06:00:00Z",
+  "updated_at": "2026-04-18T12:00:00Z",
   "articles": [
     {
       "title": "Best AI Writing Tools in 2026 \u2014 Tested and Compared",
@@ -186,6 +186,12 @@
       "url": "/agents/best-ai-agents/",
       "section": "Agents",
       "date": "2026-04-05"
+    },
+    {
+      "title": "How to Use Google Gemini \u2014 Complete Guide for 2026",
+      "url": "/tutorials/gemini/",
+      "section": "Tutorials",
+      "date": "2026-04-18"
     }
   ]
 }
