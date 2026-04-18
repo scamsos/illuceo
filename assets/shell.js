@@ -639,8 +639,10 @@
 
   /* ── NEW ARTICLE NOTIFICATION BAR ── */
   function initNewsChecker(){
-    const SEEN_KEY    = 'illuceo_seen_articles';
-    const NOTIF_KEY   = 'illuceo_last_notif_day';
+    const SEEN_KEY       = 'illuceo_seen_articles';
+    const NOTIF_KEY      = 'illuceo_last_notif_day';
+    const BLOG_SEEN_KEY  = 'illuceo_seen_blog';
+    const BLOG_NOTIF_KEY = 'illuceo_last_blog_notif_day';
 
     // Get today's date string e.g. "2026-04-17"
     function today(){ return new Date().toISOString().slice(0,10); }
@@ -701,6 +703,40 @@
       } catch(e){ /* silent */ }
     }
 
+    // ── Blog article checker — uses separate storage keys ──
+    async function checkForNewBlogArticles(){
+      if(localStorage.getItem(BLOG_NOTIF_KEY) === today()) return;
+
+      try {
+        const res = await fetch('/articles.json?t=' + Date.now());
+        if(!res.ok) return;
+        const data = await res.json();
+        const articles = data.articles || [];
+        if(!articles.length) return;
+
+        let seen;
+        try { seen = new Set(JSON.parse(localStorage.getItem(BLOG_SEEN_KEY) || '[]')); }
+        catch(e){ seen = new Set(); }
+
+        const isFirstVisit = seen.size === 0;
+        const newArticles = articles.filter(a => !seen.has(a.url));
+
+        // Always save current state
+        articles.forEach(a => seen.add(a.url));
+        localStorage.setItem(BLOG_SEEN_KEY, JSON.stringify(Array.from(seen).slice(-200)));
+
+        // First ever visit — save silently, no notification
+        if(isFirstVisit) return;
+        if(!newArticles.length) return;
+
+        // New blog articles — show banner linking to the latest one
+        const latest = newArticles[newArticles.length - 1];
+        showArticleBar(newArticles.length, latest, true);
+        localStorage.setItem(BLOG_NOTIF_KEY, today());
+
+      } catch(e){ /* silent */ }
+    }
+
     function showArticleBar(count, topArticle, isBlog){
       if(document.getElementById('news-update-bar')) return;
 
@@ -742,6 +778,8 @@
 
     // Check on page load after 4 seconds
     setTimeout(checkForNewArticles, 4000);
+    // Check blog articles after 6 seconds (stagger so banners don't collide)
+    setTimeout(checkForNewBlogArticles, 6000);
   }
 
   function init(){
