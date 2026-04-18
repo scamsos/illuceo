@@ -733,13 +733,7 @@
         setTimeout(() => bar.remove(), 400);
       });
 
-      // Auto-dismiss after 12 seconds
-      setTimeout(() => {
-        if(document.getElementById('news-update-bar')){
-          bar.classList.remove('visible');
-          setTimeout(() => bar.remove(), 400);
-        }
-      }, 12000);
+      // Bar stays until user dismisses it
     }
 
     // Check on page load after 4 seconds
