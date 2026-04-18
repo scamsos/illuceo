@@ -1,0 +1,191 @@
+{
+  "updated_at": "2026-04-18T06:00:00Z",
+  "articles": [
+    {
+      "title": "Best AI Writing Tools in 2026 \u2014 Tested and Compared",
+      "url": "/tools/best/ai-writing-tools/",
+      "section": "Tools",
+      "date": "2026-04-01"
+    },
+    {
+      "title": "ChatGPT vs Claude vs Gemini \u2014 Which Is Best?",
+      "url": "/tools/compare/chatgpt-vs-claude-vs-gemini/",
+      "section": "Tools",
+      "date": "2026-04-02"
+    },
+    {
+      "title": "Best Free AI Tools in 2026",
+      "url": "/tools/free/",
+      "section": "Tools",
+      "date": "2026-04-03"
+    },
+    {
+      "title": "Best AI Tools for Small Business",
+      "url": "/tools/best/ai-tools-small-business/",
+      "section": "Tools",
+      "date": "2026-04-04"
+    },
+    {
+      "title": "Best AI Coding Assistants \u2014 GitHub Copilot vs Cursor",
+      "url": "/tools/best/ai-coding-assistants/",
+      "section": "Tools",
+      "date": "2026-04-05"
+    },
+    {
+      "title": "Best AI Image Generators in 2026 \u2014 Tested and Ranked",
+      "url": "/tools/best/ai-image-generators/",
+      "section": "Tools",
+      "date": "2026-04-18"
+    },
+    {
+      "title": "How to Use ChatGPT \u2014 Complete Beginner Guide",
+      "url": "/tutorials/chatgpt/",
+      "section": "Tutorials",
+      "date": "2026-04-01"
+    },
+    {
+      "title": "AI Prompt Engineering \u2014 The Ultimate Guide",
+      "url": "/tutorials/prompts/",
+      "section": "Tutorials",
+      "date": "2026-04-02"
+    },
+    {
+      "title": "How to Use Midjourney \u2014 Complete Guide",
+      "url": "/tutorials/midjourney/",
+      "section": "Tutorials",
+      "date": "2026-04-03"
+    },
+    {
+      "title": "AI Automation for Beginners",
+      "url": "/tutorials/automation/",
+      "section": "Tutorials",
+      "date": "2026-04-04"
+    },
+    {
+      "title": "How to Use Claude AI \u2014 Complete Guide",
+      "url": "/tutorials/claude/",
+      "section": "Tutorials",
+      "date": "2026-04-05"
+    },
+    {
+      "title": "AI for Real Estate Agents",
+      "url": "/professions/real-estate/",
+      "section": "Professions",
+      "date": "2026-04-01"
+    },
+    {
+      "title": "AI for Teachers and Educators",
+      "url": "/professions/education/",
+      "section": "Professions",
+      "date": "2026-04-02"
+    },
+    {
+      "title": "AI for Lawyers and Legal Professionals",
+      "url": "/professions/legal/",
+      "section": "Professions",
+      "date": "2026-04-03"
+    },
+    {
+      "title": "AI for Healthcare Professionals",
+      "url": "/professions/healthcare/",
+      "section": "Professions",
+      "date": "2026-04-04"
+    },
+    {
+      "title": "AI for Marketing Professionals",
+      "url": "/professions/marketing/",
+      "section": "Professions",
+      "date": "2026-04-05"
+    },
+    {
+      "title": "How to Make Money with AI \u2014 15 Proven Methods",
+      "url": "/make-money/15-methods/",
+      "section": "Make Money",
+      "date": "2026-04-01"
+    },
+    {
+      "title": "Best AI Side Hustles in 2026",
+      "url": "/make-money/side-hustles/",
+      "section": "Make Money",
+      "date": "2026-04-02"
+    },
+    {
+      "title": "AI Freelancing Guide",
+      "url": "/make-money/freelancing/",
+      "section": "Make Money",
+      "date": "2026-04-03"
+    },
+    {
+      "title": "How to Sell AI-Generated Products Online",
+      "url": "/make-money/sell/",
+      "section": "Make Money",
+      "date": "2026-04-04"
+    },
+    {
+      "title": "AI Passive Income \u2014 Build Streams That Earn While You Sleep",
+      "url": "/make-money/passive/",
+      "section": "Make Money",
+      "date": "2026-04-05"
+    },
+    {
+      "title": "What is Artificial Intelligence?",
+      "url": "/explained/what-is-ai/",
+      "section": "Explained",
+      "date": "2026-04-01"
+    },
+    {
+      "title": "What is a Large Language Model (LLM)?",
+      "url": "/explained/what-is-llm/",
+      "section": "Explained",
+      "date": "2026-04-02"
+    },
+    {
+      "title": "What is an AI Agent?",
+      "url": "/explained/what-is-ai-agent/",
+      "section": "Explained",
+      "date": "2026-04-03"
+    },
+    {
+      "title": "AI Hallucinations Explained",
+      "url": "/explained/ai-hallucinations/",
+      "section": "Explained",
+      "date": "2026-04-04"
+    },
+    {
+      "title": "Prompt Engineering Explained",
+      "url": "/explained/prompt-engineering/",
+      "section": "Explained",
+      "date": "2026-04-05"
+    },
+    {
+      "title": "What Are AI Agents?",
+      "url": "/agents/what-are-agents/",
+      "section": "Agents",
+      "date": "2026-04-01"
+    },
+    {
+      "title": "How to Build an AI Agent",
+      "url": "/agents/build-ai-agent/",
+      "section": "Agents",
+      "date": "2026-04-02"
+    },
+    {
+      "title": "AI Workflow Automation Guide",
+      "url": "/agents/ai-workflow-automation/",
+      "section": "Agents",
+      "date": "2026-04-03"
+    },
+    {
+      "title": "What is the MCP Protocol?",
+      "url": "/agents/mcp-protocol/",
+      "section": "Agents",
+      "date": "2026-04-04"
+    },
+    {
+      "title": "Best AI Agents in 2026",
+      "url": "/agents/best-ai-agents/",
+      "section": "Agents",
+      "date": "2026-04-05"
+    }
+  ]
+}
