@@ -173,14 +173,11 @@
       return `<li><a href="${n.href}" class="${active}">${n.label}</a>${sub}</li>`;
     }).join('');
 
-    // Mobile ticker — all nav links in one scrolling strip
-    const allLinks = [];
-    NAV.forEach(n => {
-      allLinks.push({ label: n.label, href: n.href });
-      if(n.sub) n.sub.forEach(s => allLinks.push({ label: s.label, href: s.href }));
-    });
-    const tickerItems = [...allLinks, ...allLinks].map(l =>
-      `<a class="nav-ticker-item" href="${l.href}">${l.label}</a>`
+    // Mobile ticker — top-level section links only (no sub-links, no News subcategories)
+    const sectionLinks = NAV.filter(n => n.href !== '/').map(n => ({ label: n.label, href: n.href }));
+    const tickerLinks = [...sectionLinks, ...sectionLinks];
+    const tickerItems = tickerLinks.map(l =>
+      `<a class="nav-ticker-item" href="${l.href}" onclick="window.location.href='${l.href}';return false;">${l.label}</a>`
     ).join('');
 
     el.innerHTML = `
@@ -194,35 +191,45 @@
         </div>
       </div>`;
 
-    // Wire touch on ticker — pause on touchstart so tap registers, navigate on touchend
+    // Wire touch on ticker — completely passive, never blocks scroll
     const track = document.getElementById('nav-ticker-track');
     if(track) {
-      let touchStartX = 0;
-      let touchStartY = 0;
-      let touchStartTime = 0;
+      let startX = 0, startY = 0, startT = 0, moved = false;
 
       track.addEventListener('touchstart', e => {
-        touchStartX = e.touches[0].clientX;
-        touchStartY = e.touches[0].clientY;
-        touchStartTime = Date.now();
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+        startT = Date.now();
+        moved = false;
+        // Only pause animation, never call preventDefault
         track.style.animationPlayState = 'paused';
       }, { passive: true });
 
-      track.addEventListener('touchend', e => {
-        const dx = Math.abs(e.changedTouches[0].clientX - touchStartX);
-        const dy = Math.abs(e.changedTouches[0].clientY - touchStartY);
-        const dt = Date.now() - touchStartTime;
+      track.addEventListener('touchmove', e => {
+        const dx = Math.abs(e.touches[0].clientX - startX);
+        const dy = Math.abs(e.touches[0].clientY - startY);
+        // If moved more than 8px in any direction it's a scroll/swipe — mark it
+        if(dx > 8 || dy > 8) moved = true;
+      }, { passive: true });
 
-        if(dx < 10 && dy < 10 && dt < 400) {
-          // Use coordinates to find exactly what was under the finger
-          const el = document.elementFromPoint(touchStartX, touchStartY);
-          const link = el ? el.closest('.nav-ticker-item') : null;
-          if(link && link.getAttribute('href')) {
-            window.location.href = link.getAttribute('href');
-            return;
+      track.addEventListener('touchend', e => {
+        const dt = Date.now() - startT;
+        const dx = Math.abs(e.changedTouches[0].clientX - startX);
+        const dy = Math.abs(e.changedTouches[0].clientY - startY);
+
+        // Only navigate if it was a clean tap (not a scroll or swipe)
+        if(!moved && dx < 8 && dy < 8 && dt < 300) {
+          let el = e.target;
+          while(el && el !== track) {
+            if(el.tagName === 'A' && el.getAttribute('href')) {
+              window.location.href = el.getAttribute('href');
+              return;
+            }
+            el = el.parentElement;
           }
         }
-        setTimeout(() => { track.style.animationPlayState = 'running'; }, 800);
+        // Resume animation after any interaction
+        setTimeout(() => { track.style.animationPlayState = 'running'; }, 400);
       }, { passive: true });
     }
 
@@ -368,7 +375,16 @@
     document.head.appendChild(s);
   }
 
-  /* ── FAVICON (injected into <head> so Google picks it up) ── */
+  /* ── ADSENSE ── */
+  function injectAdSense(){
+    if(document.getElementById('adsense-script')) return;
+    const s = document.createElement('script');
+    s.id = 'adsense-script';
+    s.async = true;
+    s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3306478541748582';
+    s.setAttribute('crossorigin','anonymous');
+    document.head.appendChild(s);
+  }
   function injectFavicon(){
     const tags = [
       { rel:'icon', type:'image/x-icon',      href:'/favicon/favicon.ico' },
@@ -516,91 +532,261 @@
 
   /* ── BOOKMARK / ADD TO HOME SCREEN PROMPT ── */
   function initBookmarkPrompt(){
-    // Don't show if already dismissed or installed
-    if(localStorage.getItem('illuceo_bookmark') === 'done') return;
-    // Don't show on every page — only home and section pages
-    const p = window.location.pathname;
-    const isMainPage = p === '/' || p === '/index.html' ||
-      ['/tools/','/tutorials/','/agents/','/explained/','/professions/','/make-money/'].includes(p);
-    if(!isMainPage) return;
+    // Don't show if already installed or dismissed
+    if(localStorage.getItem('illuceo_install') === 'done') return;
+    const isInStandaloneMode = window.matchMedia('(display-mode: standalone)').matches
+      || window.navigator.standalone;
+    if(isInStandaloneMode) return;
 
-    let deferredPrompt = null; // For Android Chrome install prompt
+    const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+    const isMobile = /android|iphone|ipad|ipod/i.test(navigator.userAgent);
+    let deferredPrompt = null;
 
-    // Catch the native install prompt (Android Chrome)
+    // Catch Android Chrome native install event
     window.addEventListener('beforeinstallprompt', e => {
       e.preventDefault();
       deferredPrompt = e;
     });
 
-    // Detect iOS
-    const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
-    const isInStandaloneMode = window.matchMedia('(display-mode: standalone)').matches
-      || window.navigator.standalone;
+    function dismiss(){
+      const el = document.getElementById('install-popup');
+      if(el){ el.classList.remove('visible'); setTimeout(()=>el.remove(), 400); }
+    }
 
-    if(isInStandaloneMode) return; // Already installed
-
-    // Show after 30 seconds
     setTimeout(() => {
-      const prompt = document.createElement('div');
-      prompt.className = 'bookmark-prompt';
-      prompt.id = 'bookmark-prompt';
+      const popup = document.createElement('div');
+      popup.id = 'install-popup';
+      popup.className = 'install-popup';
 
-      const iosTip = isIOS
-        ? `<div class="bookmark-ios-tip" style="display:block;">Tap ⎙ Share → "Add to Home Screen"</div>`
-        : '';
-
-      prompt.innerHTML = `
-        <div class="bookmark-icon">📰</div>
-        <div class="bookmark-text">
-          <strong class="notranslate" translate="no">ILLUCEO</strong>
-          <span>Get daily AI news on your home screen</span>
-          ${iosTip}
-        </div>
-        <div class="bookmark-actions">
-          <button class="bookmark-btn bookmark-btn-yes" id="bookmark-yes">Add</button>
-          <button class="bookmark-btn bookmark-btn-no" id="bookmark-no">✕</button>
-        </div>`;
-
-      document.body.appendChild(prompt);
-      setTimeout(() => prompt.classList.add('visible'), 100);
-
-      document.getElementById('bookmark-yes').addEventListener('click', async () => {
-        if(deferredPrompt) {
-          // Android — trigger native install
-          deferredPrompt.prompt();
-          const { outcome } = await deferredPrompt.userChoice;
-          if(outcome === 'accepted') localStorage.setItem('illuceo_bookmark','done');
-          deferredPrompt = null;
-        } else if(isIOS) {
-          // iOS — can't auto-add, show the tip longer
-          prompt.querySelector('.bookmark-ios-tip').style.display = 'block';
-          document.getElementById('bookmark-yes').textContent = 'Got it';
-          document.getElementById('bookmark-yes').addEventListener('click', () => {
-            localStorage.setItem('illuceo_bookmark','done');
-            dismissPrompt();
-          }, { once: true });
-          return;
-        } else {
-          // Desktop — open bookmark dialog via keyboard shortcut hint
-          alert('Press Ctrl+D (Windows) or Cmd+D (Mac) to bookmark ILLUCEO');
-        }
-        localStorage.setItem('illuceo_bookmark','done');
-        dismissPrompt();
-      });
-
-      document.getElementById('bookmark-no').addEventListener('click', () => {
-        localStorage.setItem('illuceo_bookmark','done');
-        dismissPrompt();
-      });
-
-      function dismissPrompt(){
-        prompt.classList.remove('visible');
-        setTimeout(() => prompt.remove(), 400);
+      // Different message per platform
+      let actionHTML = '';
+      if(isIOS){
+        actionHTML = `
+          <div class="install-steps">
+            <div class="install-step"><span class="install-step-num">1</span>Tap the <strong>Share</strong> button ⎙ at the bottom of your browser</div>
+            <div class="install-step"><span class="install-step-num">2</span>Scroll down and tap <strong>"Add to Home Screen"</strong></div>
+            <div class="install-step"><span class="install-step-num">3</span>Tap <strong>"Add"</strong> — ILLUCEO will appear on your home screen</div>
+          </div>
+          <button class="install-btn-primary" id="install-got-it">Got it ✓</button>`;
+      } else if(deferredPrompt || isMobile){
+        actionHTML = `
+          <p class="install-desc">Install ILLUCEO as an app for instant access to daily AI news — no app store needed.</p>
+          <div class="install-btn-row">
+            <button class="install-btn-primary" id="install-yes">Install App →</button>
+            <button class="install-btn-secondary" id="install-no">Maybe later</button>
+          </div>`;
+      } else {
+        // Desktop
+        actionHTML = `
+          <p class="install-desc">Add ILLUCEO to your browser for one-click access to daily AI intelligence.</p>
+          <div class="install-btn-row">
+            <button class="install-btn-primary" id="install-yes">Add to Browser →</button>
+            <button class="install-btn-secondary" id="install-no">Maybe later</button>
+          </div>`;
       }
 
-    }, 30000); // 30 seconds
+      popup.innerHTML = `
+        <div class="install-popup-inner">
+          <button class="install-close" id="install-close">✕</button>
+          <div class="install-header">
+            <div class="install-app-icon">
+              <img src="/favicon/android-chrome-192x192.png" alt="ILLUCEO" width="64" height="64">
+            </div>
+            <div class="install-header-text">
+              <div class="install-app-name notranslate" translate="no">ILLUCEO</div>
+              <div class="install-app-url notranslate" translate="no">illuceo.space</div>
+              <div class="install-app-tag">Daily AI Intelligence</div>
+            </div>
+          </div>
+          ${actionHTML}
+        </div>`;
+
+      document.body.appendChild(popup);
+      setTimeout(() => popup.classList.add('visible'), 100);
+
+      // Wire buttons
+      document.getElementById('install-close')?.addEventListener('click', () => {
+        localStorage.setItem('illuceo_install','done');
+        dismiss();
+      });
+      document.getElementById('install-no')?.addEventListener('click', () => {
+        localStorage.setItem('illuceo_install','done');
+        dismiss();
+      });
+      document.getElementById('install-got-it')?.addEventListener('click', () => {
+        localStorage.setItem('illuceo_install','done');
+        dismiss();
+      });
+      document.getElementById('install-yes')?.addEventListener('click', async () => {
+        if(deferredPrompt){
+          deferredPrompt.prompt();
+          const { outcome } = await deferredPrompt.userChoice;
+          deferredPrompt = null;
+          localStorage.setItem('illuceo_install','done');
+          dismiss();
+        } else {
+          // Desktop — trigger browser install if available
+          const el = document.querySelector('#install-yes');
+          if(el) el.textContent = 'Use browser menu → Install…';
+          setTimeout(() => { localStorage.setItem('illuceo_install','done'); dismiss(); }, 2000);
+        }
+      });
+
+      // Close on backdrop click
+      popup.addEventListener('click', e => {
+        if(e.target === popup){ localStorage.setItem('illuceo_install','done'); dismiss(); }
+      });
+
+    }, 3000); // 3 seconds — quick enough to catch, not so fast it's jarring
   }
+
+  /* ── NEW ARTICLE NOTIFICATION BAR ── */
+  function initNewsChecker(){
+    const SEEN_KEY       = 'illuceo_seen_articles';
+    const NOTIF_KEY      = 'illuceo_last_notif_day';
+    const BLOG_SEEN_KEY  = 'illuceo_seen_blog';
+    const BLOG_NOTIF_KEY = 'illuceo_last_blog_notif_day';
+
+    // Get today's date string e.g. "2026-04-17"
+    function today(){ return new Date().toISOString().slice(0,10); }
+
+    // Already notified today?
+    function notifiedToday(){ return localStorage.getItem(NOTIF_KEY) === today(); }
+
+    // Get set of article slugs already seen
+    function getSeenSlugs(){
+      try { return new Set(JSON.parse(localStorage.getItem(SEEN_KEY) || '[]')); }
+      catch(e){ return new Set(); }
+    }
+
+    // Save seen slugs (keep last 100 to avoid unbounded growth)
+    function saveSeenSlugs(set){
+      const arr = Array.from(set).slice(-100);
+      localStorage.setItem(SEEN_KEY, JSON.stringify(arr));
+    }
+
+    // Build a slug from article title
+    function toSlug(str){ return (str||'').toLowerCase().replace(/[^a-z0-9]+/g,'-').slice(0,60); }
+
+    async function checkForNewArticles(){
+      if(notifiedToday()) return;
+
+      try {
+        // Check blog articles (articles.json)
+        const res = await fetch('/articles.json?t=' + Date.now());
+        if(!res.ok) return;
+        const data = await res.json();
+        const articles = data.articles || [];
+        if(!articles.length) return;
+
+        const seen = getSeenSlugs();
+        // Use url as unique key for blog articles
+        const newArticles = articles.filter(a => !seen.has(toSlug(a.url || a.title)));
+
+        if(!newArticles.length){
+          articles.forEach(a => seen.add(toSlug(a.url || a.title)));
+          saveSeenSlugs(seen);
+          return;
+        }
+
+        // First ever visit — save silently
+        if(seen.size === 0){
+          articles.forEach(a => seen.add(toSlug(a.url || a.title)));
+          saveSeenSlugs(seen);
+          return;
+        }
+
+        // New blog articles found — show notification with link
+        showArticleBar(newArticles.length, newArticles[0], true);
+
+        articles.forEach(a => seen.add(toSlug(a.url || a.title)));
+        saveSeenSlugs(seen);
+        localStorage.setItem(NOTIF_KEY, today());
+
+      } catch(e){ /* silent */ }
+    }
+
+    // ── Blog article checker — uses separate storage keys ──
+    async function checkForNewBlogArticles(){
+      if(localStorage.getItem(BLOG_NOTIF_KEY) === today()) return;
+
+      try {
+        const res = await fetch('/articles.json?t=' + Date.now());
+        if(!res.ok) return;
+        const data = await res.json();
+        const articles = data.articles || [];
+        if(!articles.length) return;
+
+        let seen;
+        try { seen = new Set(JSON.parse(localStorage.getItem(BLOG_SEEN_KEY) || '[]')); }
+        catch(e){ seen = new Set(); }
+
+        const isFirstVisit = seen.size === 0;
+        const newArticles = articles.filter(a => !seen.has(a.url));
+
+        // Always save current state
+        articles.forEach(a => seen.add(a.url));
+        localStorage.setItem(BLOG_SEEN_KEY, JSON.stringify(Array.from(seen).slice(-200)));
+
+        // First ever visit — save silently, no notification
+        if(isFirstVisit) return;
+        if(!newArticles.length) return;
+
+        // New blog articles — show banner linking to the latest one
+        const latest = newArticles[newArticles.length - 1];
+        showArticleBar(newArticles.length, latest, true);
+        localStorage.setItem(BLOG_NOTIF_KEY, today());
+
+      } catch(e){ /* silent */ }
+    }
+
+    function showArticleBar(count, topArticle, isBlog){
+      if(document.getElementById('news-update-bar')) return;
+
+      const label = count === 1
+        ? '1 new article published'
+        : count + ' new articles published';
+
+      // For blog articles use the url directly; for news use homepage
+      const ctaUrl = (isBlog && topArticle && topArticle.url) ? topArticle.url : '/';
+      const ctaLabel = isBlog ? 'Read it →' : 'See articles →';
+      const title = isBlog
+        ? (topArticle ? topArticle.title : '')
+        : (topArticle ? topArticle.headline : '');
+
+      const bar = document.createElement('div');
+      bar.id = 'news-update-bar';
+      bar.className = 'news-update-bar';
+      bar.innerHTML = `
+        <div class="news-update-inner">
+          <span class="news-update-dot"></span>
+          <span class="news-update-text">
+            <strong>${label}</strong>
+            ${title ? ' — ' + title.slice(0,55) + '…' : ''}
+          </span>
+          <button class="news-update-cta" onclick="window.location.href='${ctaUrl}';return false;">${ctaLabel}</button>
+          <button class="news-update-close" id="news-update-close">✕</button>
+        </div>`;
+
+      document.body.appendChild(bar);
+      setTimeout(() => bar.classList.add('visible'), 100);
+
+      document.getElementById('news-update-close').addEventListener('click', () => {
+        bar.classList.remove('visible');
+        setTimeout(() => bar.remove(), 400);
+      });
+
+      // Bar stays until user dismisses it
+    }
+
+    // Check on page load after 4 seconds
+    setTimeout(checkForNewArticles, 4000);
+    // Check blog articles after 6 seconds (stagger so banners don't collide)
+    setTimeout(checkForNewBlogArticles, 6000);
+  }
+
   function init(){
+    injectAdSense();
     injectFavicon();
     injectTopbar();
     injectNav();
@@ -613,6 +799,7 @@
     hideGoogleBar();
     protectBrandName();
     initBookmarkPrompt();
+    initNewsChecker();
     document.dispatchEvent(new CustomEvent('illuceo:ready'));
   }
 
