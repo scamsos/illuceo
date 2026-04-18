@@ -664,52 +664,56 @@
     function toSlug(str){ return (str||'').toLowerCase().replace(/[^a-z0-9]+/g,'-').slice(0,60); }
 
     async function checkForNewArticles(){
-      // Never show more than once per day
       if(notifiedToday()) return;
 
       try {
-        const res = await fetch('/news-data.json?t=' + Date.now());
+        // Check blog articles (articles.json)
+        const res = await fetch('/articles.json?t=' + Date.now());
         if(!res.ok) return;
         const data = await res.json();
         const articles = data.articles || [];
         if(!articles.length) return;
 
         const seen = getSeenSlugs();
-        const newArticles = articles.filter(a => !seen.has(toSlug(a.headline)));
+        // Use url as unique key for blog articles
+        const newArticles = articles.filter(a => !seen.has(toSlug(a.url || a.title)));
 
         if(!newArticles.length){
-          // All known — just make sure slugs are saved
-          articles.forEach(a => seen.add(toSlug(a.headline)));
+          articles.forEach(a => seen.add(toSlug(a.url || a.title)));
           saveSeenSlugs(seen);
           return;
         }
 
-        // First ever visit — just save slugs silently, no notification
+        // First ever visit — save silently
         if(seen.size === 0){
-          articles.forEach(a => seen.add(toSlug(a.headline)));
+          articles.forEach(a => seen.add(toSlug(a.url || a.title)));
           saveSeenSlugs(seen);
           return;
         }
 
-        // New articles found and user has visited before — show notification
-        showArticleBar(newArticles.length, newArticles[0]);
+        // New blog articles found — show notification with link
+        showArticleBar(newArticles.length, newArticles[0], true);
 
-        // Mark all current articles as seen
-        articles.forEach(a => seen.add(toSlug(a.headline)));
+        articles.forEach(a => seen.add(toSlug(a.url || a.title)));
         saveSeenSlugs(seen);
-
-        // Mark today as notified
         localStorage.setItem(NOTIF_KEY, today());
 
       } catch(e){ /* silent */ }
     }
 
-    function showArticleBar(count, topArticle){
+    function showArticleBar(count, topArticle, isBlog){
       if(document.getElementById('news-update-bar')) return;
 
       const label = count === 1
         ? '1 new article published'
         : count + ' new articles published';
+
+      // For blog articles use the url directly; for news use homepage
+      const ctaUrl = (isBlog && topArticle && topArticle.url) ? topArticle.url : '/';
+      const ctaLabel = isBlog ? 'Read it →' : 'See articles →';
+      const title = isBlog
+        ? (topArticle ? topArticle.title : '')
+        : (topArticle ? topArticle.headline : '');
 
       const bar = document.createElement('div');
       bar.id = 'news-update-bar';
@@ -719,9 +723,9 @@
           <span class="news-update-dot"></span>
           <span class="news-update-text">
             <strong>${label}</strong>
-            ${topArticle ? ' — ' + topArticle.headline.slice(0,55) + '…' : ''}
+            ${title ? ' — ' + title.slice(0,55) + '…' : ''}
           </span>
-          <button class="news-update-cta" onclick="window.location.href='/';return false;">See articles →</button>
+          <button class="news-update-cta" onclick="window.location.href='${ctaUrl}';return false;">${ctaLabel}</button>
           <button class="news-update-close" id="news-update-close">✕</button>
         </div>`;
 
