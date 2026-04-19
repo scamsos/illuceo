@@ -173,15 +173,9 @@
       return `<li><a href="${n.href}" class="${active}">${n.label}</a>${sub}</li>`;
     }).join('');
 
-    // Mobile ticker — all nav links in one scrolling strip
-    const allLinks = [];
-    NAV.forEach(n => {
-      allLinks.push({ label: n.label, href: n.href });
-      if(n.sub) n.sub.forEach(s => allLinks.push({ label: s.label, href: s.href }));
-    });
-
-    // Build ticker — duplicate for seamless loop
-    const tickerLinks = [...allLinks, ...allLinks];
+    // Mobile ticker — top-level section links only (no sub-links, no News subcategories)
+    const sectionLinks = NAV.filter(n => n.href !== '/').map(n => ({ label: n.label, href: n.href }));
+    const tickerLinks = [...sectionLinks, ...sectionLinks];
     const tickerItems = tickerLinks.map(l =>
       `<a class="nav-ticker-item" href="${l.href}" onclick="window.location.href='${l.href}';return false;">${l.label}</a>`
     ).join('');
