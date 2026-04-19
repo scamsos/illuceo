@@ -640,75 +640,70 @@
     }, 3000); // 3 seconds — quick enough to catch, not so fast it's jarring
   }
 
-  /* ── NEW ARTICLE NOTIFICATION BAR ── */
+  /* ── NOTIFICATION BARS ── */
   function initNewsChecker(){
-    const SEEN_KEY       = 'illuceo_seen_articles';
-    const NOTIF_KEY      = 'illuceo_last_notif_day';
-    const BLOG_SEEN_KEY  = 'illuceo_seen_blog';
-    const BLOG_NOTIF_KEY = 'illuceo_last_blog_notif_day';
-
-    // Get today's date string e.g. "2026-04-17"
     function today(){ return new Date().toISOString().slice(0,10); }
 
-    // Already notified today?
-    function notifiedToday(){ return localStorage.getItem(NOTIF_KEY) === today(); }
-
-    // Get set of article slugs already seen
-    function getSeenSlugs(){
-      try { return new Set(JSON.parse(localStorage.getItem(SEEN_KEY) || '[]')); }
-      catch(e){ return new Set(); }
+    function showBar(id, text, ctaLabel, ctaUrl){
+      if(document.getElementById(id)) return;
+      const bar = document.createElement('div');
+      bar.id = id;
+      bar.className = 'news-update-bar';
+      bar.innerHTML = `
+        <div class="news-update-inner">
+          <span class="news-update-dot"></span>
+          <span class="news-update-text">${text}</span>
+          <button class="news-update-cta" onclick="window.location.href='${ctaUrl}';return false;">${ctaLabel}</button>
+          <button class="news-update-close" id="${id}-close">✕</button>
+        </div>`;
+      document.body.appendChild(bar);
+      setTimeout(() => bar.classList.add('visible'), 100);
+      document.getElementById(id + '-close').addEventListener('click', () => {
+        bar.classList.remove('visible');
+        setTimeout(() => bar.remove(), 400);
+      });
     }
 
-    // Save seen slugs (keep last 100 to avoid unbounded growth)
-    function saveSeenSlugs(set){
-      const arr = Array.from(set).slice(-100);
-      localStorage.setItem(SEEN_KEY, JSON.stringify(arr));
-    }
-
-    // Build a slug from article title
-    function toSlug(str){ return (str||'').toLowerCase().replace(/[^a-z0-9]+/g,'-').slice(0,60); }
-
-    async function checkForNewArticles(){
-      if(notifiedToday()) return;
+    // ── NEWS checker (news-data.json) ──
+    async function checkNews(){
+      const SEEN_KEY  = 'illuceo_news_seen_at';
+      if(localStorage.getItem('illuceo_news_notif_day') === today()) return;
 
       try {
-        // Check blog articles (articles.json)
-        const res = await fetch('/articles.json?t=' + Date.now());
+        const res = await fetch('/news-data.json?t=' + Date.now());
         if(!res.ok) return;
         const data = await res.json();
-        const articles = data.articles || [];
-        if(!articles.length) return;
+        const ts = data.generated_at || data.date || '';
+        if(!ts) return;
 
-        const seen = getSeenSlugs();
-        // Use url as unique key for blog articles
-        const newArticles = articles.filter(a => !seen.has(toSlug(a.url || a.title)));
-
-        if(!newArticles.length){
-          articles.forEach(a => seen.add(toSlug(a.url || a.title)));
-          saveSeenSlugs(seen);
-          return;
-        }
+        const lastSeen = localStorage.getItem(SEEN_KEY);
+        localStorage.setItem(SEEN_KEY, ts);
 
         // First ever visit — save silently
-        if(seen.size === 0){
-          articles.forEach(a => seen.add(toSlug(a.url || a.title)));
-          saveSeenSlugs(seen);
-          return;
-        }
+        if(!lastSeen) return;
+        // Same news as before
+        if(lastSeen === ts) return;
 
-        // New blog articles found — show notification with link
-        showArticleBar(newArticles.length, newArticles[0], true);
-
-        articles.forEach(a => seen.add(toSlug(a.url || a.title)));
-        saveSeenSlugs(seen);
-        localStorage.setItem(NOTIF_KEY, today());
+        // New news detected
+        const count = (data.articles || []).length;
+        const top = (data.articles || [])[0];
+        const headline = top ? top.headline.slice(0, 55) + '…' : '';
+        showBar(
+          'news-update-bar',
+          `<strong>${count} new stories today</strong>${headline ? ' — ' + headline : ''}`,
+          'Read now →',
+          '/'
+        );
+        localStorage.setItem('illuceo_news_notif_day', today());
 
       } catch(e){ /* silent */ }
     }
 
-    // ── Blog article checker — uses separate storage keys ──
-    async function checkForNewBlogArticles(){
-      if(localStorage.getItem(BLOG_NOTIF_KEY) === today()) return;
+    // ── BLOG checker (articles.json) ──
+    async function checkBlog(){
+      const SEEN_KEY  = 'illuceo_blog_seen';
+      const NOTIF_KEY = 'illuceo_blog_notif_day';
+      if(localStorage.getItem(NOTIF_KEY) === today()) return;
 
       try {
         const res = await fetch('/articles.json?t=' + Date.now());
@@ -718,71 +713,34 @@
         if(!articles.length) return;
 
         let seen;
-        try { seen = new Set(JSON.parse(localStorage.getItem(BLOG_SEEN_KEY) || '[]')); }
+        try { seen = new Set(JSON.parse(localStorage.getItem(SEEN_KEY) || '[]')); }
         catch(e){ seen = new Set(); }
 
-        const isFirstVisit = seen.size === 0;
-        const newArticles = articles.filter(a => !seen.has(a.url));
+        const isFirst = seen.size === 0;
+        const newOnes = articles.filter(a => !seen.has(a.url));
 
-        // Always save current state
+        // Always update seen list
         articles.forEach(a => seen.add(a.url));
-        localStorage.setItem(BLOG_SEEN_KEY, JSON.stringify(Array.from(seen).slice(-200)));
+        localStorage.setItem(SEEN_KEY, JSON.stringify(Array.from(seen).slice(-200)));
 
-        // First ever visit — save silently, no notification
-        if(isFirstVisit) return;
-        if(!newArticles.length) return;
+        // First ever visit — save silently
+        if(isFirst) return;
+        if(!newOnes.length) return;
 
-        // New blog articles — show banner linking to the latest one
-        const latest = newArticles[newArticles.length - 1];
-        showArticleBar(newArticles.length, latest, true);
-        localStorage.setItem(BLOG_NOTIF_KEY, today());
+        // New blog article — show notification
+        const latest = newOnes[newOnes.length - 1];
+        const label = newOnes.length === 1
+          ? `<strong>New article</strong> — ${(latest.title || '').slice(0,55)}…`
+          : `<strong>${newOnes.length} new articles published</strong> — ${(latest.title || '').slice(0,45)}…`;
+
+        showBar('blog-update-bar', label, 'Read it →', latest.url || '/');
+        localStorage.setItem(NOTIF_KEY, today());
 
       } catch(e){ /* silent */ }
     }
 
-    function showArticleBar(count, topArticle, isBlog){
-      if(document.getElementById('news-update-bar')) return;
-
-      const label = count === 1
-        ? '1 new article published'
-        : count + ' new articles published';
-
-      // For blog articles use the url directly; for news use homepage
-      const ctaUrl = (isBlog && topArticle && topArticle.url) ? topArticle.url : '/';
-      const ctaLabel = isBlog ? 'Read it →' : 'See articles →';
-      const title = isBlog
-        ? (topArticle ? topArticle.title : '')
-        : (topArticle ? topArticle.headline : '');
-
-      const bar = document.createElement('div');
-      bar.id = 'news-update-bar';
-      bar.className = 'news-update-bar';
-      bar.innerHTML = `
-        <div class="news-update-inner">
-          <span class="news-update-dot"></span>
-          <span class="news-update-text">
-            <strong>${label}</strong>
-            ${title ? ' — ' + title.slice(0,55) + '…' : ''}
-          </span>
-          <button class="news-update-cta" onclick="window.location.href='${ctaUrl}';return false;">${ctaLabel}</button>
-          <button class="news-update-close" id="news-update-close">✕</button>
-        </div>`;
-
-      document.body.appendChild(bar);
-      setTimeout(() => bar.classList.add('visible'), 100);
-
-      document.getElementById('news-update-close').addEventListener('click', () => {
-        bar.classList.remove('visible');
-        setTimeout(() => bar.remove(), 400);
-      });
-
-      // Bar stays until user dismisses it
-    }
-
-    // Check on page load after 4 seconds
-    setTimeout(checkForNewArticles, 4000);
-    // Check blog articles after 6 seconds (stagger so banners don't collide)
-    setTimeout(checkForNewBlogArticles, 6000);
+    setTimeout(checkNews, 4000);
+    setTimeout(checkBlog, 7000);
   }
 
   function init(){
