@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-04-18T12:00:00Z",
+  "updated_at": "2026-04-19T06:00:00Z",
   "articles": [
     {
       "title": "Best AI Writing Tools in 2026 \u2014 Tested and Compared",
@@ -192,6 +192,12 @@
       "url": "/tutorials/gemini/",
       "section": "Tutorials",
       "date": "2026-04-18"
+    },
+    {
+      "title": "AI for Finance Professionals \u2014 Tools and Practical Guide 2026",
+      "url": "/professions/finance/",
+      "section": "Professions",
+      "date": "2026-04-19"
     }
   ]
 }
