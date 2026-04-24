@@ -1,1 +1,209 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="What is RAG (Retrieval-Augmented Generation)? Simple explanation of how RAG works, why it matters, and how it's used in enterprise AI systems in 2026.">
+<meta property="og:title" content="What is RAG (Retrieval-Augmented Generation)? Explained Simply — ILLUCEO">
+<meta property="og:description" content="What is RAG (Retrieval-Augmented Generation)? Simple explanation of how RAG works, why it matters, and how it's used in enterprise AI systems in 2026.">
+<meta property="og:url" content="https://illuceo.space/explained/what-is-rag/">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2026-04-15T06:00:00Z">
+<link rel="canonical" href="https://illuceo.space/explained/what-is-rag/">
+<title>What is RAG (Retrieval-Augmented Generation)? Explained Simply — ILLUCEO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@300;400;500&family=Outfit:wght@200;300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/shell.css">
+<link rel="stylesheet" href="/assets/article.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"What is RAG (Retrieval-Augmented Generation)? Explained Simply","description":"What is RAG (Retrieval-Augmented Generation)? Simple explanation of how RAG works, why it matters, and how it's used in enterprise AI systems in 2026.","datePublished":"2026-04-15T06:00:00Z","dateModified":"2026-04-15T06:00:00Z","author":{"@type":"Organization","name":"ILLUCEO","url":"https://illuceo.space"},"publisher":{"@type":"Organization","name":"ILLUCEO","url":"https://illuceo.space","logo":{"@type":"ImageObject","url":"https://illuceo.space/favicon/android-chrome-512x512.png"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://illuceo.space/explained/what-is-rag/"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type": "Question", "name": "What is RAG in simple terms?", "acceptedAnswer": {"@type": "Answer", "text": "RAG (Retrieval-Augmented Generation) is a technique that gives an AI model access to a specific set of documents or data at query time. Instead of relying only on what it learned during training, the model first searches your documents for relevant information, then uses that information to answer your question. Think of it as giving the AI a reference library to consult before answering."}}, {"@type": "Question", "name": "What is the difference between RAG and fine-tuning?", "acceptedAnswer": {"@type": "Answer", "text": "Fine-tuning trains the model itself on new data — permanently changing its weights. RAG keeps the model unchanged and instead retrieves relevant information at the time of each query. RAG is faster, cheaper, and easier to update — you just add documents to the database. Fine-tuning is better for changing how the model behaves or speaks, not for giving it access to specific facts."}}, {"@type": "Question", "name": "What are vector databases and why does RAG need them?", "acceptedAnswer": {"@type": "Answer", "text": "Vector databases store documents as mathematical representations (embeddings) that capture meaning rather than just keywords. When you ask a question, RAG converts your question to the same format and finds documents with similar meaning — not just matching words. Popular vector databases include Pinecone, Weaviate, Chroma, and Qdrant."}}, {"@type": "Question", "name": "What are the limitations of RAG?", "acceptedAnswer": {"@type": "Answer", "text": "RAG struggles when: the relevant information is spread across many documents and requires synthesis, the documents contradict each other, the question requires reasoning that goes beyond what is written, or the retrieval step fails to find the right document. RAG is only as good as the documents you give it and the quality of the retrieval."}}, {"@type": "Question", "name": "Which AI tools use RAG?", "acceptedAnswer": {"@type": "Answer", "text": "Most enterprise AI tools use RAG under the hood — including Microsoft Copilot (searches your SharePoint and OneDrive), Notion AI (searches your Notion workspace), and custom enterprise chatbots built on GPT or Claude APIs. When an AI says 'based on your documents' or 'according to your data', it is almost certainly using RAG."}}]}
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3306478541748582" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="shell-top"></div>
+<nav id="shell-nav"></nav>
 
+<div class="ad-wrap ad-wrap-top">
+  <div class="ad-slot ad-leaderboard"><!-- AdSense 728x90 --></div>
+  <div class="ad-slot ad-mobile"><!-- AdSense 320x50 --></div>
+</div>
+
+<main class="main">
+  <div class="breadcrumb"><a href="/">Home</a><span>/</span><a href="/explained/">Explained</a><span>/</span><span>What is RAG</span></div>
+  <div class="article-wrap">
+    <article class="article-main">
+      <header class="article-hero">
+        <div class="article-meta-row">
+          <div class="cat cat-models">Research</div>
+          <span class="article-meta-date notranslate" translate="no">April 15, 2026</span>
+          <span class="article-read-time">7 min read</span>
+        </div>
+        <h1 class="hl-xl">What is RAG (Retrieval-Augmented Generation)? Explained Simply</h1>
+        <p class="deck">RAG is the technique that lets AI answer questions about your own documents, databases, and private data — without retraining the model. Here's how it works and why it matters.</p>
+        <div class="why-box">
+          <div class="why-label">Why Read This</div>
+          <div class="why-text">RAG is now the dominant architecture for deploying AI in enterprise — understanding it helps you evaluate AI tools, ask better questions of vendors, and understand why AI sometimes gets things wrong.</div>
+        </div>
+      </header>
+
+      <div class="article-body">
+        
+<div class="takeaways-box"><h3>RAG in 30 Seconds</h3><ul>
+<li>RAG gives AI access to your specific documents at query time</li>
+<li>The model searches first, then answers using what it finds</li>
+<li>No retraining required — you just add documents to the database</li>
+<li>It is why AI can answer questions about your company's internal data</li>
+<li>Most enterprise AI tools use RAG under the hood</li>
+</ul></div>
+
+<h2>The Problem RAG Solves</h2>
+<p>Large language models like GPT-5.4 or Claude are trained on enormous amounts of internet text up to a certain date. They know a lot about the world in general — but they know nothing about your company's internal documents, your customer database, last week's meeting notes, or any information that wasn't in their training data.</p>
+<p>The obvious solution — retrain the model on your private data — is prohibitively expensive. Training a frontier model costs tens of millions of dollars and takes months. Even fine-tuning a smaller model on your data costs thousands of dollars and requires ML expertise.</p>
+<p>RAG solves this problem elegantly. Instead of changing the model, you give it access to a searchable database of your documents at the time of each query. The model doesn't need to have memorised your data — it just needs to be able to find and read the relevant parts on demand.</p>
+
+<h2>How RAG Works — Step by Step</h2>
+<ol class="step-list">
+  <li><strong>Document ingestion:</strong> Your documents (PDFs, Word files, emails, database records, web pages) are processed and split into chunks — typically 200-500 word segments.</li>
+  <li><strong>Embedding:</strong> Each chunk is converted into a vector — a list of numbers that represents the meaning of that text. Similar chunks get similar vectors. This is done by a separate embedding model.</li>
+  <li><strong>Storage:</strong> All these vectors are stored in a vector database, alongside the original text they represent.</li>
+  <li><strong>Query:</strong> When you ask a question, your question is also converted to a vector using the same embedding model.</li>
+  <li><strong>Retrieval:</strong> The system finds the document chunks whose vectors are closest to your question vector — i.e., the chunks most likely to contain relevant information.</li>
+  <li><strong>Generation:</strong> The retrieved chunks are included in the prompt sent to the language model, along with your question. The model reads the relevant text and generates an answer based on it.</li>
+</ol>
+
+<div class="highlight-box"><p>Simple analogy: Imagine you asked a very smart assistant a question. Instead of answering from memory, they first ran to a filing cabinet, pulled out the most relevant documents, read them quickly, and then answered your question using what they just read. That is RAG.</p></div>
+
+<h2>Why Vectors and Not Keywords?</h2>
+<p>Traditional search uses keywords — it finds documents that contain the same words as your query. This works for exact matches but fails when the concept you're looking for is described differently in the document than in your question.</p>
+<p>Vector search finds documents based on meaning. If you ask "what is our refund policy?" it will find the document titled "Customer Returns Procedure" even though none of those words appear in your question. It understands that these topics are semantically related.</p>
+
+<div class="stat-callout">
+  <div class="stat-callout-num">78%</div>
+  <div class="stat-callout-text">Of enterprise AI deployments in 2026 use RAG as their primary architecture for giving AI access to internal data, according to research by AI infrastructure firm Vectara. It has become the default pattern for production enterprise AI systems.</div>
+</div>
+
+<h2>RAG vs Fine-Tuning — When to Use Which</h2>
+<p>These two approaches are often confused. They solve different problems:</p>
+
+<table>
+  <tr><th>RAG</th><th>Fine-Tuning</th></tr>
+  <tr><td>Give model access to specific facts and documents</td><td>Change how the model behaves or communicates</td></tr>
+  <tr><td>Easy to update — add or remove documents</td><td>Requires retraining when data changes</td></tr>
+  <tr><td>Works with any up-to-date information</td><td>Knowledge is locked at training time</td></tr>
+  <tr><td>Costs cents per query</td><td>Costs thousands of dollars to train</td></tr>
+  <tr><td>Model can cite its sources</td><td>Model cannot attribute where it learned things</td></tr>
+</table>
+
+<p>Most enterprise use cases need RAG, not fine-tuning. Fine-tuning is the right choice when you want to change the model's tone, style, or behaviour — not when you want it to know specific facts about your organisation.</p>
+
+<h2>RAG in Practice — Real Examples</h2>
+<p><strong>Microsoft Copilot for Microsoft 365:</strong> When you ask Copilot to summarise your emails or find a document, it uses RAG to search your SharePoint, OneDrive, and email. The language model never sees all your data — it only receives the specific chunks retrieved for your query.</p>
+<p><strong>Customer support chatbots:</strong> Enterprise support chatbots use RAG to search product documentation, knowledge bases, and previous support tickets. When a customer asks a question, the bot retrieves the relevant documentation sections and generates a specific, accurate answer.</p>
+<p><strong>Legal research tools:</strong> AI legal research platforms like Harvey use RAG to search millions of case documents, statutes, and legal memos. Lawyers ask questions in natural language and receive answers with citations to the specific documents retrieved.</p>
+
+<h2>The Limitations You Should Know</h2>
+<p>RAG is powerful but not magic. Understanding its failure modes helps you use it more effectively:</p>
+<ul>
+  <li><strong>Retrieval failures:</strong> If the retrieval step does not find the right document — because the question is phrased very differently from how the answer is written — the model answers from general knowledge and may hallucinate. This is the most common failure mode.</li>
+  <li><strong>Chunk boundary problems:</strong> If the answer spans across a chunk boundary (the relevant information is split across two chunks), retrieval may only find half of what it needs.</li>
+  <li><strong>Contradictory documents:</strong> If your document set contains conflicting information, the model may retrieve both and become confused, or choose the wrong one.</li>
+  <li><strong>Synthesis limitations:</strong> RAG is best at retrieving specific facts. It struggles with questions that require synthesising information across many documents or drawing inferences that are not explicit in any single document.</li>
+</ul>
+
+<h2>How to Evaluate a RAG System</h2>
+<p>If you are evaluating an enterprise AI tool that uses RAG, ask these questions:</p>
+<ul>
+  <li>Can it cite the specific document and section it retrieved? (If not, you cannot verify its answers.)</li>
+  <li>How does it handle queries where the answer is not in the documents? (It should say so clearly, not hallucinate.)</li>
+  <li>How frequently are the documents updated? (Stale retrieval databases give outdated answers.)</li>
+  <li>What chunk size and overlap does it use? (Larger chunks preserve more context; overlap reduces boundary problems.)</li>
+</ul>
+
+        <div class="ad-wrap ad-wrap-in-content">
+          <div class="ad-slot ad-banner"><!-- AdSense 468x60 --></div>
+        </div>
+        <section class="faq-section">
+          <h2>Frequently Asked Questions</h2>
+          <div class="faq-item">
+          <div class="faq-q">What is RAG in simple terms?</div>
+          <div class="faq-a">RAG (Retrieval-Augmented Generation) is a technique that gives an AI model access to a specific set of documents or data at query time. Instead of relying only on what it learned during training, the model first searches your documents for relevant information, then uses that information to answer your question. Think of it as giving the AI a reference library to consult before answering.</div>
+        </div><div class="faq-item">
+          <div class="faq-q">What is the difference between RAG and fine-tuning?</div>
+          <div class="faq-a">Fine-tuning trains the model itself on new data — permanently changing its weights. RAG keeps the model unchanged and instead retrieves relevant information at the time of each query. RAG is faster, cheaper, and easier to update — you just add documents to the database. Fine-tuning is better for changing how the model behaves or speaks, not for giving it access to specific facts.</div>
+        </div><div class="faq-item">
+          <div class="faq-q">What are vector databases and why does RAG need them?</div>
+          <div class="faq-a">Vector databases store documents as mathematical representations (embeddings) that capture meaning rather than just keywords. When you ask a question, RAG converts your question to the same format and finds documents with similar meaning — not just matching words. Popular vector databases include Pinecone, Weaviate, Chroma, and Qdrant.</div>
+        </div><div class="faq-item">
+          <div class="faq-q">What are the limitations of RAG?</div>
+          <div class="faq-a">RAG struggles when: the relevant information is spread across many documents and requires synthesis, the documents contradict each other, the question requires reasoning that goes beyond what is written, or the retrieval step fails to find the right document. RAG is only as good as the documents you give it and the quality of the retrieval.</div>
+        </div><div class="faq-item">
+          <div class="faq-q">Which AI tools use RAG?</div>
+          <div class="faq-a">Most enterprise AI tools use RAG under the hood — including Microsoft Copilot (searches your SharePoint and OneDrive), Notion AI (searches your Notion workspace), and custom enterprise chatbots built on GPT or Claude APIs. When an AI says 'based on your documents' or 'according to your data', it is almost certainly using RAG.</div>
+        </div>
+        </section>
+      </div>
+
+      <footer class="article-footer">
+        <div class="article-tags"><a class="article-tag" href="/tags/rag/">RAG</a> <a class="article-tag" href="/tags/retrieval-augmented-generation/">Retrieval-Augmented Generation</a> <a class="article-tag" href="/tags/ai-explained/">AI Explained</a> <a class="article-tag" href="/tags/enterprise-ai/">Enterprise AI</a> <a class="article-tag" href="/tags/vector-database/">Vector Database</a> <a class="article-tag" href="/tags/llm/">LLM</a></div>
+        <h3 class="related-heading">Related Articles</h3>
+        <div class="related-grid"><a class="related-card" href="/explained/what-is-llm/">
+          <div class="related-cat cat-research">Research</div>
+          <div class="related-title">What is a Large Language Model (LLM)?</div>
+        </a><a class="related-card" href="/explained/what-is-ai-agent/">
+          <div class="related-cat cat-research">Research</div>
+          <div class="related-title">What is an AI Agent?</div>
+        </a><a class="related-card" href="/explained/prompt-engineering/">
+          <div class="related-cat cat-research">Research</div>
+          <div class="related-title">Prompt Engineering Explained</div>
+        </a></div>
+      </footer>
+    </article>
+
+    <aside class="article-sidebar">
+      <div class="ad-wrap-sidebar">
+        <div class="ad-slot ad-rectangle"><!-- AdSense 300x250 --></div>
+      </div>
+      <div class="affiliate-cta">
+        <div class="aff-badge">PARTNER</div>
+        <div class="affiliate-cta-title">Browse Privately</div>
+        <div class="affiliate-cta-body">NordVPN encrypts your connection while you research. 14M+ users. 30-day guarantee.</div>
+        <a href="https://go.nordvpn.net/aff_c?offer_id=15&aff_id=145247&url_id=902" target="_blank" rel="noopener sponsored" class="affiliate-cta-btn">Get 73% OFF →</a>
+      </div>
+      <div class="sidebar-widget" id="toc-widget">
+        <h4>In This Article</h4>
+        <ul id="toc-list"></ul>
+      </div>
+      <div class="ad-wrap-sidebar">
+        <div class="ad-slot ad-halfpage"><!-- AdSense 300x600 --></div>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<div class="ad-wrap" style="border-top:1px solid var(--border);padding:20px 0;max-width:var(--max-w);margin:0 auto;text-align:center;">
+  <div class="ad-slot ad-leaderboard"><!-- AdSense 728x90 --></div>
+  <div class="ad-slot ad-mobile"><!-- AdSense 320x50 --></div>
+</div>
+
+<div id="shell-bottom"></div>
+<script src="/assets/shell.js?v=4"></script>
+<script>
+(function() {
+  var hs  = document.querySelectorAll('.article-body h2');
+  var toc = document.getElementById('toc-list');
+  var wid = document.getElementById('toc-widget');
+  if (!hs.length || !toc) { if (wid) wid.style.display = 'none'; return; }
+  hs.forEach(function(h, i) {
+    h.id = 'section-' + i;
+    var li = document.createElement('li');
+    li.innerHTML = '<a href="#section-' + i + '">' + h.textContent + '</a>';
+    toc.appendChild(li);
+  });
+})();
+</script>
+</body>
+</html>
