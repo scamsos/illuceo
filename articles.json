@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-04-20T06:00:00Z",
+  "updated_at": "2026-04-21T06:00:00Z",
   "articles": [
     {
       "title": "Best AI Writing Tools in 2026 \u2014 Tested and Compared",
@@ -204,6 +204,12 @@
       "url": "/make-money/ai-content-site/",
       "section": "Make Money",
       "date": "2026-04-20"
+    },
+    {
+      "title": "What is RAG (Retrieval-Augmented Generation)? Explained Simply",
+      "url": "/explained/what-is-rag/",
+      "section": "Explained",
+      "date": "2026-04-21"
     }
   ]
 }
