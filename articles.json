@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-04-21T06:00:00Z",
+  "updated_at": "2026-04-25T06:00:00Z",
   "articles": [
     {
       "title": "Best AI Writing Tools in 2026 \u2014 Tested and Compared",
@@ -210,6 +210,12 @@
       "url": "/explained/what-is-rag/",
       "section": "Explained",
       "date": "2026-04-21"
+    },
+    {
+      "title": "AI Agents at Work \u2014 How Companies Are Deploying Agents in 2026",
+      "url": "/agents/ai-agents-at-work/",
+      "section": "Agents",
+      "date": "2026-04-25"
     }
   ]
 }
