@@ -3,29 +3,73 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="How companies are deploying AI agents in 2026. Real-world use cases across finance, healthcare, legal, software, and customer service — with outcomes, lessons, and deployment guidance.">
-<meta property="og:title" content="AI Agents at Work — How Companies Are Deploying Agents in 2026 — ILLUCEO">
-<meta property="og:description" content="How companies are deploying AI agents in 2026. Real-world use cases across finance, healthcare, legal, software, and customer service — with outcomes, lessons, and deployment guidance.">
-<meta property="og:url" content="https://illuceo.space/agents/ai-agents-at-work/">
-<meta property="og:type" content="article">
-<meta property="article:published_time" content="2026-04-25T06:00:00Z">
+<meta name="description" content="How companies are deploying AI agents in 2026. Real-world use cases across finance, healthcare, legal, software, and customer service.">
+<meta property="og:title" content="AI Agents at Work — ILLUCEO">
 <link rel="canonical" href="https://illuceo.space/agents/ai-agents-at-work/">
 <title>AI Agents at Work — How Companies Are Deploying Agents in 2026 — ILLUCEO</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@300;400;500&family=Outfit:wght@200;300;400;500&display=swap" rel="stylesheet">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3306478541748582" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="/assets/shell.css?v=4">
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Article","headline":"AI Agents at Work — How Companies Are Deploying Agents in 2026","description":"How companies are deploying AI agents in 2026. Real-world use cases across finance, healthcare, legal, software, and customer service — with outcomes, lessons, and deployment guidance.","datePublished":"2026-04-25T06:00:00Z","dateModified":"2026-04-25T06:00:00Z","author":{"@type":"Organization","name":"ILLUCEO","url":"https://illuceo.space"},"publisher":{"@type":"Organization","name":"ILLUCEO","url":"https://illuceo.space","logo":{"@type":"ImageObject","url":"https://illuceo.space/favicon/android-chrome-512x512.png"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://illuceo.space/agents/ai-agents-at-work/"}}
-</script>
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type": "Question", "name": "What is an AI agent in a business context?", "acceptedAnswer": {"@type": "Answer", "text": "An AI agent is a system that can take actions autonomously to complete a goal — not just answer questions. In a business context, agents access systems, execute tasks, make decisions within defined parameters, and hand off to humans when they encounter edge cases. They differ from chatbots by their ability to act, not just respond."}}, {"@type": "Question", "name": "Which industries are seeing the most AI agent adoption?", "acceptedAnswer": {"@type": "Answer", "text": "Financial services, software development, healthcare administration, legal, and customer service are leading adoption in 2026. Financial services and software development have the clearest ROI cases — agents that review code or flag compliance issues produce measurable output directly comparable to human equivalents."}}, {"@type": "Question", "name": "What are the biggest risks of deploying AI agents?", "acceptedAnswer": {"@type": "Answer", "text": "The three main risks are: agents taking incorrect actions with real-world consequences, agents accumulating permissions beyond what they need, and failure to maintain meaningful human oversight as agents scale. All three are manageable with proper architecture — but companies that skip the design phase often encounter them."}}, {"@type": "Question", "name": "How do I know if my business is ready for AI agents?", "acceptedAnswer": {"@type": "Answer", "text": "Good indicators: clearly defined repeatable workflows that currently require human attention, accessible and reasonably structured data, technical capacity to monitor agent behaviour, and identified humans who will review agent outputs and handle escalations."}}, {"@type": "Question", "name": "What is the difference between an AI agent and RPA?", "acceptedAnswer": {"@type": "Answer", "text": "RPA follows rigid pre-programmed rules and breaks when anything changes. AI agents adapt to variation, handle ambiguous inputs, make judgment calls within parameters, and learn from feedback. RPA is a script; an agent is a reasoning system."}}]}
-</script>
+<style>
+.article-wrap{display:grid;grid-template-columns:1fr 300px;gap:40px;align-items:start}
+.article-sidebar{position:sticky;top:60px}
+.article-footer{margin-top:40px;padding-top:32px;border-top:1px solid var(--border)}
+.article-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}
+.article-tag{font-family:var(--mono);font-size:8px;letter-spacing:.15em;text-transform:uppercase;padding:4px 10px;border-radius:2px;border:1px solid var(--border2);color:var(--text3);text-decoration:none;transition:all .15s}
+.article-tag:hover{border-color:var(--teal);color:var(--teal)}
+.related-heading{font-family:var(--serif);font-size:22px;font-weight:600;color:var(--text);margin-bottom:16px}
+.related-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.related-card{display:block;background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:16px;text-decoration:none;transition:border-color .18s,background .18s}
+.related-card:hover{border-color:var(--teal);background:#101013}
+.related-cat{font-family:var(--mono);font-size:8px;letter-spacing:.2em;text-transform:uppercase;margin-bottom:8px}
+.related-title{font-family:var(--serif);font-size:15px;font-weight:600;color:var(--text);line-height:1.3}
+.article-hero{padding:32px 0 24px;border-bottom:1px solid var(--border);margin-bottom:28px}
+.article-meta-row{display:flex;align-items:center;gap:12px;margin-bottom:14px;flex-wrap:wrap}
+.article-meta-date,.article-read-time{font-family:var(--mono);font-size:9px;color:var(--text3);letter-spacing:.08em}
+.article-body h2{font-family:var(--serif);font-size:26px;font-weight:600;color:var(--text);margin:36px 0 14px}
+.article-body p{margin-bottom:16px;font-size:15px;line-height:1.8;color:var(--text2)}
+.article-body ul,.article-body ol{padding-left:22px;margin-bottom:16px}
+.article-body li{margin-bottom:7px;font-size:15px;line-height:1.7;color:var(--text2)}
+.article-body strong{color:var(--text);font-weight:500}
+.sidebar-widget{background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:20px;margin-bottom:16px}
+.sidebar-widget h4{font-family:var(--mono);font-size:8px;letter-spacing:.3em;text-transform:uppercase;color:var(--text3);margin-bottom:14px}
+.sidebar-widget ul{list-style:none;padding:0}
+.sidebar-widget li{margin-bottom:8px}
+.sidebar-widget li a{font-size:12px;color:var(--text3);text-decoration:none;transition:color .15s;line-height:1.4;display:block}
+.sidebar-widget li a:hover{color:var(--teal)}
+.affiliate-cta{background:linear-gradient(145deg,#0a1530,#0d1e45);border:1px solid #1a2d52;border-radius:6px;padding:20px;margin-bottom:16px}
+.aff-badge{font-family:var(--mono);font-size:7px;letter-spacing:.3em;text-transform:uppercase;color:var(--nord);margin-bottom:8px}
+.affiliate-cta-title{font-family:var(--serif);font-size:20px;font-weight:600;color:#e8f0ff;margin-bottom:8px}
+.affiliate-cta-body{font-size:12px;color:#6b96d4;line-height:1.6;margin-bottom:14px}
+.affiliate-cta-btn{display:inline-block;background:linear-gradient(135deg,#4687ff,#2654c8);color:#fff;font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;padding:10px 18px;border-radius:3px;text-decoration:none;transition:all .2s}
+.faq-section{margin-top:40px;padding-top:32px;border-top:1px solid var(--border)}
+.faq-section h2{font-family:var(--serif);font-size:26px;font-weight:600;color:var(--text);margin-bottom:20px}
+.faq-item{border-bottom:1px solid var(--border);padding:16px 0}
+.faq-q{font-family:var(--serif);font-size:17px;font-weight:600;color:var(--text);cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+.faq-q::after{content:'+';color:var(--teal);font-family:var(--mono);font-size:16px}
+.faq-item.open .faq-q::after{content:'−'}
+.faq-a{display:none;font-size:14px;color:var(--text2);line-height:1.7;margin-top:10px}
+.faq-item.open .faq-a{display:block}
+.takeaways-box{background:var(--bg2);border:1px solid var(--border);border-left:2px solid var(--teal);border-radius:0 6px 6px 0;padding:20px 24px;margin-bottom:28px}
+.takeaways-box h3{font-family:var(--mono);font-size:9px;letter-spacing:.25em;text-transform:uppercase;color:var(--teal);margin-bottom:14px}
+.takeaways-box li{font-size:14px;color:var(--text2);margin-bottom:8px;line-height:1.6}
+.highlight-box{background:var(--bg3);border-left:2px solid var(--teal);padding:16px 20px;margin:20px 0;border-radius:0 4px 4px 0}
+.highlight-box p{margin:0;font-size:14px;color:var(--text2);line-height:1.7}
+.stat-callout{background:var(--bg2);border:1px solid var(--border2);border-radius:6px;padding:20px 24px;margin:24px 0;display:flex;align-items:center;gap:20px}
+.stat-callout-num{font-family:var(--serif);font-size:48px;font-weight:700;color:var(--teal);line-height:1;flex-shrink:0}
+.stat-callout-text{font-size:13px;color:var(--text2);line-height:1.6}
+.step-list{padding-left:0;list-style:none;counter-reset:steps}
+.step-list li{counter-increment:steps;padding:12px 0 12px 44px;border-bottom:1px solid var(--border);position:relative;font-size:14px;color:var(--text2);line-height:1.7}
+.step-list li::before{content:counter(steps);position:absolute;left:0;top:12px;width:26px;height:26px;background:var(--teal);color:var(--bg);border-radius:50%;font-family:var(--mono);font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center}
+.step-list li:last-child{border-bottom:none}
+@media(max-width:1100px){.article-wrap{grid-template-columns:1fr}.article-sidebar{position:static}.related-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){.related-grid{grid-template-columns:1fr}.stat-callout{flex-direction:column}}
+</style>
 </head>
 <body>
 <div id="shell-top"></div>
 <nav id="shell-nav"></nav>
-
 <main class="main">
   <div class="breadcrumb"><a href="/">Home</a><span>/</span><a href="/agents/">AI Agents</a><span>/</span><span>AI Agents at Work</span></div>
   <div class="article-wrap">
@@ -43,9 +87,8 @@
           <div class="why-text">The gap between companies that have deployed AI agents successfully and those still running pilots is widening fast. This is what the leaders are actually doing — not theory, but documented deployments.</div>
         </div>
       </header>
-
       <div class="article-body">
-        
+
 <div class="takeaways-box"><h3>Key Findings from 2026 Agent Deployments</h3><ul>
 <li>Software development agents are the most mature — near-100% success on defined coding tasks</li>
 <li>Customer service agents handle 60-70% of queries without human intervention at leading deployments</li>
@@ -55,91 +98,62 @@
 </ul></div>
 
 <h2>Why 2026 Is the Inflection Point for Enterprise Agents</h2>
-<p>For the past three years, AI agents were either research projects or narrow automations dressed up with agentic language. In 2026, that changed. The combination of dramatically improved reasoning in frontier models, standardised protocols like MCP (Model Context Protocol) for tool integration, and a growing body of documented deployments has moved agents from pilot to production across multiple industries.</p>
-<p>The Stanford AI Index 2026 documented agent task success rates rising from 12% to 66% on OSWorld benchmarks in a single year. On software-specific benchmarks, success rates approached 100%. These are not theoretical improvements — they reflect real capability that enterprises are now deploying.</p>
+<p>For the past three years, AI agents were either research projects or narrow automations. In 2026, that changed. The combination of dramatically improved reasoning in frontier models, standardised protocols like MCP for tool integration, and a growing body of documented deployments has moved agents from pilot to production across multiple industries.</p>
+<p>The Stanford AI Index 2026 documented agent task success rates rising from 12% to 66% on OSWorld benchmarks in a single year. On software-specific benchmarks, success rates approached 100%.</p>
 
 <h2>Software Development — The Most Mature Deployment</h2>
-<p>AI coding agents are the furthest along of any enterprise deployment. The combination of well-defined inputs (code, specifications, test cases), verifiable outputs (does the code run? do the tests pass?), and massive training data has made software the ideal proving ground for agentic AI.</p>
-<p>Deployment patterns that are working in 2026:</p>
-<ul>
-  <li><strong>Autonomous PR review:</strong> Agents review every pull request against style guidelines, security rules, and test coverage requirements — flagging issues before human reviewers see the code. Teams at Stripe, Cloudflare, and dozens of mid-market companies report 30-40% reduction in reviewer time on routine PRs.</li>
-  <li><strong>Bug triage and first-pass resolution:</strong> Agents monitor bug queues, reproduce reported issues, attempt automated fixes for recognisable classes of bugs, and route unresolved issues to appropriate engineers with reproduction steps already compiled.</li>
-  <li><strong>Documentation generation:</strong> Agents scan codebases and generate or update technical documentation automatically when code changes — particularly effective for API documentation and internal tooling.</li>
-</ul>
+<p>AI coding agents are the furthest along of any enterprise deployment. Teams at Stripe, Cloudflare, and dozens of mid-market companies report 30-40% reduction in reviewer time on routine PRs from autonomous review agents. Bug triage agents monitor queues, reproduce issues, attempt automated fixes, and route unresolved issues to appropriate engineers with context already compiled.</p>
 
-<div class="stat-callout">
-  <div class="stat-callout-num">14-26%</div>
-  <div class="stat-callout-text">Productivity improvement documented in peer-reviewed studies of AI-assisted software development teams in 2026. Gains are highest for well-defined implementation tasks and lowest for architectural design — consistent with agents' current strength in execution over strategy.</div>
-</div>
+<div class="stat-callout"><div class="stat-callout-num">14-26%</div><div class="stat-callout-text">Productivity improvement documented in peer-reviewed studies of AI-assisted software development teams in 2026. Gains are highest for well-defined implementation tasks and lowest for architectural design.</div></div>
 
 <h2>Financial Services — Compliance and Analysis at Scale</h2>
-<p>Financial services has the most to gain from AI agents — and the most to lose from getting them wrong. The regulatory environment means every agent deployment requires careful governance design. The firms that have done this well are seeing significant results.</p>
-
-<h2>Compliance Review Agents</h2>
-<p>Major banks including JPMorgan Chase and HSBC have deployed agents that review communications, transactions, and documents for compliance flags — continuously, at a scale no human team could match. These agents do not make final compliance decisions; they surface potential issues to human compliance officers who make the actual determinations.</p>
-<p>The design principle that makes these deployments work: agents flag, humans decide. The agent is a first-pass filter that dramatically reduces the volume of material a human compliance officer must personally review, without removing human judgment from the final determination.</p>
+<p>Major banks including JPMorgan Chase and HSBC have deployed agents that review communications, transactions, and documents for compliance flags continuously, at a scale no human team could match. The design principle: agents flag, humans decide. The agent is a first-pass filter that dramatically reduces volume without removing human judgment from the final determination. Early deployments show 40-60% reduction in review time.</p>
 
 <h2>Customer Service — High Volume, Defined Scope</h2>
-<p>Customer service is where most consumers have already encountered AI agents — often without knowing it. The deployments that work share a common architecture: agents handle a defined set of query types autonomously, and route anything outside those types to humans immediately.</p>
-<p>Successful deployments in 2026 consistently show containment rates (queries resolved without human intervention) of 60-70% for companies with well-structured knowledge bases and clear escalation paths. The 30-40% that escalate to humans are typically the high-complexity, high-emotion queries where human judgment is genuinely needed.</p>
+<p>Successful deployments in 2026 consistently show containment rates of 60-70% for companies with well-structured knowledge bases and clear escalation paths. The 30-40% that escalate to humans are the high-complexity, high-emotion queries where human judgment is genuinely needed. Deployments that attempt to handle too wide a scope consistently create frustrated customers.</p>
 
 <h2>Healthcare Administration — High Impact, Careful Deployment</h2>
-<p>Healthcare AI agent deployments are concentrated in administrative rather than clinical functions — prior authorisation processing, appointment scheduling, referral coordination, and medical record summarisation. Epic Systems' integrated AI agent capabilities handle prior authorisation documentation, with early deployments showing 40-60% reduction in time spent on prior authorisation at hospitals using the feature.</p>
-<p>Clinical deployment remains more cautious and more regulated. AI agents that assist with diagnosis or treatment decisions require FDA approval as medical devices — a process that takes years and requires rigorous clinical validation.</p>
+<p>Epic Systems' integrated AI agent capabilities handle prior authorisation documentation, with early deployments showing 40-60% reduction in time spent on prior authorisation at hospitals using the feature. Clinical deployment remains more cautious — agents that assist with diagnosis or treatment decisions require FDA approval as medical devices.</p>
 
 <h2>Legal — Document Review and Research</h2>
-<p>Law firms and legal departments are deploying agents for document review in discovery, contract analysis for specific clauses and risk terms, and legal research for relevant precedents. Harvey AI has processed over 10 million documents for law firm clients with a consistent deployment pattern: agents do first-pass review and annotation, attorneys review agent output and make final determinations.</p>
-<p>The Nebraska attorney suspension case (57 fabricated citations in a brief) illustrates what happens when agents are deployed without appropriate human review. The lesson is not that agents should not be used in legal work — it is that agent outputs require verification before submission in any regulated context.</p>
+<p>Harvey AI has processed over 10 million documents for law firm clients with a consistent deployment pattern: agents do first-pass review and annotation, attorneys review agent output and make final determinations. The Nebraska attorney suspension case (57 fabricated citations) illustrates what happens when agents are deployed without appropriate human review.</p>
 
 <h2>What Successful Deployments Have in Common</h2>
 <ol class="step-list">
-  <li><strong>Narrow, well-defined scope:</strong> Agents that do one thing well consistently outperform agents designed to handle everything. Define the specific task, the specific inputs, and the specific outputs before deployment.</li>
-  <li><strong>Clear escalation paths:</strong> Every successful deployment has explicit rules for when the agent should stop and hand off to a human. Agents that attempt to handle everything eventually make consequential mistakes.</li>
-  <li><strong>Verifiable outputs:</strong> The best agent deployments produce outputs that humans can verify efficiently. Code that can be tested. Documents that can be spot-checked. Flags that can be reviewed.</li>
-  <li><strong>Appropriate permissions:</strong> Agents should have the minimum permissions needed to complete their task. An agent that needs to read documents does not need write access.</li>
-  <li><strong>Monitoring and feedback loops:</strong> Deployed agents need to be monitored for error rates, edge cases, and drift. The most sophisticated deployments have dashboards tracking agent performance and processes for incorporating feedback into agent improvement.</li>
+  <li><strong>Narrow, well-defined scope:</strong> Agents that do one thing well consistently outperform agents designed to handle everything. Define the specific task, inputs, and outputs before deployment.</li>
+  <li><strong>Clear escalation paths:</strong> Every successful deployment has explicit rules for when the agent should stop and hand off to a human.</li>
+  <li><strong>Verifiable outputs:</strong> Code that can be tested. Documents that can be spot-checked. Flags that can be reviewed.</li>
+  <li><strong>Appropriate permissions:</strong> Agents should have the minimum permissions needed to complete their task.</li>
+  <li><strong>Monitoring and feedback loops:</strong> Deployed agents need dashboards tracking performance and processes for incorporating feedback.</li>
 </ol>
 
-<div class="highlight-box"><p>The most expensive AI agent mistake is deploying the wrong agent at the wrong scope. Before any deployment: map the workflow in detail, identify exactly where human judgment is genuinely required, design the escalation path first, and run a pilot on a narrow subset before expanding. Companies that deployed agents at full scale immediately have consistently had worse outcomes than those that started narrow and expanded carefully.</p></div>
-
+<div class="highlight-box"><p>The most expensive AI agent mistake is deploying the wrong agent at the wrong scope. Before any deployment: map the workflow in detail, identify exactly where human judgment is required, design the escalation path first, and run a pilot on a narrow subset before expanding.</p></div>
 
         <section class="faq-section">
           <h2>Frequently Asked Questions</h2>
-          <div class="faq-item">
-          <div class="faq-q">What is an AI agent in a business context?</div>
-          <div class="faq-a">An AI agent is a system that can take actions autonomously to complete a goal — not just answer questions. In a business context, agents access systems, execute tasks, make decisions within defined parameters, and hand off to humans when they encounter edge cases. They differ from chatbots by their ability to act, not just respond.</div>
-        </div><div class="faq-item">
-          <div class="faq-q">Which industries are seeing the most AI agent adoption?</div>
-          <div class="faq-a">Financial services, software development, healthcare administration, legal, and customer service are leading adoption in 2026. Financial services and software development have the clearest ROI cases — agents that review code or flag compliance issues produce measurable output directly comparable to human equivalents.</div>
-        </div><div class="faq-item">
-          <div class="faq-q">What are the biggest risks of deploying AI agents?</div>
-          <div class="faq-a">The three main risks are: agents taking incorrect actions with real-world consequences, agents accumulating permissions beyond what they need, and failure to maintain meaningful human oversight as agents scale. All three are manageable with proper architecture — but companies that skip the design phase often encounter them.</div>
-        </div><div class="faq-item">
-          <div class="faq-q">How do I know if my business is ready for AI agents?</div>
-          <div class="faq-a">Good indicators: clearly defined repeatable workflows that currently require human attention, accessible and reasonably structured data, technical capacity to monitor agent behaviour, and identified humans who will review agent outputs and handle escalations.</div>
-        </div><div class="faq-item">
-          <div class="faq-q">What is the difference between an AI agent and RPA?</div>
-          <div class="faq-a">RPA follows rigid pre-programmed rules and breaks when anything changes. AI agents adapt to variation, handle ambiguous inputs, make judgment calls within parameters, and learn from feedback. RPA is a script; an agent is a reasoning system.</div>
-        </div>
+          <div class="faq-item"><div class="faq-q">What is an AI agent in a business context?</div><div class="faq-a">An AI agent is a system that can take actions autonomously to complete a goal — not just answer questions. In a business context, agents access systems, execute tasks, make decisions within defined parameters, and hand off to humans when they encounter edge cases.</div></div>
+          <div class="faq-item"><div class="faq-q">Which industries are seeing the most AI agent adoption?</div><div class="faq-a">Financial services, software development, healthcare administration, legal, and customer service are leading adoption in 2026. Financial services and software development have the clearest ROI cases.</div></div>
+          <div class="faq-item"><div class="faq-q">What are the biggest risks of deploying AI agents?</div><div class="faq-a">The three main risks are: agents taking incorrect actions with real-world consequences, agents accumulating permissions beyond what they need, and failure to maintain meaningful human oversight as agents scale.</div></div>
+          <div class="faq-item"><div class="faq-q">How do I know if my business is ready for AI agents?</div><div class="faq-a">Good indicators: clearly defined repeatable workflows, accessible structured data, technical capacity to monitor agent behaviour, and identified humans who will review agent outputs and handle escalations.</div></div>
+          <div class="faq-item"><div class="faq-q">What is the difference between an AI agent and RPA?</div><div class="faq-a">RPA follows rigid pre-programmed rules and breaks when anything changes. AI agents adapt to variation, handle ambiguous inputs, and make judgment calls within parameters. RPA is a script; an agent is a reasoning system.</div></div>
         </section>
       </div>
-
       <footer class="article-footer">
-        <div class="article-tags"><a class="article-tag" href="/tags/ai-agents/">AI Agents</a> <a class="article-tag" href="/tags/enterprise-ai/">Enterprise AI</a> <a class="article-tag" href="/tags/agentic-ai/">Agentic AI</a> <a class="article-tag" href="/tags/ai-deployment/">AI Deployment</a> <a class="article-tag" href="/tags/business-ai/">Business AI</a> <a class="article-tag" href="/tags/autonomous-ai/">Autonomous AI</a></div>
+        <div class="article-tags">
+          <a class="article-tag" href="/tags/ai-agents/">AI Agents</a>
+          <a class="article-tag" href="/tags/enterprise-ai/">Enterprise AI</a>
+          <a class="article-tag" href="/tags/agentic-ai/">Agentic AI</a>
+          <a class="article-tag" href="/tags/ai-deployment/">AI Deployment</a>
+          <a class="article-tag" href="/tags/business-ai/">Business AI</a>
+        </div>
         <h3 class="related-heading">Related Articles</h3>
-        <div class="related-grid"><a class="related-card" href="/agents/what-are-agents/">
-          <div class="related-cat cat-agents">Agents</div>
-          <div class="related-title">What Are AI Agents?</div>
-        </a><a class="related-card" href="/agents/build-ai-agent/">
-          <div class="related-cat cat-agents">Agents</div>
-          <div class="related-title">How to Build an AI Agent</div>
-        </a><a class="related-card" href="/agents/ai-workflow-automation/">
-          <div class="related-cat cat-agents">Agents</div>
-          <div class="related-title">AI Workflow Automation Guide</div>
-        </a></div>
+        <div class="related-grid">
+          <a class="related-card" href="/agents/what-are-agents/"><div class="related-cat cat-agents">Agents</div><div class="related-title">What Are AI Agents?</div></a>
+          <a class="related-card" href="/agents/build-ai-agent/"><div class="related-cat cat-agents">Agents</div><div class="related-title">How to Build an AI Agent</div></a>
+          <a class="related-card" href="/agents/ai-workflow-automation/"><div class="related-cat cat-agents">Agents</div><div class="related-title">AI Workflow Automation Guide</div></a>
+        </div>
       </footer>
     </article>
-
     <aside class="article-sidebar">
       <div class="affiliate-cta">
         <div class="aff-badge">PARTNER</div>
@@ -154,21 +168,28 @@
     </aside>
   </div>
 </main>
-
 <div id="shell-bottom"></div>
 <script src="/assets/shell.js?v=4"></script>
 <script>
 (function(){
-  const hs=document.querySelectorAll('.article-body h2');
-  const toc=document.getElementById('toc-list');
+  var hs=document.querySelectorAll('.article-body h2');
+  var toc=document.getElementById('toc-list');
   if(!hs.length||!toc){document.getElementById('toc-widget').style.display='none';return;}
-  hs.forEach((h,i)=>{
-    const id='s'+i; h.id=id;
-    const li=document.createElement('li');
-    li.innerHTML=`<a href="#${id}">${h.textContent}</a>`;
+  hs.forEach(function(h,i){
+    var id='s'+i; h.id=id;
+    var li=document.createElement('li');
+    li.innerHTML='<a href="#'+id+'">'+h.textContent+'</a>';
     toc.appendChild(li);
   });
 })();
+document.querySelectorAll('.faq-q').forEach(function(q){
+  q.addEventListener('click',function(){
+    var item=q.closest('.faq-item');
+    var open=item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(function(i){i.classList.remove('open');});
+    if(!open) item.classList.add('open');
+  });
+});
 </script>
 </body>
 </html>
