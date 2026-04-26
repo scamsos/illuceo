@@ -1096,3 +1096,58 @@ body::after {
 
 /* Prevent overscroll interference with swipe gestures */
 body { overscroll-behavior-x: none; }
+
+/* ── SECTION INDEX GRID ── */
+.sec-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 8px;
+}
+.sec-card {
+  display: block;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px;
+  text-decoration: none;
+  transition: border-color .2s, background .2s;
+  cursor: pointer;
+}
+.sec-card:hover {
+  border-color: var(--teal);
+  background: #101013;
+}
+.sec-card-title {
+  font-family: var(--serif);
+  font-size: 19px;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.25;
+  margin-bottom: 10px;
+  transition: color .2s;
+}
+.sec-card:hover .sec-card-title { color: var(--teal); }
+.sec-card-desc {
+  font-size: 13px;
+  color: var(--text3);
+  line-height: 1.65;
+  margin-bottom: 14px;
+}
+.sec-card-meta {
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--text3);
+  margin-bottom: 10px;
+}
+.sec-card-cta {
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--teal);
+}
+@media(max-width:900px) { .sec-grid { grid-template-columns: 1fr 1fr; } }
+@media(max-width:600px) { .sec-grid { grid-template-columns: 1fr; } }
