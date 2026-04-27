@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-04-25T06:00:00Z",
+  "updated_at": "2026-04-26T06:00:00Z",
   "articles": [
     {
       "title": "Best AI Writing Tools in 2026 \u2014 Tested and Compared",
@@ -216,6 +216,12 @@
       "url": "/agents/ai-agents-at-work/",
       "section": "Agents",
       "date": "2026-04-25"
+    },
+    {
+      "title": "Best AI Video Tools in 2026 \u2014 Create Professional Videos with AI",
+      "url": "/tools/best/ai-video-tools/",
+      "section": "Tools",
+      "date": "2026-04-26"
     }
   ]
 }
